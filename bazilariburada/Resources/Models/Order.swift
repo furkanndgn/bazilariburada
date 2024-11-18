@@ -7,8 +7,13 @@
 
 import Foundation
 
-struct Order {
+struct Order: Codable {
     let orderID, date: String?
     let totalAmount: Double?
     let items: [CartItem]?
+    
+    enum CodingKeys: String, CodingKey {
+        case orderID = "orderId"
+        case date, totalAmount, items
+    }
 }

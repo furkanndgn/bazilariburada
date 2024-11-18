@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct Product {
-    let id, name, description, imageURL, category, brand, weight: String?
+struct Product: Codable {
+    let id, name, description, imageURL, category, brand, weight, createdAt, lastModifiedAt: String?
     let price: Double?
     let quantity: Int?
     let reviews: [Review]?

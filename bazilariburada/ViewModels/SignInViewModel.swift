@@ -9,4 +9,7 @@ import Foundation
 
 class SignInViewModel {
     
+    func Login(username: String, password: String) {
+        
+    }
 }

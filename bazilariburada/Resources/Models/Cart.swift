@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Cart {
+struct Cart: Codable {
     let cartItems: [CartItem]?
     let totalPrice: Double?
 }

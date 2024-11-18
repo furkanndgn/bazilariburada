@@ -13,20 +13,23 @@ enum HTTPMethod: String {
 }
 
 class NetworkManager {
+    
+    static let shared = NetworkManager()
+    
     private let baseURL: String = "https://grocery-app-backend-45m3.onrender.com/api/v1"
     private let token: String?
-    private let cancellables = Set<AnyCancellable>()
     
     init(token: String? = nil) {
         self.token = token
     }
     
-    func request<T: Decodable>(
+    func request(
         endpoint: String,
         method: HTTPMethod,
         body: [String: Any]? = nil,
-        requiresAuthentication: Bool
-    ) -> AnyPublisher<T, Error> {
+        requiresAuthentication: Bool = false,
+        token: String? = nil
+    ) -> AnyPublisher<Data, Error> {
         guard let url = URL(string: "\(baseURL)\(endpoint)") else {
             return Fail(error: NetworkError.invalidURL).eraseToAnyPublisher()
         }
@@ -44,13 +47,24 @@ class NetworkManager {
         }
         
         return URLSession.shared.dataTaskPublisher(for: request)
-            .tryMap { output in
-                guard let response = output.response as? HTTPURLResponse, (200...299).contains(response.statusCode) else {
-                    throw NetworkError.requestFailed(description:"")
-                }
-                return output.data
-            }
-            .decode(type: T.self, decoder: JSONDecoder())
+            .tryMap({ try self.handleURLResponse(output: $0, url: url) })
             .eraseToAnyPublisher()
+    }
+    
+    private func handleURLResponse(output: URLSession.DataTaskPublisher.Output, url: URL) throws -> Data {
+        guard let response = output.response as? HTTPURLResponse,
+              response.statusCode >= 200 && response.statusCode < 300 else {
+            throw(NetworkError.invalidURL)
+        }
+        return output.data
+    }
+    
+    func handleCompletion(completion: Subscribers.Completion<Error>) {
+        switch completion {
+        case .finished:
+            break
+        case .failure(let error):
+            print(String(describing: error.localizedDescription))
+        }
     }
 }

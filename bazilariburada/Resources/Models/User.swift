@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct User {
+struct User: Codable {
     let username, password, email: String?
     let cart: [CartItem]?
     let orders: [Order]?
