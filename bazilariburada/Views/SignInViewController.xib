@@ -14,31 +14,29 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="E-mail" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BAP-ji-2bz" userLabel="emailTextField">
+                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="E-mail" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BAP-ji-2bz" userLabel="emailTextField">
                     <rect key="frame" x="18" y="228" width="357" height="34"/>
-                    <autoresizingMask key="autoresizingMask"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" returnKeyType="next" textContentType="email"/>
                 </textField>
-                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jxY-0H-gG3" userLabel="passwordTextField">
+                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jxY-0H-gG3" userLabel="passwordTextField">
                     <rect key="frame" x="18" y="287" width="357" height="34"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" returnKeyType="next" textContentType="email"/>
                 </textField>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" role="primary" translatesAutoresizingMaskIntoConstraints="NO" id="pQv-kt-WJG" userLabel="logInButton">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" role="primary" translatesAutoresizingMaskIntoConstraints="NO" id="pQv-kt-WJG" userLabel="logInButton">
                     <rect key="frame" x="38" y="348" width="317" height="35"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                     <buttonConfiguration key="configuration" style="filled" title="Log in"/>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" role="primary" translatesAutoresizingMaskIntoConstraints="NO" id="tXr-Vc-pzV" userLabel="registerButton">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" role="primary" translatesAutoresizingMaskIntoConstraints="NO" id="tXr-Vc-pzV" userLabel="registerButton">
                     <rect key="frame" x="38" y="426" width="317" height="35"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                     <buttonConfiguration key="configuration" style="filled" title="Register"/>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Don't have an account?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NQR-ns-AXS" userLabel="registerLabel">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Don't have an account?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NQR-ns-AXS" userLabel="registerLabel">
                     <rect key="frame" x="38" y="397" width="317" height="21"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="nn4-w4-wUm"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -46,6 +44,23 @@
             </subviews>
             <viewLayoutGuide key="safeArea" id="6iM-ls-njP"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="NQR-ns-AXS" firstAttribute="trailing" secondItem="tXr-Vc-pzV" secondAttribute="trailing" id="4I5-Vq-XNy"/>
+                <constraint firstItem="NQR-ns-AXS" firstAttribute="leading" secondItem="tXr-Vc-pzV" secondAttribute="leading" id="8Fl-sn-AwU"/>
+                <constraint firstItem="pQv-kt-WJG" firstAttribute="leading" secondItem="6iM-ls-njP" secondAttribute="leading" constant="38" id="G10-SI-epM"/>
+                <constraint firstItem="jxY-0H-gG3" firstAttribute="centerX" secondItem="pQv-kt-WJG" secondAttribute="centerX" id="Kcr-1J-SiF"/>
+                <constraint firstItem="jxY-0H-gG3" firstAttribute="top" secondItem="BAP-ji-2bz" secondAttribute="bottom" constant="25" id="Khf-ut-Zei"/>
+                <constraint firstItem="pQv-kt-WJG" firstAttribute="leading" secondItem="NQR-ns-AXS" secondAttribute="leading" id="O41-1J-GhX"/>
+                <constraint firstItem="BAP-ji-2bz" firstAttribute="centerX" secondItem="DXl-3C-vU1" secondAttribute="centerX" id="T1t-4E-SCn"/>
+                <constraint firstItem="BAP-ji-2bz" firstAttribute="trailing" secondItem="jxY-0H-gG3" secondAttribute="trailing" id="VEo-MO-hUA"/>
+                <constraint firstItem="BAP-ji-2bz" firstAttribute="top" secondItem="6iM-ls-njP" secondAttribute="top" constant="169" id="VbX-Yh-KPH"/>
+                <constraint firstItem="tXr-Vc-pzV" firstAttribute="top" secondItem="NQR-ns-AXS" secondAttribute="bottom" constant="8" id="ZGc-7U-Zy0"/>
+                <constraint firstItem="pQv-kt-WJG" firstAttribute="trailing" secondItem="NQR-ns-AXS" secondAttribute="trailing" id="ZeY-a9-MMO"/>
+                <constraint firstItem="BAP-ji-2bz" firstAttribute="leading" secondItem="jxY-0H-gG3" secondAttribute="leading" id="jVh-wW-57p"/>
+                <constraint firstItem="pQv-kt-WJG" firstAttribute="top" secondItem="jxY-0H-gG3" secondAttribute="bottom" constant="27" id="uUh-KT-Gew"/>
+                <constraint firstItem="BAP-ji-2bz" firstAttribute="leading" secondItem="6iM-ls-njP" secondAttribute="leading" constant="18" id="xa6-YQ-snU"/>
+                <constraint firstItem="NQR-ns-AXS" firstAttribute="top" secondItem="pQv-kt-WJG" secondAttribute="bottom" constant="14" id="zSb-bK-JGv"/>
+            </constraints>
             <point key="canvasLocation" x="131" y="-658"/>
         </view>
     </objects>
