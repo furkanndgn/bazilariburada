@@ -52,11 +52,19 @@ class NetworkManager {
     }
     
     private func handleURLResponse(output: URLSession.DataTaskPublisher.Output, url: URL) throws -> Data {
-        guard let response = output.response as? HTTPURLResponse,
-              response.statusCode >= 200 && response.statusCode < 300 else {
-            throw(NetworkError.invalidURL)
+        guard let response = output.response as? HTTPURLResponse else {
+            throw NetworkError.decodingFailed
         }
-        return output.data
+        switch response.statusCode {
+        case 200..<300:
+            return output.data
+        case 401:
+            throw NetworkError.unauthorized
+        case 500..<600:
+            throw NetworkError.serverError
+        default:
+            throw NetworkError.unknown
+        }
     }
     
     func handleCompletion(completion: Subscribers.Completion<Error>) {
