@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 class CartService {
-    let cartKeyword = "/cart"
+    private let cartKeyword = "/cart"
     
     private let networkManager = NetworkManager.shared
     private var cancellables = Set<AnyCancellable>()

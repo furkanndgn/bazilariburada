@@ -11,7 +11,7 @@ import Combine
 // For endpoints in Authentication collection
 class AuthenticationService {
     
-    let authKeyword = "/auth"
+    private let authKeyword = "/auth"
     
     private let networkManager = NetworkManager.shared
     private var cancellables = Set<AnyCancellable>()
