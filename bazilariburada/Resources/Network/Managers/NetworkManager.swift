@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 enum HTTPMethod: String {
-    case GET, POST, DELETE, PUT
+    case GET, POST, DELETE, PATCH
 }
 
 class NetworkManager {

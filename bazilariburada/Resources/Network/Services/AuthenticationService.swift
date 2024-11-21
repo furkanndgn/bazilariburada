@@ -30,6 +30,17 @@ class AuthenticationService {
             })
             .store(in: &cancellables)
     }
+    
+    func activateAccount(email: String, activationCode: String) {
+        let body = ["email": email, "activationCode": activationCode]
+        networkManager.request(endpoint: "\(authKeyword)/activate", method: .PATCH, body: body)
+            .decode(type: ApiResponse<EmptyResponseData>.self, decoder: JSONDecoder())
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: networkManager.handleCompletion, receiveValue: { response in
+                print(response.message)
+            })
+            .store(in: &cancellables)
+    }
 
     func login(username: String, password: String) {
         let body = ["username": username, "password": password]
