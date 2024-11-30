@@ -20,23 +20,43 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="aeF-AO-nv1">
-                    <rect key="frame" x="0.0" y="59" width="393" height="759"/>
+                    <rect key="frame" x="0.0" y="127" width="393" height="691"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 </tableView>
+                <tabBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ls0-rT-F1Q">
+                    <rect key="frame" x="0.0" y="735" width="393" height="83"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <items>
+                        <tabBarItem title="Home" image="house" catalog="system" id="hZL-TP-TJb"/>
+                        <tabBarItem title="Profile" image="person" catalog="system" id="SQI-rT-eLT"/>
+                    </items>
+                </tabBar>
+                <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Fl-Pp-Qv7">
+                    <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                    <items>
+                        <navigationItem title="Title" id="i0S-LU-PHp"/>
+                    </items>
+                </navigationBar>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <constraints>
-                <constraint firstItem="aeF-AO-nv1" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="0tk-4X-dOT"/>
-                <constraint firstItem="aeF-AO-nv1" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="1aF-jJ-Hxe"/>
+                <constraint firstItem="6Fl-Pp-Qv7" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="0Ma-aS-x2V"/>
+                <constraint firstItem="Ls0-rT-F1Q" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="HBO-2J-29c"/>
+                <constraint firstItem="aeF-AO-nv1" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="J9o-tS-xCK"/>
+                <constraint firstItem="6Fl-Pp-Qv7" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="KRa-tz-vfK"/>
+                <constraint firstItem="Ls0-rT-F1Q" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="KZf-FY-Oey"/>
+                <constraint firstItem="6Fl-Pp-Qv7" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="M6N-Bd-jH3"/>
+                <constraint firstItem="aeF-AO-nv1" firstAttribute="top" secondItem="6Fl-Pp-Qv7" secondAttribute="bottom" constant="24" id="O6x-jP-qyt"/>
                 <constraint firstItem="aeF-AO-nv1" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="P3n-q1-0Pn"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="aeF-AO-nv1" secondAttribute="trailing" id="QuN-nd-ZK2"/>
-                <constraint firstItem="aeF-AO-nv1" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="UYg-a1-Nde"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="aeF-AO-nv1" secondAttribute="bottom" id="iex-ZJ-cLe"/>
+                <constraint firstItem="Ls0-rT-F1Q" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="gcN-qq-vDd"/>
+                <constraint firstItem="aeF-AO-nv1" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="rt8-Yk-DTa"/>
             </constraints>
-            <point key="canvasLocation" x="109" y="-12"/>
+            <point key="canvasLocation" x="107.63358778625954" y="-12.67605633802817"/>
         </view>
     </objects>
     <resources>
+        <image name="house" catalog="system" width="128" height="104"/>
+        <image name="person" catalog="system" width="128" height="121"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
