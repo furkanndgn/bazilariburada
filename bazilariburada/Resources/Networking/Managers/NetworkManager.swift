@@ -23,7 +23,34 @@ class NetworkManager {
         self.token = token
     }
     
-    func request(
+    func performRequest<T: Decodable>(
+        endpoint: String,
+        method: HTTPMethod,
+        body: [String: Any]? = nil,
+        requiresAuthentication: Bool = false,
+        token: String? = nil
+    ) -> AnyPublisher<ApiResponse<T>, Error> {
+        request(endpoint: endpoint, method: method, body: body, requiresAuthentication: requiresAuthentication, token: token)
+            .decode(type: ApiResponse<T>.self, decoder: JSONDecoder())
+            .receive(on: DispatchQueue.main)
+            .eraseToAnyPublisher()
+    }
+    
+    // Overload for `null` data responses
+    func performRequest(
+        endpoint: String,
+        method: HTTPMethod,
+        body: [String: Any]? = nil,
+        requiresAuthentication: Bool = false,
+        token: String? = nil
+    ) -> AnyPublisher<ApiResponse<EmptyResponseData>, Error> {
+        request(endpoint: endpoint, method: method, body: body, requiresAuthentication: requiresAuthentication, token: token)
+            .decode(type: ApiResponse<EmptyResponseData>.self, decoder: JSONDecoder())
+            .receive(on: DispatchQueue.main)
+            .eraseToAnyPublisher()
+    }
+
+    private func request(
         endpoint: String,
         method: HTTPMethod,
         body: [String: Any]? = nil,
@@ -63,7 +90,7 @@ class NetworkManager {
         case 500..<600:
             throw NetworkError.serverError
         default:
-            throw NetworkError.unknown
+            return output.data
         }
     }
     

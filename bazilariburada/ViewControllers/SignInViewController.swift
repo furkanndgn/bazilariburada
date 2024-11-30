@@ -8,14 +8,14 @@
 import UIKit
 
 class SignInViewController: UIViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
     }
-}
-
-#Preview {
-    SignInViewController()
+    
+    @IBAction func pushTestView(_ sender: UIButton) {
+        navigationController?.pushViewController(TestViewController(), animated: true)
+    }
 }

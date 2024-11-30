@@ -12,30 +12,28 @@ class ProductService {
     private let productsKeyword = "/products"
     
     private let networkManager = NetworkManager.shared
-    private var cancellables = Set<AnyCancellable>()
+    private var productSubscription: AnyCancellable?
     
-    @Published var allProducts: AllProductResponseData?
+    @Published var allProducts: AllProductsResponseData?
     @Published var productByID: Product?
     
-    func getAllProduct() {
-        networkManager.request(endpoint: "\(productsKeyword)", method: .GET)
-            .decode(type: ApiResponse<AllProductResponseData>.self, decoder: JSONDecoder())
+    func getAllProducts() {
+        
+        productSubscription = networkManager.performRequest(endpoint: "\(productsKeyword)", method: .GET)
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: networkManager.handleCompletion, receiveValue: { [weak self] response in
-                print(response.message)
                 self?.allProducts = response.data
+                self?.productSubscription?.cancel()
             })
-            .store(in: &cancellables)
     }
     
     func getProductByID(productID: String) {
-        networkManager.request(endpoint: "\(productsKeyword)/\(productID)", method: .GET)
-            .decode(type: ApiResponse<Product>.self, decoder: JSONDecoder())
+        
+        productSubscription = networkManager.performRequest(endpoint: "\(productsKeyword)/\(productID)", method: .GET)
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: networkManager.handleCompletion, receiveValue: { [weak self] response in
-                print(response.message)
                 self?.productByID = response.data
+                self?.productSubscription?.cancel()
             })
-            .store(in: &cancellables)
     }
 }

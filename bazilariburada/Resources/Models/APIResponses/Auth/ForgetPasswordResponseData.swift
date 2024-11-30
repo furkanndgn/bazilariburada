@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct ForgotPasswordResponseData: Decodable {
+struct ForgetPasswordResponseData: Decodable {
     let message: String
 }

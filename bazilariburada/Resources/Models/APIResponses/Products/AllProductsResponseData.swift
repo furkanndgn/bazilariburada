@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct AllProductResponseData: Decodable {
+struct AllProductsResponseData: Decodable {
     let products: [Product]
     let totalProducts: Int
     let totalPages: Int

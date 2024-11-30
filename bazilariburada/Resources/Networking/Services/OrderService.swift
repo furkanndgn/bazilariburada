@@ -12,43 +12,40 @@ class OrderService {
     private let ordersKeywork = "/orders"
     
     private let networkManager = NetworkManager.shared
-    private var cancellables = Set<AnyCancellable>()
+    private var orderSubscription: AnyCancellable?
     
     @Published var placedOrder: Order?
     @Published var orderByID: Order?
     @Published var allOrders: [Order]?
     
     func placeAnOrder(token: String) {
-        networkManager.request(endpoint: "\(ordersKeywork)", method: .POST, requiresAuthentication: true, token: token)
-            .decode(type: ApiResponse<Order>.self, decoder: JSONDecoder())
+        
+        orderSubscription = networkManager.performRequest(endpoint: "\(ordersKeywork)", method: .POST, requiresAuthentication: true, token: token)
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: networkManager.handleCompletion, receiveValue: { [weak self] response in
-                print(response.message)
                 self?.placedOrder = response.data
+                self?.orderSubscription?.cancel()
             })
-            .store(in: &cancellables)
     }
     
     func getUsersOrderByID(token: String, orderID: String) {
-        networkManager.request(endpoint: "\(ordersKeywork)/\(orderID)", method: .GET)
-            .decode(type: ApiResponse<Order>.self, decoder: JSONDecoder())
+        
+        orderSubscription = networkManager.performRequest(endpoint: "\(ordersKeywork)/\(orderID)", method: .GET)
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: networkManager.handleCompletion, receiveValue: { [weak self] response in
-                print(response.message)
                 self?.orderByID = response.data
+                self?.orderSubscription?.cancel()
             })
-            .store(in: &cancellables)
     }
     
     func getUsersAllOrders(token: String) {
-        networkManager.request(endpoint: "\(ordersKeywork)", method: .GET, requiresAuthentication: true, token: token)
-            .decode(type: ApiResponse<[Order]>.self, decoder: JSONDecoder())
+        
+        orderSubscription = networkManager.performRequest(endpoint: "\(ordersKeywork)", method: .GET, requiresAuthentication: true, token: token)
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: networkManager.handleCompletion, receiveValue: { [weak self] response in
-                print(response.message)
                 self?.allOrders = response.data
+                self?.orderSubscription?.cancel()
             })
-            .store(in: &cancellables)
     }
 }
     
