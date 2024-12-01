@@ -11,33 +11,27 @@ class MainViewController: UIViewController {
 
     @IBOutlet weak var productTableView: UITableView!
     
-    
     let viewModel = MainViewModel()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupView()
         
-        NSLayoutConstraint.activate([
-            productTableView.topAnchor.constraint(equalTo: view.topAnchor),
-            productTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            productTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            productTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-        ])
+        setupView()
     }
     
     private func updateUI() {
         if let products = viewModel.allProducts, !products.isEmpty {
             productTableView.reloadData()
+            productTableView.isHidden = false
         } else {
-           // productTableView.isHidden = true
+           productTableView.isHidden = true
         }
     }
     
-    private func setupView() {
+    private func setupView() {                
+        
         productTableView.dataSource = self
         productTableView.delegate = self
-        //productTableView.isHidden = false
         
         let nib = UINib(nibName: "ProductCell", bundle: nil)
         productTableView.register(nib, forCellReuseIdentifier: "ProductCell")

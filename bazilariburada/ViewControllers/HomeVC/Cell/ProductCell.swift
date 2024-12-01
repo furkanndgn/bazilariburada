@@ -10,11 +10,10 @@ import UIKit
 class ProductCell: UITableViewCell {
 
     @IBOutlet weak var nameLabel: UILabel!
-    
     @IBOutlet weak var productImageView: UIImageView!
-    
     @IBOutlet weak var priceLabel: UILabel!
-    
+    @IBOutlet weak var rateLabel: UILabel!
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -26,9 +25,11 @@ class ProductCell: UITableViewCell {
         // Configure the view for the selected state
     }
     func config(product: Product) {
-        nameLabel.text = product.name
+        
+        nameLabel.text = "\(product.brand!) \(product.name!)"
         let formattedPrice = product.price?.formatted(.currency(code: "USD"))
         priceLabel.text = formattedPrice
         productImageView.image = UIImage(systemName: "bag.fill")
+        rateLabel.text = String(format: "%.1f", product.averageRating ?? 0.0)
     }
 }

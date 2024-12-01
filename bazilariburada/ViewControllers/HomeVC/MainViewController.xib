@@ -11,52 +11,40 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MainViewController" customModule="bazilariburada" customModuleProvider="target">
             <connections>
                 <outlet property="productTableView" destination="aeF-AO-nv1" id="xOs-6a-veE"/>
-                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="view" destination="741-o2-zP0" id="S0u-ju-fGw"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+        <view contentMode="scaleToFill" id="741-o2-zP0">
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="aeF-AO-nv1">
-                    <rect key="frame" x="0.0" y="127" width="393" height="691"/>
+                    <rect key="frame" x="0.0" y="103" width="393" height="715"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 </tableView>
-                <tabBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ls0-rT-F1Q">
-                    <rect key="frame" x="0.0" y="735" width="393" height="83"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <items>
-                        <tabBarItem title="Home" image="house" catalog="system" id="hZL-TP-TJb"/>
-                        <tabBarItem title="Profile" image="person" catalog="system" id="SQI-rT-eLT"/>
-                    </items>
-                </tabBar>
-                <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Fl-Pp-Qv7">
+                <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CRc-hl-ekx">
                     <rect key="frame" x="0.0" y="59" width="393" height="44"/>
                     <items>
-                        <navigationItem title="Title" id="i0S-LU-PHp"/>
+                        <navigationItem title="bazilariburada" id="bL3-t2-OXH"/>
                     </items>
                 </navigationBar>
             </subviews>
-            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <viewLayoutGuide key="safeArea" id="oXe-U2-JUF"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="6Fl-Pp-Qv7" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="0Ma-aS-x2V"/>
-                <constraint firstItem="Ls0-rT-F1Q" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="HBO-2J-29c"/>
-                <constraint firstItem="aeF-AO-nv1" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="J9o-tS-xCK"/>
-                <constraint firstItem="6Fl-Pp-Qv7" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="KRa-tz-vfK"/>
-                <constraint firstItem="Ls0-rT-F1Q" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="KZf-FY-Oey"/>
-                <constraint firstItem="6Fl-Pp-Qv7" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="M6N-Bd-jH3"/>
-                <constraint firstItem="aeF-AO-nv1" firstAttribute="top" secondItem="6Fl-Pp-Qv7" secondAttribute="bottom" constant="24" id="O6x-jP-qyt"/>
-                <constraint firstItem="aeF-AO-nv1" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="P3n-q1-0Pn"/>
-                <constraint firstItem="Ls0-rT-F1Q" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="gcN-qq-vDd"/>
-                <constraint firstItem="aeF-AO-nv1" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="rt8-Yk-DTa"/>
+                <constraint firstItem="CRc-hl-ekx" firstAttribute="leading" secondItem="oXe-U2-JUF" secondAttribute="leading" id="6Cn-BV-WlG"/>
+                <constraint firstItem="aeF-AO-nv1" firstAttribute="trailing" secondItem="oXe-U2-JUF" secondAttribute="trailing" id="GPq-V8-zRk"/>
+                <constraint firstItem="CRc-hl-ekx" firstAttribute="trailing" secondItem="oXe-U2-JUF" secondAttribute="trailing" id="YVd-XU-BCB"/>
+                <constraint firstItem="aeF-AO-nv1" firstAttribute="leading" secondItem="oXe-U2-JUF" secondAttribute="leading" id="brB-BS-po7"/>
+                <constraint firstItem="CRc-hl-ekx" firstAttribute="top" secondItem="oXe-U2-JUF" secondAttribute="top" id="cGH-fd-ijy"/>
+                <constraint firstItem="aeF-AO-nv1" firstAttribute="top" secondItem="CRc-hl-ekx" secondAttribute="bottom" id="hIX-yT-va1"/>
+                <constraint firstItem="oXe-U2-JUF" firstAttribute="bottom" secondItem="aeF-AO-nv1" secondAttribute="bottom" id="lsL-Sh-jw7"/>
             </constraints>
-            <point key="canvasLocation" x="107.63358778625954" y="-12.67605633802817"/>
+            <point key="canvasLocation" x="-390.07633587786256" y="-659.15492957746483"/>
         </view>
     </objects>
     <resources>
-        <image name="house" catalog="system" width="128" height="104"/>
-        <image name="person" catalog="system" width="128" height="121"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
