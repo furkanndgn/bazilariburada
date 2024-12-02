@@ -87,7 +87,7 @@ class StarRatingView: UIView {
         self.starColor = starColor
         self.starRounding = starRounding
         self.isMultipleTouchEnabled = false
-        self.isUserInteractionEnabled = true
+        self.isUserInteractionEnabled = false
         self.horizontalStack?.isUserInteractionEnabled = false
     }
         

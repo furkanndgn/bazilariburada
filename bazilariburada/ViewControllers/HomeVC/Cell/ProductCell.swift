@@ -27,8 +27,7 @@ class ProductCell: UITableViewCell {
     func config(product: Product) {
         
         nameLabel.text = "\(product.brand!) \(product.name!)"
-        let formattedPrice = product.price?.formatted(.currency(code: "USD"))
-        priceLabel.text = formattedPrice
+        priceLabel.text = product.price?.formatted(.currency(code: "USD"))
         productImageView.image = UIImage(systemName: "bag.fill")
         rateLabel.text = String(format: "%.1f", product.averageRating ?? 0.0)
     }

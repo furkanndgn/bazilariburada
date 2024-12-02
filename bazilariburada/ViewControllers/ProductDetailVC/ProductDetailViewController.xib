@@ -11,6 +11,12 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ProductDetailViewController" customModule="bazilariburada" customModuleProvider="target">
             <connections>
+                <outlet property="productDescriptionLabel" destination="4aU-bK-AoQ" id="KxZ-QK-47e"/>
+                <outlet property="productImageView" destination="19Y-rU-uWk" id="arI-db-3K9"/>
+                <outlet property="productPriceLabel" destination="Kq6-TL-4Ee" id="2WT-8x-Qnr"/>
+                <outlet property="productQuantityLabel" destination="qHk-ID-yVz" id="U0W-Hb-NbC"/>
+                <outlet property="productVoteCountLabel" destination="8Z6-aF-CId" id="a1J-Dv-6o3"/>
+                <outlet property="starRateView" destination="jbr-P9-4Xg" id="K0k-Ui-cGv"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -55,12 +61,19 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4aU-bK-AoQ" userLabel="Product Description">
+                    <rect key="frame" x="36" y="451.66666666666669" width="321" height="20.333333333333314"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="8Z6-aF-CId" firstAttribute="centerX" secondItem="jbr-P9-4Xg" secondAttribute="centerX" id="0U6-wK-TXx"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="19Y-rU-uWk" secondAttribute="trailing" constant="12" id="B7U-Jh-4Im"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="4aU-bK-AoQ" secondAttribute="trailing" constant="36" id="Dmx-o1-5SD"/>
                 <constraint firstItem="8Z6-aF-CId" firstAttribute="top" secondItem="jbr-P9-4Xg" secondAttribute="bottom" constant="10" id="Fkf-9B-PbI"/>
                 <constraint firstItem="qHk-ID-yVz" firstAttribute="leading" secondItem="Kq6-TL-4Ee" secondAttribute="leading" id="LpR-bY-U7J"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="jbr-P9-4Xg" secondAttribute="trailing" constant="12" id="UiX-NE-XTs"/>
@@ -70,8 +83,11 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="qHk-ID-yVz" secondAttribute="bottom" constant="402" id="ZfF-7D-MxC"/>
                 <constraint firstItem="Kq6-TL-4Ee" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="a8t-wO-F7I"/>
                 <constraint firstItem="jbr-P9-4Xg" firstAttribute="top" secondItem="19Y-rU-uWk" secondAttribute="bottom" constant="8" symbolic="YES" id="deu-cV-1ZD"/>
+                <constraint firstItem="4aU-bK-AoQ" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="h5x-Vq-AAr"/>
                 <constraint firstItem="qHk-ID-yVz" firstAttribute="baseline" secondItem="8Z6-aF-CId" secondAttribute="baseline" id="hdY-yh-yGE"/>
                 <constraint firstItem="19Y-rU-uWk" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="8" id="nvH-QQ-cOE"/>
+                <constraint firstItem="4aU-bK-AoQ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="36" id="oi0-xB-fjQ"/>
+                <constraint firstItem="4aU-bK-AoQ" firstAttribute="bottom" secondItem="8Z6-aF-CId" secondAttribute="bottom" constant="56" id="xUD-tC-pxJ"/>
                 <constraint firstItem="jbr-P9-4Xg" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="243" id="xqA-5i-eb1"/>
             </constraints>
             <point key="canvasLocation" x="130.53435114503816" y="-12.67605633802817"/>
