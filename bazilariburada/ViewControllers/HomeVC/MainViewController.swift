@@ -27,9 +27,8 @@ class MainViewController: UIViewController {
            productTableView.isHidden = true
         }
     }
-    
-    private func setupView() {                
-        
+
+    private func setupView() {
         productTableView.dataSource = self
         productTableView.delegate = self
         
