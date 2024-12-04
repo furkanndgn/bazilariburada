@@ -16,9 +16,11 @@ class ProductDetailViewController: UIViewController {
     @IBOutlet weak var starRateView: StarRatingView!
     @IBOutlet weak var productDescriptionLabel: UILabel!
     
+    var product: Product
+    
     init(product: Product) {
-        super.init(nibName: nil, bundle: nil)
-        
+        self.product = product
+        super.init(nibName: "ProductDetailViewController", bundle: nil)
     }
     
     required init?(coder: NSCoder) {
@@ -27,15 +29,16 @@ class ProductDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        self.title = product.name
+        configureView(for: product)
     }
     
     private func configureView(for product: Product) {
         productImageView.image = UIImage(systemName: "bag.fill")
         productPriceLabel.text = product.price?.formatted(.currency(code: "USD"))
-        productQuantityLabel.text = "\(product.quantity ?? 0) left."
-        productVoteCountLabel.text = "\(product.reviews?.count ?? 0)"
+        productQuantityLabel.text = "\(product.quantity ?? 0) left"
+        let reviewCount = product.reviews?.count ?? 0
+        productVoteCountLabel.text = reviewCount == 1 ? "\(reviewCount) review" : "\(reviewCount) reviews"
         starRateView.rating = Float(product.averageRating ?? 0)
         productDescriptionLabel.text = product.description
     }

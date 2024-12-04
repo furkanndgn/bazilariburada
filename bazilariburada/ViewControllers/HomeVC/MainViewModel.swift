@@ -33,7 +33,6 @@ class MainViewModel: ObservableObject {
     }
     
     func product(by index: Int) -> Product {
-        print(allProducts![index])
         return allProducts![index]
     }
     
@@ -42,7 +41,6 @@ class MainViewModel: ObservableObject {
             .sink { [weak self] returnedProducts in
                 self?.allProducts = returnedProducts?.products
                 self?.productCount = returnedProducts?.totalProducts
-                print("product count: \(self?.productCount ?? 0)")
             }
             .store(in: &cancellables)
         

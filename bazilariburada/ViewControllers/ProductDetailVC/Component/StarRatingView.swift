@@ -43,6 +43,15 @@ class StarRatingView: UIView {
         }
     }
     
+    @IBInspectable var viewIsUserInteractable: Bool {
+        get {
+            self.isUserInteractionEnabled
+        }
+        set {
+            self.isUserInteractionEnabled = newValue
+        }
+    }
+    
     var starRounding: StarRounding = .roundToHalfStar {
         didSet {
             updateStarsForRating(rating)
