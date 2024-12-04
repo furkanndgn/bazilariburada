@@ -31,6 +31,8 @@ class MainViewController: UIViewController {
     private func setupView() {
         productTableView.dataSource = self
         productTableView.delegate = self
+        self.title = "bazilariburada"
+        self.navigationItem.backButtonTitle = ""
         
         let nib = UINib(nibName: "ProductCell", bundle: nil)
         productTableView.register(nib, forCellReuseIdentifier: "ProductCell")
@@ -61,12 +63,17 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         let product = viewModel.product(by: indexPath.row)
-        cell.config(product: product)
+        cell.configure(product: product)
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // Implement the logic for opening the product detail screen
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        let product = viewModel.product(by: indexPath.row)
+        let productDetailViewController = ProductDetailViewController(product: product)
+        
+        navigationController?.pushViewController(productDetailViewController, animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

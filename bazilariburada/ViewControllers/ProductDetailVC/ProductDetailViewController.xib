@@ -47,7 +47,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jbr-P9-4Xg" customClass="StarRatingView" customModule="bazilariburada" customModuleProvider="target">
-                    <rect key="frame" x="243" y="340" width="138" height="45"/>
+                    <rect key="frame" x="243" y="348" width="138" height="39"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="rating">
@@ -74,7 +74,7 @@
                 <constraint firstItem="8Z6-aF-CId" firstAttribute="centerX" secondItem="jbr-P9-4Xg" secondAttribute="centerX" id="0U6-wK-TXx"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="19Y-rU-uWk" secondAttribute="trailing" constant="12" id="B7U-Jh-4Im"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="4aU-bK-AoQ" secondAttribute="trailing" constant="36" id="Dmx-o1-5SD"/>
-                <constraint firstItem="8Z6-aF-CId" firstAttribute="top" secondItem="jbr-P9-4Xg" secondAttribute="bottom" constant="10" id="Fkf-9B-PbI"/>
+                <constraint firstItem="8Z6-aF-CId" firstAttribute="top" secondItem="jbr-P9-4Xg" secondAttribute="bottom" constant="8" id="Fkf-9B-PbI"/>
                 <constraint firstItem="qHk-ID-yVz" firstAttribute="leading" secondItem="Kq6-TL-4Ee" secondAttribute="leading" id="LpR-bY-U7J"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="jbr-P9-4Xg" secondAttribute="trailing" constant="12" id="UiX-NE-XTs"/>
                 <constraint firstItem="Kq6-TL-4Ee" firstAttribute="top" secondItem="19Y-rU-uWk" secondAttribute="bottom" constant="16" id="WjR-nE-AvI"/>
@@ -82,7 +82,7 @@
                 <constraint firstItem="19Y-rU-uWk" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="12" id="Zda-Uf-7cU"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="qHk-ID-yVz" secondAttribute="bottom" constant="402" id="ZfF-7D-MxC"/>
                 <constraint firstItem="Kq6-TL-4Ee" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="a8t-wO-F7I"/>
-                <constraint firstItem="jbr-P9-4Xg" firstAttribute="top" secondItem="19Y-rU-uWk" secondAttribute="bottom" constant="8" symbolic="YES" id="deu-cV-1ZD"/>
+                <constraint firstItem="jbr-P9-4Xg" firstAttribute="top" secondItem="19Y-rU-uWk" secondAttribute="bottom" constant="16" id="deu-cV-1ZD"/>
                 <constraint firstItem="4aU-bK-AoQ" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="h5x-Vq-AAr"/>
                 <constraint firstItem="qHk-ID-yVz" firstAttribute="baseline" secondItem="8Z6-aF-CId" secondAttribute="baseline" id="hdY-yh-yGE"/>
                 <constraint firstItem="19Y-rU-uWk" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="8" id="nvH-QQ-cOE"/>

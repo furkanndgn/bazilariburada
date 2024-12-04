@@ -20,8 +20,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         
-        let mainVC = MainViewController(nibName: "MainViewController", bundle: nil)
-        let signInVC = SignInViewController(nibName: "SignInViewController", bundle: nil)
+        let mainVC = UINavigationController(rootViewController: MainViewController(nibName: "MainViewController", bundle: nil))
+        let signInVC = UINavigationController(rootViewController: SignInViewController(nibName: "SignInViewController", bundle: nil))
         
         mainVC.tabBarItem = UITabBarItem(title: "Home", image: UIImage(systemName: "house"), tag: 0)
         signInVC.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person"), tag: 1)
