@@ -12,11 +12,9 @@ class MainViewModel: ObservableObject {
     
     private let productService: ProductService
     var cancellables = Set<AnyCancellable>()
-    
     @Published var allProducts: [Product]?
     @Published var productByID: Product?
     @Published var productCount: Int?
-    
     
     init(productService: ProductService = ProductService()) {
         self.productService = productService
@@ -43,11 +41,7 @@ class MainViewModel: ObservableObject {
                 self?.productCount = returnedProducts?.totalProducts
             }
             .store(in: &cancellables)
-        
         productService.$productByID
-            .sink { [weak self] returnedProduct in
-                self?.productByID = returnedProduct
-            }
-            .store(in: &cancellables)
+            .assign(to: &$productByID)
     }
 }

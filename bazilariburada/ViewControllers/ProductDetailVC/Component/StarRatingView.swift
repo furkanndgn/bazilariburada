@@ -21,6 +21,10 @@ public enum StarRounding: Int {
 class StarRatingView: UIView {
     
     private var horizontalStack: StarRatingStackView?
+    var onTap: (() -> Void)?
+    private let fullStarImage = UIImage(systemName: "star.fill")
+    private let halfStarImage = UIImage(systemName: "star.leadinghalf.filled")
+    private let emptyStarImage = UIImage(systemName: "star")
     
     @IBInspectable var rating: Float = 3.5 {
         didSet {
@@ -58,10 +62,6 @@ class StarRatingView: UIView {
         }
     }
     
-    private let fullStarImage = UIImage(systemName: "star.fill")
-    private let halfStarImage = UIImage(systemName: "star.leadinghalf.filled")
-    private let emptyStarImage = UIImage(systemName: "star")
-    
     convenience init(frame: CGRect, starColor: UIColor, starRounding: StarRounding) {
         self.init(frame: frame)
         setupView(rating: rating, starColor: starColor, starRounding: starRounding)
@@ -81,14 +81,18 @@ class StarRatingView: UIView {
         let bundle = Bundle(for: StarRatingStackView.self)
         let nib = UINib(nibName: "StarRatingStackView", bundle: bundle)
         guard let viewFromNib = nib.instantiate(withOwner: self).first as? StarRatingStackView else { return }
-        
         self.addSubview(viewFromNib)
         viewFromNib.translatesAutoresizingMaskIntoConstraints = false
-        viewFromNib.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-        }
+        setupConstraints(ratingView: viewFromNib)
         self.horizontalStack = viewFromNib
         updateView(rating: rating, starColor: starColor, starRounding: starRounding)
+        setupGestures()
+    }
+    
+    private func setupConstraints(ratingView: StarRatingStackView) {
+        ratingView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
     }
     
     private func updateView(rating: Float, starColor: UIColor, starRounding: StarRounding) {
@@ -96,8 +100,13 @@ class StarRatingView: UIView {
         self.starColor = starColor
         self.starRounding = starRounding
         self.isMultipleTouchEnabled = false
-        self.isUserInteractionEnabled = false
+        self.isUserInteractionEnabled = true
         self.horizontalStack?.isUserInteractionEnabled = false
+    }
+    
+    private func setupGestures() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        self.addGestureRecognizer(tapGesture)
     }
         
     private func updateStarColor()  {
@@ -123,7 +132,6 @@ class StarRatingView: UIView {
             horizontalStack.star4ImageView,
             horizontalStack.star5ImageView
         ]
-        
         for i in 1...5 {
             let starImage = getStarImage(for: rating, index: Float(i))
             starImageViews[i - 1]?.image = starImage
@@ -146,7 +154,6 @@ class StarRatingView: UIView {
         case .floorToFullStar:
             starImage = rating >= index ? fullStarImage : emptyStarImage
         }
-        
         return starImage
     }
     
@@ -168,42 +175,49 @@ class StarRatingView: UIView {
         return image
     }
     
-    var lastTouched: Date?
-    
-    private func touched(touch: UITouch, moveTouch: Bool) {
-        guard !moveTouch || lastTouched == nil || lastTouched!.timeIntervalSinceNow < -0.1 else { return }
-        guard let horizontalStack = self.horizontalStack else { return }
-        let touchX = touch.location(in: horizontalStack).x
-        let ratingFromTouch = Float(5 * touchX / horizontalStack.frame.width)
-        let roundedRatingFromTouch = roundedRating(for: ratingFromTouch)
-        self.rating = roundedRatingFromTouch
-        lastTouched = Date()
+    /// Mark: Action Functions
+    @objc
+    private func handleTap() {
+        onTap?()
     }
     
-    private func roundedRating(for rating: Float) -> Float {
-        var result: Float = 0
-        switch starRounding {
-        case .roundToHalfStar, .ceilToHalfStar, .floorToHalfStar:
-            result = round(2 * rating) / 2
-        case .roundToFullStar, .ceilToFullStar, .floorToFullStar:
-            result = round(rating)
-        }
-        
-        return result
-    }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let touch = touches.first else { return }
-        touched(touch: touch, moveTouch: false)
-    }
-    
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let touch = touches.first else { return }
-        touched(touch: touch, moveTouch: true)
-    }
-    
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let touch = touches.first else { return }
-        touched(touch: touch, moveTouch: false)
-    }
+//
+//    var lastTouched: Date?
+//    
+//    private func touched(touch: UITouch, moveTouch: Bool) {
+//        guard !moveTouch || lastTouched == nil || lastTouched!.timeIntervalSinceNow < -0.1 else { return }
+//        guard let horizontalStack = self.horizontalStack else { return }
+//        let touchX = touch.location(in: horizontalStack).x
+//        let ratingFromTouch = Float(5 * touchX / horizontalStack.frame.width)
+//        let roundedRatingFromTouch = roundedRating(for: ratingFromTouch)
+//        self.rating = roundedRatingFromTouch
+//        lastTouched = Date()
+//    }
+//    
+//    private func roundedRating(for rating: Float) -> Float {
+//        var result: Float = 0
+//        switch starRounding {
+//        case .roundToHalfStar, .ceilToHalfStar, .floorToHalfStar:
+//            result = round(2 * rating) / 2
+//        case .roundToFullStar, .ceilToFullStar, .floorToFullStar:
+//            result = round(rating)
+//        }
+//        
+//        return result
+//    }
+//    
+//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        guard let touch = touches.first else { return }
+//        touched(touch: touch, moveTouch: false)
+//    }
+//    
+//    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        guard let touch = touches.first else { return }
+//        touched(touch: touch, moveTouch: true)
+//    }
+//    
+//    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        guard let touch = touches.first else { return }
+//        touched(touch: touch, moveTouch: false)
+//    }
 }

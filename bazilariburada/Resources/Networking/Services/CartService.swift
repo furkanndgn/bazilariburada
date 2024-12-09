@@ -8,17 +8,16 @@
 import Foundation
 import Combine
 
-class CartService {
-    private let cartKeyword = "/cart"
+class CartService: ObservableObject {
     
+    private let cartKeyword = "/cart"
     private let networkManager = NetworkManager.shared
     private var cartSubscription: AnyCancellable?
-    
     @Published var cart: Cart?
     
     func getUsersCart(token: String) {
-        
-        cartSubscription = networkManager.performRequest(endpoint: "\(cartKeyword)", method: .GET, requiresAuthentication: true, token: token)
+        cartSubscription = networkManager.performRequest(endpoint: "\(cartKeyword)", method: .GET,
+                                                         requiresAuthentication: true, token: token)
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: networkManager.handleCompletion, receiveValue: { [weak self] response in
                 self?.cart = response.data
@@ -28,8 +27,8 @@ class CartService {
     
     func addItemToCart(token: String, productID: String, quantity: Int) {
         let body = ["productId": productID, "quantity": quantity] as [String : Any]
-        
-        cartSubscription = networkManager.performRequest(endpoint: "\(cartKeyword)", method: .POST, body: body, requiresAuthentication: true, token: token)
+        cartSubscription = networkManager.performRequest(endpoint: "\(cartKeyword)", method: .POST,
+                                                         body: body, requiresAuthentication: true, token: token)
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: networkManager.handleCompletion, receiveValue: { [weak self] response in
                 self?.cart = response.data
@@ -39,8 +38,8 @@ class CartService {
     
     func updateCartItemQuantity(token: String, productID: String, quantity: Int) {
         let body = ["quantity": quantity]
-        
-        cartSubscription = networkManager.performRequest(endpoint: "\(cartKeyword)/\(productID)", method: .PATCH, body: body, requiresAuthentication: true, token: token)
+        cartSubscription = networkManager.performRequest(endpoint: "\(cartKeyword)/\(productID)", method: .PATCH,
+                                                         body: body, requiresAuthentication: true, token: token)
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: networkManager.handleCompletion, receiveValue: { [weak self] response in
                 self?.cart = response.data
@@ -48,9 +47,9 @@ class CartService {
             })
     }
     
-    func removeItemFromCart(token: String, productID: String) {
-        
-        cartSubscription = networkManager.performRequest(endpoint: "\(cartKeyword)/\(productID)", method: .DELETE, requiresAuthentication: true, token: token)
+    func removeItemFromCart(token: String, productID: String) {    
+        cartSubscription = networkManager.performRequest(endpoint: "\(cartKeyword)/\(productID)", method: .DELETE,
+                                                         requiresAuthentication: true, token: token)
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: networkManager.handleCompletion, receiveValue: { [weak self] response in
                 self?.cart = response.data
@@ -59,8 +58,8 @@ class CartService {
     }
     
     func clearCartItems(token: String) {
-        
-        cartSubscription = networkManager.performRequest(endpoint: "\(cartKeyword)", method: .DELETE, requiresAuthentication: true, token: token)
+        cartSubscription = networkManager.performRequest(endpoint: "\(cartKeyword)", method: .DELETE,
+                                                         requiresAuthentication: true, token: token)
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: networkManager.handleCompletion, receiveValue: { [weak self] response in
                 self?.cart = response.data

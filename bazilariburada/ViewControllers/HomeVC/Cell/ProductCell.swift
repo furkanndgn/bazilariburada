@@ -25,7 +25,6 @@ class ProductCell: UITableViewCell {
         // Configure the view for the selected state
     }
     func configure(product: Product) {
-        
         nameLabel.text = "\(product.brand!) \(product.name!)"
         priceLabel.text = product.price?.formatted(.currency(code: "USD"))
         productImageView.image = UIImage(systemName: "bag.fill")

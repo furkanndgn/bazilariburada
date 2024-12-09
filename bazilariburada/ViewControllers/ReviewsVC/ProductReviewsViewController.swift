@@ -11,21 +11,31 @@ class ProductReviewsViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
+    var viewModel: ReviewsViewModel
+    var product: Product
     
-    let viewModel = ReviewsViewModel()
+    init(product: Product, viewModel: ReviewsViewModel = ReviewsViewModel()) {
+        self.product = product
+        self.viewModel = viewModel
+        super.init(nibName: "ProductReviewsViewController", bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        setupView()
+        addSubscription()
     }
     
     private func setupView() {
         tableView.delegate = self
         tableView.dataSource = self
-        
         let nib = UINib(nibName: "ProductReviewCell", bundle: nil)
-        tableView.register(nib, forCellReuseIdentifier: "ProductReviewCell")
+        tableView.register(nib, forCellReuseIdentifier: "ReviewCell")
+        viewModel.getProductReviews(for: product)
     }
     
     private func addSubscription() {
@@ -48,17 +58,18 @@ class ProductReviewsViewController: UIViewController {
     }
 }
 
+
 extension ProductReviewsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.reviewCount ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ReviewCell", for: indexPath) as? ProductReviewCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ReviewCell",
+                                                       for: indexPath) as? ProductReviewCell
         else {
             return UITableViewCell()
         }
-        
         let review = viewModel.review(by: indexPath.row)
         cell.configure(for: review)
         return cell

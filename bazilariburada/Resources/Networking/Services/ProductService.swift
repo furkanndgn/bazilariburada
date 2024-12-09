@@ -8,17 +8,15 @@
 import Foundation
 import Combine
 
-class ProductService {
-    private let productsKeyword = "/products"
+class ProductService: ObservableObject {
     
+    private let productsKeyword = "/products"
     private let networkManager = NetworkManager.shared
     private var productSubscription: AnyCancellable?
-    
     @Published var allProducts: AllProductsResponseData?
     @Published var productByID: Product?
     
     func getAllProducts() {
-        
         productSubscription = networkManager.performRequest(endpoint: "\(productsKeyword)", method: .GET)
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: networkManager.handleCompletion, receiveValue: { [weak self] response in
@@ -28,7 +26,6 @@ class ProductService {
     }
     
     func getProductByID(productID: String) {
-        
         productSubscription = networkManager.performRequest(endpoint: "\(productsKeyword)/\(productID)", method: .GET)
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: networkManager.handleCompletion, receiveValue: { [weak self] response in

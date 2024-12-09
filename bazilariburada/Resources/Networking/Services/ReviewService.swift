@@ -8,16 +8,15 @@
 import Foundation
 import Combine
 
-class ReviewService {
+class ReviewService: ObservableObject {
+    
     private let networkManager = NetworkManager.shared
     private var reviewSubscription: AnyCancellable?
-    
     @Published var productReviews: [Review]?
     @Published var sentReview: Review?
     @Published var reviewDeletedMessage: String?
     
     func getProductReviews(productID: String) {
-        
         reviewSubscription = networkManager.performRequest(endpoint: "/products/\(productID)/reviews", method: .GET)
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: networkManager.handleCompletion, receiveValue: { [weak self] response in
@@ -28,8 +27,8 @@ class ReviewService {
     
     func addProductReview(token: String, productID: String, comment: String, rating: Int) {
         let body = ["comment": comment, "rating": rating] as [String : Any]
-        
-        reviewSubscription = networkManager.performRequest(endpoint: "/products/\(productID)/reviews", method: .POST, body: body, requiresAuthentication: true, token: token)
+        reviewSubscription = networkManager.performRequest(endpoint: "/products/\(productID)/reviews", method: .POST,
+                                                           body: body, requiresAuthentication: true, token: token)
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: networkManager.handleCompletion, receiveValue: { [weak self] response in
                 self?.sentReview = response.data
@@ -38,8 +37,8 @@ class ReviewService {
     }
     
     func deleteUserReview(token: String, productID: String) {
-        
-        reviewSubscription = networkManager.performRequest(endpoint: "/products/\(productID)/reviews", method: .DELETE, requiresAuthentication: true, token: token)
+        reviewSubscription = networkManager.performRequest(endpoint: "/products/\(productID)/reviews", method: .DELETE,
+                                                           requiresAuthentication: true, token: token)
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: networkManager.handleCompletion, receiveValue: { [weak self] response in
                 self?.reviewDeletedMessage = response.message
