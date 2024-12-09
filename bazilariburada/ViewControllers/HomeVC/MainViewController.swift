@@ -6,16 +6,15 @@
 //
 
 import UIKit
+import Combine
 
 class MainViewController: UIViewController {
 
     @IBOutlet weak var productTableView: UITableView!
-    
     let viewModel = MainViewModel()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupView()
     }
     
@@ -33,7 +32,6 @@ class MainViewController: UIViewController {
         productTableView.delegate = self
         self.title = "bazilariburada"
         self.navigationItem.backButtonTitle = ""
-        
         let nib = UINib(nibName: "ProductCell", bundle: nil)
         productTableView.register(nib, forCellReuseIdentifier: "ProductCell")
         addSubscription()
@@ -51,7 +49,6 @@ class MainViewController: UIViewController {
 
 
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.productCount ?? 0
     }
@@ -61,7 +58,6 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         else {
             return UITableViewCell()
         }
-        
         let product = viewModel.product(by: indexPath.row)
         cell.configure(product: product)
         return cell
@@ -69,10 +65,8 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
         let product = viewModel.product(by: indexPath.row)
         let productDetailViewController = ProductDetailViewController(product: product)
-        
         navigationController?.pushViewController(productDetailViewController, animated: true)
     }
     

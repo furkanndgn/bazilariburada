@@ -12,7 +12,6 @@ class AuthViewModel {
     
     private let authService = AuthenticationService()
     private var cancellables = Set<AnyCancellable>()
-    
     @Published var registerData: RegisterResponseData?
     @Published var loginData: LoginResponseData?
     @Published var forgetPassword: ForgetPasswordResponseData?
@@ -50,25 +49,21 @@ class AuthViewModel {
                 self?.registerData = returnedData
             }
             .store(in: &cancellables)
-        
         authService.$loginData
             .sink { [weak self] returnedData in
                 self?.loginData = returnedData
             }
             .store(in: &cancellables)
-        
         authService.$forgetPasswordData
             .sink { [weak self] returnedData in
                 self?.forgetPassword = returnedData
             }
             .store(in: &cancellables)
-
         authService.$activateAccountMessage
             .sink { [weak self] returnedData in
                 self?.accActivationMessage = returnedData
             }
             .store(in: &cancellables)
-
         authService.$resetPasswordMessage
             .sink { [weak self] returnedData in
                 self?.resetPasswordMessage = returnedData

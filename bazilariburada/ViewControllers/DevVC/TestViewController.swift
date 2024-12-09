@@ -15,9 +15,7 @@ class TestViewController: UIViewController {
     let productService = ProductService()
     let reviewService = ReviewService()
     let userService = UserService()
-    
     var userToken: String = ""
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -95,7 +93,8 @@ class TestViewController: UIViewController {
     }
     
     @IBAction func testAddReview(_ sender: UIButton) {
-        reviewService.addProductReview(token: userToken, productID: "672ca178803e6ff577ae0b3a", comment: "stephen curry how I ball", rating: 5)
+        reviewService.addProductReview(token: userToken, productID: "672ca178803e6ff577ae0b3a",
+                                       comment: "stephen curry how I ball", rating: 5)
     }
     
     @IBAction func testRemoveReview(_ sender: UIButton) {

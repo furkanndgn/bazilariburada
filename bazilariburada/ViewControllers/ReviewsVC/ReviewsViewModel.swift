@@ -8,10 +8,10 @@
 import Foundation
 import Combine
 
-class ReviewsViewModel {
+class ReviewsViewModel: ObservableObject {
+    
     private let reviewService: ReviewService
     var cancellables = Set<AnyCancellable>()
-    
     @Published var allReviews: [Review]?
     @Published var reviewCount: Int?
     
@@ -29,7 +29,8 @@ class ReviewsViewModel {
     }
     
     func addReview(for product: Product, comment: String, rating: Int, userData: LoginResponseData) {
-        reviewService.addProductReview(token: userData.accessToken, productID: product.id ?? "", comment: comment, rating: rating)
+        reviewService.addProductReview(token: userData.accessToken, productID: product.id ?? "",
+                                       comment: comment, rating: rating)
     }
     
     func deleteReview(for product: Product, userData: LoginResponseData) {
