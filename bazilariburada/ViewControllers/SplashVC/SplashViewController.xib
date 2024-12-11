@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SplashViewController" customModule="bazilariburada" customModuleProvider="target">
+            <connections>
+                <outlet property="view" destination="Fla-0O-2VG" id="eV8-KX-jLm"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="Fla-0O-2VG">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="bazilariburada" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8lp-rB-J9e">
+                    <rect key="frame" x="94.000000000000014" y="490" width="205.33333333333337" height="40.666666666666629"/>
+                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                    <color key="textColor" systemColor="systemBackgroundColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cart" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="4EP-pX-9Qz">
+                    <rect key="frame" x="111.66666666666669" y="367.66666666666669" width="170" height="118"/>
+                    <color key="tintColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="120" id="HYV-9t-63F"/>
+                        <constraint firstAttribute="width" constant="170" id="PjG-Id-kJc"/>
+                    </constraints>
+                </imageView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="IWb-Nm-KzN"/>
+            <color key="backgroundColor" systemColor="systemOrangeColor"/>
+            <constraints>
+                <constraint firstItem="4EP-pX-9Qz" firstAttribute="centerX" secondItem="Fla-0O-2VG" secondAttribute="centerX" id="UDr-oW-RtJ"/>
+                <constraint firstItem="4EP-pX-9Qz" firstAttribute="centerY" secondItem="Fla-0O-2VG" secondAttribute="centerY" id="aeS-5Q-4Vf"/>
+                <constraint firstItem="8lp-rB-J9e" firstAttribute="centerX" secondItem="Fla-0O-2VG" secondAttribute="centerX" id="au7-kl-aoB"/>
+                <constraint firstItem="8lp-rB-J9e" firstAttribute="top" secondItem="4EP-pX-9Qz" secondAttribute="bottom" constant="4" id="bHa-9O-fs9"/>
+            </constraints>
+            <point key="canvasLocation" x="66" y="-659"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="cart" catalog="system" width="128" height="102"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemOrangeColor">
+            <color red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

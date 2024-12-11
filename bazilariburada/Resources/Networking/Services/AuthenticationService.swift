@@ -17,6 +17,7 @@ class AuthenticationService: ObservableObject {
     @Published var registerData: RegisterResponseData?
     @Published var loginData: LoginResponseData?
     @Published var forgetPasswordData: ForgetPasswordResponseData?
+    @Published var refreshAccessTokenData: RefreshAccessTokenResponseData?
     @Published var activateAccountMessage: String?
     @Published var resetPasswordMessage: String?
     
@@ -73,5 +74,16 @@ class AuthenticationService: ObservableObject {
                 self?.resetPasswordMessage = response.message
                 self?.authenticationSubscription?.cancel()
             })
+    }
+    
+    func refreshAccessToken(refreshToken: String) {
+        let body = ["refreshToken": refreshToken]
+        authenticationSubscription = networkManager.performRequest(endpoint: "\(authKeyword)/refresh-token",
+                                                                   method: .POST, body: body)
+        .receive(on: DispatchQueue.main)
+        .sink(receiveCompletion: networkManager.handleCompletion, receiveValue: { [weak self] response in
+            self?.refreshAccessTokenData = response.data
+            self?.authenticationSubscription?.cancel()
+        })
     }
 }

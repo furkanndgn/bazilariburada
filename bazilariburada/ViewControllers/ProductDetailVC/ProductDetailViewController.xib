@@ -15,8 +15,8 @@
                 <outlet property="productDescriptionLabel" destination="hIe-zq-HdL" id="2Sn-8O-qZI"/>
                 <outlet property="productImageView" destination="19Y-rU-uWk" id="arI-db-3K9"/>
                 <outlet property="productPriceLabel" destination="Kq6-TL-4Ee" id="2WT-8x-Qnr"/>
-                <outlet property="productQuantityStepper" destination="Fza-AX-jNL" id="HSz-L2-4ep"/>
-                <outlet property="productQuantityTextField" destination="Xbu-iL-Q5T" id="00M-Gu-nvO"/>
+                <outlet property="productQuantityLabel" destination="xAK-qa-vEJ" id="1q6-L6-JMl"/>
+                <outlet property="productQuantityStepper" destination="Fza-AX-jNL" id="T8E-3f-3rp"/>
                 <outlet property="productStockQuantityLabel" destination="qHk-ID-yVz" id="U0W-Hb-NbC"/>
                 <outlet property="productVoteCountLabel" destination="8Z6-aF-CId" id="a1J-Dv-6o3"/>
                 <outlet property="starRateView" destination="jbr-P9-4Xg" id="K0k-Ui-cGv"/>
@@ -65,25 +65,27 @@
                     </userDefinedRuntimeAttributes>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="coh-fZ-TGw">
-                    <rect key="frame" x="142" y="510" width="109" height="35"/>
-                    <color key="tintColor" systemColor="systemOrangeColor"/>
+                    <rect key="frame" x="142" y="509" width="109" height="35"/>
                     <state key="normal" title="Button"/>
-                    <buttonConfiguration key="configuration" style="filled" title="Add to cart"/>
+                    <buttonConfiguration key="configuration" style="filled" title="Add to cart">
+                        <color key="baseBackgroundColor" systemColor="systemOrangeColor"/>
+                    </buttonConfiguration>
                 </button>
-                <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minimumValue="1" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="Fza-AX-jNL" userLabel="Item Quantity Stepper">
-                    <rect key="frame" x="149.66666666666666" y="470" width="93.666666666666657" height="32"/>
-                </stepper>
-                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Xbu-iL-Q5T" userLabel="Item Quantity Text Field">
-                    <rect key="frame" x="161.66666666666666" y="428" width="70" height="34"/>
-                    <color key="backgroundColor" systemColor="systemGray5Color"/>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xAK-qa-vEJ" userLabel="Item Quantity Label">
+                    <rect key="frame" x="146.66666666666666" y="437" width="100" height="24"/>
+                    <color key="backgroundColor" systemColor="systemGray4Color"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="70" id="lOP-7O-ubs"/>
+                        <constraint firstAttribute="width" constant="100" id="XJy-cY-Ie8"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done"/>
-                </textField>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hIe-zq-HdL" userLabel="Item Description Label">
-                    <rect key="frame" x="24" y="595" width="345" height="21"/>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minimumValue="1" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="Fza-AX-jNL" userLabel="Item Quantity Stepper">
+                    <rect key="frame" x="149.66666666666666" y="469" width="94" height="32"/>
+                </stepper>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hIe-zq-HdL" userLabel="Item Description Label">
+                    <rect key="frame" x="24" y="594" width="345" height="20.333333333333371"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -93,18 +95,19 @@
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="8Z6-aF-CId" firstAttribute="centerX" secondItem="jbr-P9-4Xg" secondAttribute="centerX" id="0U6-wK-TXx"/>
+                <constraint firstAttribute="bottom" secondItem="xAK-qa-vEJ" secondAttribute="bottom" constant="391" id="1Je-lO-4bd"/>
+                <constraint firstItem="Fza-AX-jNL" firstAttribute="top" secondItem="xAK-qa-vEJ" secondAttribute="bottom" constant="8" symbolic="YES" id="1gi-jc-sVH"/>
                 <constraint firstItem="coh-fZ-TGw" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="142" id="32c-bq-VgK"/>
-                <constraint firstItem="Xbu-iL-Q5T" firstAttribute="top" secondItem="19Y-rU-uWk" secondAttribute="bottom" constant="96" id="6YD-sG-bkg"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="19Y-rU-uWk" secondAttribute="trailing" constant="12" id="B7U-Jh-4Im"/>
                 <constraint firstItem="8Z6-aF-CId" firstAttribute="top" secondItem="jbr-P9-4Xg" secondAttribute="bottom" constant="8" id="Fkf-9B-PbI"/>
-                <constraint firstItem="Fza-AX-jNL" firstAttribute="top" secondItem="Xbu-iL-Q5T" secondAttribute="bottom" constant="8" symbolic="YES" id="IWE-TY-4lq"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="hIe-zq-HdL" secondAttribute="trailing" constant="24" id="LCR-7y-h9E"/>
                 <constraint firstItem="qHk-ID-yVz" firstAttribute="leading" secondItem="Kq6-TL-4Ee" secondAttribute="leading" id="LpR-bY-U7J"/>
                 <constraint firstItem="coh-fZ-TGw" firstAttribute="top" secondItem="Fza-AX-jNL" secondAttribute="bottom" constant="8" symbolic="YES" id="Mnw-0z-DBV"/>
-                <constraint firstItem="Fza-AX-jNL" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="149.66666666666666" id="P5o-wE-ud6"/>
                 <constraint firstItem="hIe-zq-HdL" firstAttribute="top" secondItem="coh-fZ-TGw" secondAttribute="bottom" constant="50" id="RKB-Mq-9Zr"/>
+                <constraint firstItem="xAK-qa-vEJ" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Sgn-Ec-HR0"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="jbr-P9-4Xg" secondAttribute="trailing" constant="12" id="UiX-NE-XTs"/>
                 <constraint firstItem="Kq6-TL-4Ee" firstAttribute="top" secondItem="19Y-rU-uWk" secondAttribute="bottom" constant="16" id="WjR-nE-AvI"/>
+                <constraint firstItem="Fza-AX-jNL" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Y1K-8D-5fB"/>
                 <constraint firstItem="qHk-ID-yVz" firstAttribute="top" secondItem="Kq6-TL-4Ee" secondAttribute="bottom" constant="8" id="ZVc-g3-LHK"/>
                 <constraint firstItem="19Y-rU-uWk" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="12" id="Zda-Uf-7cU"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="qHk-ID-yVz" secondAttribute="bottom" constant="402" id="ZfF-7D-MxC"/>
@@ -112,10 +115,8 @@
                 <constraint firstItem="Kq6-TL-4Ee" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="a8t-wO-F7I"/>
                 <constraint firstItem="hIe-zq-HdL" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="cBE-mq-W7A"/>
                 <constraint firstItem="jbr-P9-4Xg" firstAttribute="top" secondItem="19Y-rU-uWk" secondAttribute="bottom" constant="16" id="deu-cV-1ZD"/>
-                <constraint firstItem="Fza-AX-jNL" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="hCw-Ds-vAj"/>
                 <constraint firstItem="qHk-ID-yVz" firstAttribute="baseline" secondItem="8Z6-aF-CId" secondAttribute="baseline" id="hdY-yh-yGE"/>
                 <constraint firstItem="19Y-rU-uWk" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="8" id="nvH-QQ-cOE"/>
-                <constraint firstItem="Xbu-iL-Q5T" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="rk6-3k-i2W"/>
                 <constraint firstItem="jbr-P9-4Xg" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="243" id="xqA-5i-eb1"/>
             </constraints>
             <point key="canvasLocation" x="130.53435114503816" y="-12.67605633802817"/>
@@ -128,11 +129,11 @@
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
-        <systemColor name="systemGray5Color">
-            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <systemColor name="systemGray4Color">
+            <color red="0.81960784310000001" green="0.81960784310000001" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemOrangeColor">
-            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

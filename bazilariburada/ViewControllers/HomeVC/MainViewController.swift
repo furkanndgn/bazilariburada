@@ -66,7 +66,8 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let product = viewModel.product(by: indexPath.row)
-        let productDetailViewController = ProductDetailViewController(product: product)
+        let detailVM = ProductDetailViewModel(product: product)
+        let productDetailViewController = ProductDetailViewController(viewModel: detailVM)
         navigationController?.pushViewController(productDetailViewController, animated: true)
     }
     

@@ -42,7 +42,6 @@ class AuthViewModel {
         authService.resetPassword(securityCode: securityCode, newPassword: newPassword)
     }
     
-    
     private func addSubscribers() {
         authService.$registerData
             .sink { [weak self] returnedData in

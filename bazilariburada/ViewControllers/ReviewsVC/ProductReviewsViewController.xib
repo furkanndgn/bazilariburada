@@ -10,6 +10,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ProductReviewsViewController" customModule="bazilariburada" customModuleProvider="target">
             <connections>
+                <outlet property="ratingLabel" destination="kKu-ZX-o7b" id="YgU-6z-Hzj"/>
+                <outlet property="starRatingView" destination="eKy-eV-0ka" id="6W6-wX-ljH"/>
                 <outlet property="tableView" destination="YVT-KM-92j" id="g6q-zJ-qwv"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -19,20 +21,48 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YgJ-Wj-aGp">
+                    <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                    <items>
+                        <navigationItem title="Reviews" id="FVW-vs-7ZV"/>
+                    </items>
+                </navigationBar>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eKy-eV-0ka" customClass="StarRatingView" customModule="bazilariburada" customModuleProvider="target">
+                    <rect key="frame" x="141" y="107" width="240" height="100"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="100" id="NTc-C3-t6c"/>
+                        <constraint firstAttribute="width" constant="240" id="XUj-r7-aqt"/>
+                    </constraints>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kKu-ZX-o7b" userLabel="Rating Label">
+                    <rect key="frame" x="12" y="146.66666666666666" width="117" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="YVT-KM-92j">
-                    <rect key="frame" x="0.0" y="59" width="393" height="759"/>
+                    <rect key="frame" x="0.0" y="211" width="393" height="641"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 </tableView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="YVT-KM-92j" secondAttribute="bottom" id="Jqy-kj-Ort"/>
-                <constraint firstItem="YVT-KM-92j" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="iqx-mV-UeB"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="YVT-KM-92j" secondAttribute="trailing" id="njd-EJ-pJS"/>
-                <constraint firstItem="YVT-KM-92j" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="s20-dM-bF9"/>
+                <constraint firstItem="kKu-ZX-o7b" firstAttribute="centerY" secondItem="eKy-eV-0ka" secondAttribute="centerY" id="1SY-bV-Q3x"/>
+                <constraint firstItem="eKy-eV-0ka" firstAttribute="top" secondItem="YgJ-Wj-aGp" secondAttribute="bottom" constant="4" id="AIb-Tk-29r"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="eKy-eV-0ka" secondAttribute="trailing" constant="12" id="EWt-qX-bAZ"/>
+                <constraint firstItem="YgJ-Wj-aGp" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="UL1-WE-SbM"/>
+                <constraint firstItem="YVT-KM-92j" firstAttribute="top" secondItem="eKy-eV-0ka" secondAttribute="bottom" constant="4" id="Wwv-2O-yhQ"/>
+                <constraint firstItem="YgJ-Wj-aGp" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="Ynt-cf-zKZ"/>
+                <constraint firstItem="YgJ-Wj-aGp" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="c23-Yk-kVK"/>
+                <constraint firstItem="YVT-KM-92j" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="exo-y0-oQf"/>
+                <constraint firstItem="eKy-eV-0ka" firstAttribute="leading" secondItem="kKu-ZX-o7b" secondAttribute="trailing" constant="12" id="lZD-bQ-C0a"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="YVT-KM-92j" secondAttribute="trailing" id="vah-rI-jpF"/>
+                <constraint firstAttribute="bottom" secondItem="YVT-KM-92j" secondAttribute="bottom" id="vng-5H-onI"/>
+                <constraint firstItem="kKu-ZX-o7b" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="12" id="zF5-e0-Nf0"/>
             </constraints>
-            <point key="canvasLocation" x="108" y="-12"/>
+            <point key="canvasLocation" x="107.63358778625954" y="-12.67605633802817"/>
         </view>
     </objects>
     <resources>
