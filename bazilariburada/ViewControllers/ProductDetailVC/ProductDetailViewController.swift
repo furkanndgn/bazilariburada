@@ -16,15 +16,13 @@ class ProductDetailViewController: UIViewController {
     @IBOutlet weak var productVoteCountLabel: UILabel!
     @IBOutlet weak var starRateView: StarRatingView!
     @IBOutlet weak var productDescriptionLabel: UILabel!
-    @IBOutlet weak var productQuantityTextField: UITextField!
+    @IBOutlet weak var productQuantityLabel: UILabel!
     @IBOutlet weak var productQuantityStepper: UIStepper!
     @IBOutlet weak var addToCartButton: UIButton!
     
-    var product: Product
     var viewModel: ProductDetailViewModel
     
-    init(product: Product, viewModel: ProductDetailViewModel = ProductDetailViewModel()) {
-        self.product = product
+    init(viewModel: ProductDetailViewModel) {
         self.viewModel = viewModel
         super.init(nibName: "ProductDetailViewController", bundle: nil)
     }
@@ -35,12 +33,12 @@ class ProductDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = product.name
-        configureView(for: product)
+        self.title = viewModel.product.name
+        setupView(with: viewModel.product)
         addSubscribers()
     }
     
-    private func configureView(for product: Product) {
+    private func setupView(with product: Product) {
         productImageView.image = UIImage(systemName: "bag.fill")
         productPriceLabel.text = product.price?.formatted(.currency(code: "USD"))
         productStockQuantityLabel.text = "\(product.quantity ?? 0) left"
@@ -54,7 +52,9 @@ class ProductDetailViewController: UIViewController {
             self.navigationController?.present(reviewsVC, animated: true)
         }
         productQuantityStepper.addTarget(self, action: #selector(stepperValueChanged), for: .valueChanged)
-        productQuantityTextField.addTarget(self, action: #selector(textFieldValueChanged), for: .editingChanged)
+        productQuantityStepper.maximumValue = Double(viewModel.product.quantity ?? 0)
+        productQuantityLabel.layer.cornerRadius = productQuantityLabel.frame.height / 2
+        productQuantityLabel.clipsToBounds = true
     }
     
     private func addSubscribers() {
@@ -62,19 +62,13 @@ class ProductDetailViewController: UIViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] value in
                 self?.productQuantityStepper.value = Double(value)
-                self?.productQuantityTextField.text = "\(value)"
+                self?.productQuantityLabel.text = "\(value)"
             }
             .store(in: &viewModel.cancellables)
     }
     
-    /// Mark: Activation functions
+    // MARK: Activation functions
     @objc private func stepperValueChanged(_ sender: UIStepper) {
-        viewModel.itemQuantity = Int(sender.value)
-    }
-    
-    @objc private func textFieldValueChanged(_ sender: UITextField) {
-        if let text = sender.text, let intValue = Int(text) {
-            viewModel.itemQuantity = intValue
-        }
+        viewModel.updateItemQuantity(quantity: Int(sender.value))
     }
 }
