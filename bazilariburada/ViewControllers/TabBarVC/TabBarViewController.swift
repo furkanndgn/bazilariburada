@@ -11,8 +11,7 @@ class TabBarViewController: UITabBarController {
 
     let homeVC = UINavigationController(rootViewController: MainViewController(nibName: "MainViewController",
                                                                                bundle: nil))
-    let signInVC = UINavigationController(rootViewController: SignInViewController(nibName: "SignInViewController",
-                                                                                   bundle: nil))
+    let signInVC = UINavigationController(rootViewController: SignInViewController())
     
     override func viewDidLoad() {
         super.viewDidLoad()
