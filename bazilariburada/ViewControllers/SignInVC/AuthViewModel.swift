@@ -51,6 +51,7 @@ class AuthViewModel {
         authService.$loginData
             .sink { [weak self] returnedData in
                 self?.loginData = returnedData
+                UserDefaults.standard.set(returnedData?.refreshToken, forKey: "refreshToken")
             }
             .store(in: &cancellables)
         authService.$forgetPasswordData
