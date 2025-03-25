@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-// For endpoints in Authentication collection
+/// For endpoints in Authentication collection
 class AuthenticationService: ObservableObject {
     
     private let authKeyword = "/auth"

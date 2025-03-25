@@ -18,7 +18,7 @@
 		5EF5D9E52CE767A7009CFF2B /* Exceptions for "bazilariburada" folder in "bazilariburada" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				SystemFiles/Info.plist,
+				Utilities/Resources/Info.plist,
 			);
 			target = 5EF5D9D22CE767A6009CFF2B /* bazilariburada */;
 		};
@@ -156,7 +156,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 44Y84K5426;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = bazilariburada/SystemFiles/Info.plist;
+				INFOPLIST_FILE = bazilariburada/Utilities/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -184,7 +184,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 44Y84K5426;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = bazilariburada/SystemFiles/Info.plist;
+				INFOPLIST_FILE = bazilariburada/Utilities/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
