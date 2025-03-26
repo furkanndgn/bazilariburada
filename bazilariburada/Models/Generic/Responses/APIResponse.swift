@@ -7,10 +7,10 @@
 
 import Foundation
 
-struct ApiResponse<T: Decodable>: Decodable {
+struct APIResponse<T: Decodable>: Decodable {
     let status: Int
     let message: String
     var data: T?
     let timestamp: String
-    let errors: [ApiError]?
+    let errors: [APIError]?
 }
