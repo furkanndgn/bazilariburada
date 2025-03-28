@@ -7,11 +7,11 @@
 
 import Foundation
 
-struct Product: Codable {
-    let id, name, description, imageURL, category, brand, weight: String?
-    let price, averageRating: Double?
-    let quantity: Int?
-    let reviews: [Review]?
+struct Product: Decodable {
+    let id, name, description, imageURL, category, brand, weight: String
+    let price, averageRating: Double
+    let quantity: Int
+    let reviews: [Review]
     
     enum CodingKeys: String, CodingKey {
         case imageURL = "imageUrl"

@@ -7,10 +7,8 @@
 
 import Foundation
 
-struct RegisterResponse: Codable {
-    let userID: String
-    let email: String
-    let message: String
+struct RegisterResponse: Decodable {
+    let userID, email, message: String
     
     enum CodingKeys: String, CodingKey {
         case email, message

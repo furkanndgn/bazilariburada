@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct APIError: Codable {
-    let field: String?
-    let errorMessage: String?
-    let rejectedValue: String?
+struct APIError: Decodable {
+    let field: String
+    let errorMessage: String
+    let rejectedValue: String
 }

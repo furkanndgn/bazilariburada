@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Cart: Codable {
-    let cartItems: [CartItem]?
-    let totalPrice: Double?
+struct Cart: Decodable {
+    let cartItems: [CartItem]
+    let totalPrice: Double
 }

@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct User: Codable {
-    let username, password, email: String?
-    let cart: [CartItem]?
-    let orders: [Order]?
+struct User: Decodable {
+    let username, password, email: String
+    let cart: [CartItem]
+    let orders: [Order]
 }
