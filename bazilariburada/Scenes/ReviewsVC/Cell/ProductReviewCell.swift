@@ -27,6 +27,6 @@ class ProductReviewCell: UITableViewCell {
         reviewLabel.text = review.comment
         usernameLabel.text = review.username
         reviewDateLabel.text = review.date
-        starRatingView.rating = Float(review.rating ?? 0)
+        starRatingView.rating = Float(review.rating)
     }
 }
