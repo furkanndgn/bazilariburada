@@ -26,7 +26,5 @@ class ProductDetailViewModel: ObservableObject {
     }
     
     func addToCart() {
-        cartService.addItemToCart(token: "", productID: product.id ?? "", quantity: itemQuantity)
-        itemQuantity = 1
     }
 }

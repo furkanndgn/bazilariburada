@@ -25,24 +25,14 @@ class ReviewsViewModel: ObservableObject {
     }
     
     func getProductReviews(for product: Product) {
-        reviewService.getProductReviews(productID: product.id ?? "")
     }
     
-    func addReview(for product: Product, comment: String, rating: Int, userData: LoginResponseData) {
-        reviewService.addProductReview(token: userData.accessToken, productID: product.id ?? "",
-                                       comment: comment, rating: rating)
+    func addReview(for product: Product, comment: String, rating: Int, userData: LoginResponse) {
     }
     
-    func deleteReview(for product: Product, userData: LoginResponseData) {
-        reviewService.deleteUserReview(token: userData.accessToken, productID: product.id ?? "")
+    func deleteReview(for product: Product, userData: LoginResponse) {
     }
     
     private func addSubscribers() {
-        reviewService.$productReviews
-            .sink { [weak self] returnedReivews in
-                self?.allReviews = returnedReivews
-                self?.reviewCount = returnedReivews?.count
-            }
-            .store(in: &cancellables)
     }
 }

@@ -40,11 +40,11 @@ class ProductDetailViewController: UIViewController {
     
     private func setupView(with product: Product) {
         productImageView.image = UIImage(systemName: "bag.fill")
-        productPriceLabel.text = product.price?.formatted(.currency(code: "USD"))
-        productStockQuantityLabel.text = "\(product.quantity ?? 0) left"
-        let reviewCount = product.reviews?.count ?? 0
+        productPriceLabel.text = product.price.formatted(.currency(code: "USD"))
+        productStockQuantityLabel.text = "\(product.quantity) left"
+        let reviewCount = product.reviews.count
         productVoteCountLabel.text = reviewCount == 1 ? "\(reviewCount) review" : "\(reviewCount) reviews"
-        starRateView.rating = Float(product.averageRating ?? 0)
+        starRateView.rating = Float(product.averageRating)
         productDescriptionLabel.text = product.description
         starRateView.onTap = { [weak self] in
             guard let self = self else { return }
@@ -52,7 +52,7 @@ class ProductDetailViewController: UIViewController {
             self.navigationController?.present(reviewsVC, animated: true)
         }
         productQuantityStepper.addTarget(self, action: #selector(stepperValueChanged), for: .valueChanged)
-        productQuantityStepper.maximumValue = Double(viewModel.product.quantity ?? 0)
+        productQuantityStepper.maximumValue = Double(viewModel.product.quantity)
         productQuantityLabel.layer.cornerRadius = productQuantityLabel.frame.height / 2
         productQuantityLabel.clipsToBounds = true
     }

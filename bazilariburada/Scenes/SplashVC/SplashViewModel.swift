@@ -23,21 +23,8 @@ class SplashViewModel: ObservableObject {
 
     func getAccessToken() {
         guard let refreshToken = refreshToken, !refreshToken.isEmpty else { return }
-        authService.refreshAccessToken(refreshToken: refreshToken)
     }
     
     private func addSubscribers() {
-        authService.$loginData
-            .sink { [weak self] data in
-                self?.refreshToken = data?.refreshToken
-                self?.accessTokesn = data?.accessToken
-            }
-            .store(in: &cancellables)
-        authService.$refreshAccessTokenData
-            .sink { [weak self] data in
-                self?.refreshToken = data?.refreshToken
-                self?.accessTokesn = data?.accessToken
-            }
-            .store(in: &cancellables)
     }
 }

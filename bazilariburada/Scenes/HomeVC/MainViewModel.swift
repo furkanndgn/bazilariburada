@@ -27,7 +27,6 @@ class MainViewModel: ObservableObject {
     }
     
     func getProductByID(productID: String) {
-        productService.getProductByID(productID: productID)
     }
     
     func product(by index: Int) -> Product {
@@ -35,13 +34,5 @@ class MainViewModel: ObservableObject {
     }
     
     private func addSubscribers() {
-        productService.$allProducts
-            .sink { [weak self] returnedProducts in
-                self?.allProducts = returnedProducts?.products
-                self?.productCount = returnedProducts?.totalProducts
-            }
-            .store(in: &cancellables)
-        productService.$productByID
-            .assign(to: &$productByID)
     }
 }

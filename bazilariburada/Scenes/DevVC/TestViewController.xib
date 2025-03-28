@@ -56,7 +56,7 @@
                     <state key="normal" title="Button"/>
                     <buttonConfiguration key="configuration" style="plain" title="login"/>
                     <connections>
-                        <action selector="testLogin:" destination="-1" eventType="touchUpInside" id="ygv-jQ-bV0"/>
+                        <action selector="loginPressed:" destination="-1" eventType="touchUpInside" id="Z4e-ss-IW1"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ats-2X-ivh">
@@ -169,7 +169,7 @@
                     <state key="normal" title="Button"/>
                     <buttonConfiguration key="configuration" style="plain" title="get all"/>
                     <connections>
-                        <action selector="testGetAllProducts:" destination="-1" eventType="touchUpInside" id="J78-O2-2OZ"/>
+                        <action selector="getAllProductPressed:" destination="-1" eventType="touchUpInside" id="thH-q1-oT5"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ova-4X-qI1">
@@ -177,9 +177,6 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <state key="normal" title="Button"/>
                     <buttonConfiguration key="configuration" style="plain" title="get by id"/>
-                    <connections>
-                        <action selector="testGetByID:" destination="-1" eventType="touchUpInside" id="h8k-TZ-Crg"/>
-                    </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="review" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AbB-8q-bou">
                     <rect key="frame" x="21" y="583" width="50" height="21"/>

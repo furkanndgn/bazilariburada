@@ -37,32 +37,18 @@ class NetworkManager: NetworkManagerProtocol {
             }
         }
 
-        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+        let task = URLSession.shared.dataTask(with: request) { [weak self] (data, response, error) in
+
+            guard let self = self else { return }
 
             if let error = error {
                 return completion(.failure(.unknown(error)))
             }
 
-            guard let httpResponse = response as? HTTPURLResponse else {
-                return completion(.failure(.invalidResponse))
-            }
-
-            guard (200...299).contains(httpResponse.statusCode) else {
-                return completion(.failure(.serverError(statusCode: httpResponse.statusCode)))
-            }
+            self.validateHTTPResponse(response, completion: completion)
 
             if let data = data {
-                do {
-                    let jsonData = try JSONDecoder().decode(APIResponse<T>.self, from: data)
-                    completion(.success(jsonData))
-                } catch let error {
-                    if let decodingError = error as? DecodingError {
-                        return completion(.failure(.decodingFailed(underlyingError: decodingError)))
-                    }
-                    else {
-                        return completion(.failure(.unknown(error)))
-                    }
-                }
+                self.decodeData(data, responseType: responseType, completion: completion)
             }
         }
         task.resume()
@@ -116,4 +102,38 @@ private extension NetworkManager {
             completion(.unknown(error))
         }
     }
+
+    func validateHTTPResponse<T: Decodable>(
+        _ response: URLResponse?,
+        completion: @escaping(Result<APIResponse<T>, NetworkError>) -> Void
+    ) {
+        guard let httpResponse = response as? HTTPURLResponse else {
+            completion(.failure(.invalidResponse))
+            return
+        }
+
+        guard (200...299).contains(httpResponse.statusCode) else {
+            completion(.failure(.serverError(statusCode: httpResponse.statusCode)))
+            return
+        }
+    }
+
+    func decodeData<T: Decodable> (
+        _ data: Data,
+        responseType: T.Type,
+        completion: @escaping(Result<APIResponse<T>, NetworkError>) -> Void
+    ) {
+        do {
+            let jsonData = try JSONDecoder().decode(APIResponse<T>.self, from: data)
+            completion(.success(jsonData))
+        } catch let error {
+            if let decodingError = error as? DecodingError {
+                return completion(.failure(.decodingFailed(underlyingError: decodingError)))
+            }
+            else {
+                return completion(.failure(.unknown(error)))
+            }
+        }
+    }
 }
+

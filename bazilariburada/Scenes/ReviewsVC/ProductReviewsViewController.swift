@@ -38,9 +38,9 @@ class ProductReviewsViewController: UIViewController {
         let nib = UINib(nibName: "ProductReviewCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "ReviewCell")
         viewModel.getProductReviews(for: product)
-        let avgRatingString = String(format: "%.1f", product.averageRating ?? 0)
+        let avgRatingString = String(format: "%.1f", product.averageRating)
         ratingLabel.text = "\(avgRatingString) out of 5"
-        starRatingView.rating = Float(product.averageRating ?? 0)
+        starRatingView.rating = Float(product.averageRating)
     }
     
     private func addSubscription() {

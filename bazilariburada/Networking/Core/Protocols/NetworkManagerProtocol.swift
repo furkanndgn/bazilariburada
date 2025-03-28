@@ -28,6 +28,7 @@ protocol NetworkManagerProtocol {
 }
 
 
+// MARK: - Convenience Methods with Default Parameters
 extension NetworkManagerProtocol {
     func performRequest<T: Decodable, U: Encodable>(
         endpoint: APIEndpointProtocol,
