@@ -77,7 +77,7 @@ private extension NetworkManager {
     func buildRequest(with url: URL, and endpoint: APIEndpointProtocol) -> URLRequest{
         var request = URLRequest(url: url)
         request.httpMethod = endpoint.pathAndMethod.method.rawValue
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue(ContentType.json.rawValue, forHTTPHeaderField: HTTPHeaderField.contentType.rawValue)
         return request
     }
 
@@ -86,7 +86,7 @@ private extension NetworkManager {
         guard let token = token else {
             return completion(.missingToken)
         }
-        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        request.setValue("Bearer \(token)", forHTTPHeaderField: HTTPHeaderField.authorization.rawValue)
     }
 
     func addBody<T: Encodable>(

@@ -17,4 +17,10 @@ enum APIConfig {
         case .staging: return "https://grocery-app-backend-45m3.onrender.com/api/v1"
         }
     }
+
+    var headers: [String: String] {
+        [
+            "Content-Type": "application/json"
+        ]
+    }
 }
