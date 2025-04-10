@@ -18,7 +18,7 @@ public enum StarRounding: Int {
 }
 
 @IBDesignable
-class StarRatingView: UIView {
+final class StarRatingView: UIView {
     
     private var horizontalStack: StarRatingStackView?
     var onTap: (() -> Void)?
@@ -78,19 +78,15 @@ class StarRatingView: UIView {
     }
     
     private func setupView(rating: Float, starColor: UIColor, starRounding: StarRounding) {
-        let bundle = Bundle(for: StarRatingStackView.self)
-        let nib = UINib(nibName: "StarRatingStackView", bundle: bundle)
-        guard let viewFromNib = nib.instantiate(withOwner: self).first as? StarRatingStackView else { return }
-        self.addSubview(viewFromNib)
-        viewFromNib.translatesAutoresizingMaskIntoConstraints = false
-        setupConstraints(ratingView: viewFromNib)
-        self.horizontalStack = viewFromNib
+        guard let horizontalStack = StarRatingStackView.loadFromNib() else { return }
+        addSubview(horizontalStack)
+        setupConstraints(of: horizontalStack)
         updateView(rating: rating, starColor: starColor, starRounding: starRounding)
         setupGestures()
     }
     
-    private func setupConstraints(ratingView: StarRatingStackView) {
-        ratingView.snp.makeConstraints { make in
+    private func setupConstraints(of subview: UIView) {
+        subview.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
     }

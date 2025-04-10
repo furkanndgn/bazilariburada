@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-class TestViewController: UIViewController {
+class TestViewController: BaseViewController {
 
     let autService = AuthenticationService()
     let cartService = CartService()

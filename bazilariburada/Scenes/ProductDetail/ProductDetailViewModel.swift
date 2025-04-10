@@ -8,22 +8,17 @@
 import Foundation
 import Combine
 
-class ProductDetailViewModel: ObservableObject {
+final class ProductDetailViewModel: ObservableObject {
     
     let cartService: CartService
     let product: Product
     var cancellables = Set<AnyCancellable>()
-     
-    @Published var itemQuantity: Int = 1
     
     init(product: Product) {
         self.product = product
         cartService = CartService()
     }
     
-    func updateItemQuantity(quantity: Int) {
-        itemQuantity = quantity
-    }
     
     func addToCart() {
     }

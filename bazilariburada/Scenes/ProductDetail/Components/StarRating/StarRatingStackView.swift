@@ -7,7 +7,9 @@
 
 import UIKit
 
-class StarRatingStackView: UIStackView {
+final class StarRatingStackView: UIStackView, NibLoadable {
+
+    static var nibName = Nib.Name.starRatingStack
 
     @IBOutlet weak var star1ImageView: UIImageView!
     @IBOutlet weak var star2ImageView: UIImageView!

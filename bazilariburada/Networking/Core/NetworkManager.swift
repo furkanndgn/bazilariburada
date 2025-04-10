@@ -7,7 +7,7 @@
 
 import Foundation
 
-class NetworkManager: NetworkManagerProtocol {
+final class NetworkManager: NetworkManagerProtocol {
 
     static var shared: NetworkManagerProtocol = NetworkManager()
 
