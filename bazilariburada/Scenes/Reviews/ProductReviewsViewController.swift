@@ -7,19 +7,17 @@
 
 import UIKit
 
-class ProductReviewsViewController: UIViewController {
+final class ProductReviewsViewController: BaseViewController {
 
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var starRatingView: StarRatingView!
     @IBOutlet weak var ratingLabel: UILabel!
+    @IBOutlet weak var starRatingView: StarRatingView!
     
     var viewModel: ReviewsViewModel
-    var product: Product
     
-    init(product: Product, viewModel: ReviewsViewModel = ReviewsViewModel()) {
-        self.product = product
+    init(viewModel: ReviewsViewModel) {
         self.viewModel = viewModel
-        super.init(nibName: "ProductReviewsViewController", bundle: nil)
+        super.init()
     }
 
     required init?(coder: NSCoder) {
@@ -29,30 +27,27 @@ class ProductReviewsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
-        addSubscription()
     }
-    
-    private func setupView() {
+
+}
+
+
+// MARK: - Setup UI
+private extension ProductReviewsViewController {
+    func setupView() {
         tableView.delegate = self
         tableView.dataSource = self
-        let nib = UINib(nibName: "ProductReviewCell", bundle: nil)
-        tableView.register(nib, forCellReuseIdentifier: "ReviewCell")
-        viewModel.getProductReviews(for: product)
-        let avgRatingString = String(format: "%.1f", product.averageRating)
-        ratingLabel.text = "\(avgRatingString) out of 5"
-        starRatingView.rating = Float(product.averageRating)
+        tableView.estimatedRowHeight = 120
+        let nib = ProductReviewCell.getNib()
+        tableView.register(nib, forCellReuseIdentifier: ProductReviewCell.identifier)
+        viewModel.getProductReviews()
+        let averageRatingString = String(format: "%.1f", viewModel.product.averageRating)
+        ratingLabel.text = "Rating: \(averageRatingString)/5"
+        starRatingView.configureView(with: viewModel.product.averageRating)
+        updateUI()
     }
-    
-    private func addSubscription() {
-        viewModel.$allReviews
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] _ in
-                self?.updateUI()
-            }
-            .store(in: &viewModel.cancellables)
-    }
-    
-    private func updateUI() {
+
+    func updateUI() {
         if let reviews = viewModel.allReviews, !reviews.isEmpty {
             tableView.reloadData()
             tableView.isHidden = false
@@ -64,13 +59,14 @@ class ProductReviewsViewController: UIViewController {
 }
 
 
+// MARK: - TableView Delegation
 extension ProductReviewsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.reviewCount ?? 0
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ReviewCell",
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: ProductReviewCell.identifier,
                                                        for: indexPath) as? ProductReviewCell
         else {
             return UITableViewCell()

@@ -6,17 +6,19 @@
 //
 
 import Foundation
-import Combine
 
-class ReviewsViewModel: ObservableObject {
-    
+final class ReviewsViewModel {
+
     private let reviewService: ReviewService
-    var cancellables = Set<AnyCancellable>()
-    @Published var allReviews: [Review]?
-    @Published var reviewCount: Int?
+    let product: Product
+    var allReviews: [Review]?
+    var reviewCount: Int?
     
-    init(reviewSerview: ReviewService = ReviewService()) {
-        self.reviewService = reviewSerview
+    init(product: Product, reviewService: ReviewService = ReviewService()) {
+        self.product = product
+        allReviews = product.reviews
+        reviewCount = allReviews?.count
+        self.reviewService = reviewService
         addSubscribers()
     }
 
@@ -24,13 +26,15 @@ class ReviewsViewModel: ObservableObject {
         return allReviews![index]
     }
     
-    func getProductReviews(for product: Product) {
+    func getProductReviews() {
+        reviewService.getReviews(of: product.id) { result in
+        }
     }
     
-    func addReview(for product: Product, comment: String, rating: Int, userData: LoginResponse) {
+    func addReview(comment: String, rating: Int, userData: LoginResponse) {
     }
     
-    func deleteReview(for product: Product, userData: LoginResponse) {
+    func deleteUserReview(_ userData: LoginResponse) {
     }
     
     private func addSubscribers() {

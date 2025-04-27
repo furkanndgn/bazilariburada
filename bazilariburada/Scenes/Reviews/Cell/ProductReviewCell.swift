@@ -7,13 +7,13 @@
 
 import UIKit
 
-class ProductReviewCell: UITableViewCell {
+final class ProductReviewCell: BaseTableViewCell, NibLoadable {
 
     @IBOutlet weak var reviewLabel: UILabel!
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var reviewDateLabel: UILabel!
     @IBOutlet weak var starRatingView: StarRatingView!
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -22,11 +22,11 @@ class ProductReviewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
-    
+
     func configure(for review: Review) {
         reviewLabel.text = review.comment
         usernameLabel.text = review.username
         reviewDateLabel.text = review.date
-        starRatingView.rating = Float(review.rating)
+        starRatingView.configureView(with: Double(review.rating))
     }
 }

@@ -14,8 +14,10 @@ class TabBarViewController: UITabBarController {
     let signInVC = UINavigationController(rootViewController: SignInViewController())
 
     let productDetailVC = UINavigationController(
-        rootViewController: ProductDetailViewController(viewModel: ProductDetailViewModel(product: Product()))
+        rootViewController: ProductDetailViewController(viewModel: ProductDetailViewModel(product: Product.sample))
     )
+
+    let reviewsScene = ProductReviewsViewController(viewModel: ReviewsViewModel(product: Product.sample))
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,8 +28,9 @@ class TabBarViewController: UITabBarController {
     private func setupView() {
         homeVC.tabBarItem = UITabBarItem(title: "Home", image: UIImage(systemName: "house"), tag: 0)
         signInVC.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person"), tag: 1)
-        productDetailVC.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person"), tag: 2)
+        productDetailVC.tabBarItem = UITabBarItem(title: "detail", image: UIImage(systemName: "person"), tag: 2)
+        reviewsScene.tabBarItem = UITabBarItem(title: "reviews", image: UIImage(systemName: "person"), tag: 3)
 
-        self.viewControllers = [homeVC, signInVC, productDetailVC]
+        self.viewControllers = [homeVC, signInVC, productDetailVC, reviewsScene]
     }
 }
