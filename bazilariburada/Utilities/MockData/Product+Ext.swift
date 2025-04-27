@@ -8,18 +8,17 @@
 import Foundation
 
 extension Product {
-    init()
-    {
-        self.id = "test"
-        self.name = "test"
-        self.description = "test"
-        self.imageURL = "test"
-        self.category = "test"
-        self.brand = "test"
-        self.weight = "100"
-        self.price = 12.3
-        self.averageRating = 3.5
-        self.quantity = 5
-        self.reviews = []
-    }
+    static var sample = Product(
+        id: "test",
+        name: "test",
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+        imageURL: "test",
+        category: "test",
+        brand: "test",
+        weight: "12",
+        price: 12.3,
+        averageRating: 3,
+        quantity: 5,
+        reviews: Review.samples
+    )
 }

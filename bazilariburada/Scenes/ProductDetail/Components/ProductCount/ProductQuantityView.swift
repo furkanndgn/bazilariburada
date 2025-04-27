@@ -25,7 +25,7 @@ final class ProductQuantityView: UIView {
 }
 
 private extension ProductQuantityView {
-
+    
     func setupView() {
         guard let viewFromNib = ProductQuantityStack.loadFromNib() else { return }
         self.stack = viewFromNib

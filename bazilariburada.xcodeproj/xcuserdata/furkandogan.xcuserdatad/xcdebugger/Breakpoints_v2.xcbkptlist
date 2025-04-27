@@ -55,16 +55,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "D114CAEA-3F5E-4E24-9349-A7056A697D49"
+            uuid = "F997972D-DAD1-469E-A2C1-C660787DDE0C"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "bazilariburada/Scenes/ProductDetail/ProductDetailViewController.swift"
+            filePath = "bazilariburada/Scenes/ProductDetail/Components/StarRating/StarRatingView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "40"
-            endingLineNumber = "40"
-            landmarkName = "configureSubviews()"
+            startingLineNumber = "122"
+            endingLineNumber = "122"
+            landmarkName = "updateStarsForRating(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -4,6 +4,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Image references" minToolsVersion="12.0"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -11,7 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ProductDetailViewController" customModule="bazilariburada" customModuleProvider="target">
             <connections>
-                <outlet property="descriptionView" destination="8TB-0e-1ks" id="g9c-Sd-N8R"/>
+                <outlet property="productDescriptionSection" destination="Pno-Zj-zjc" id="Tl2-CP-LH8"/>
                 <outlet property="productQuantityView" destination="Dus-Eo-Tva" id="RmA-qc-ToG"/>
                 <outlet property="productStockLabel" destination="Djt-9v-dDg" id="9NL-bh-5Mj"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -29,19 +30,19 @@
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Product Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gZx-yj-dR2" userLabel="ProductNameLabel">
-                    <rect key="frame" x="24" y="391" width="148" height="27.666666666666686"/>
+                    <rect key="frame" x="24" y="391" width="148" height="28.666666666666686"/>
                     <fontDescription key="fontDescription" type="system" pointSize="24"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Remaining Stock" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Djt-9v-dDg" userLabel="RemainingStockLabel">
-                    <rect key="frame" x="23.999999999999993" y="426.66666666666669" width="121.33333333333331" height="19.333333333333314"/>
+                    <rect key="frame" x="23.999999999999993" y="427.66666666666669" width="121.33333333333331" height="19.333333333333314"/>
                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                     <color key="textColor" systemColor="secondaryLabelColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rSK-sW-o55" userLabel="FavoriteButton">
-                    <rect key="frame" x="318" y="387.33333333333331" width="51" height="35"/>
+                    <rect key="frame" x="318.33333333333331" y="388.33333333333331" width="50.666666666666686" height="34.333333333333314"/>
                     <state key="normal" title="Button"/>
                     <buttonConfiguration key="configuration" style="plain">
                         <imageReference key="image" image="heart" catalog="system" symbolScale="large"/>
@@ -49,34 +50,46 @@
                     </buttonConfiguration>
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dus-Eo-Tva" customClass="ProductQuantityView" customModule="bazilariburada" customModuleProvider="target">
-                    <rect key="frame" x="24" y="458" width="120" height="44"/>
+                    <rect key="frame" x="24" y="459" width="120" height="44"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="120" id="7eC-pD-eNx"/>
                         <constraint firstAttribute="height" constant="44" id="r5S-03-VP6"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8TB-0e-1ks" customClass="DescriptionStack" customModule="bazilariburada" customModuleProvider="target">
-                    <rect key="frame" x="24" y="534" width="345" height="284"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V6C-0R-D2Q" customClass="HairlineView" customModule="bazilariburada" customModuleProvider="target">
+                    <rect key="frame" x="24" y="511" width="345" height="1"/>
+                    <color key="backgroundColor" name="Colors/black-20"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="TZI-S3-fWE"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pno-Zj-zjc" customClass="ProductDescriptionSection" customModule="bazilariburada" customModuleProvider="target">
+                    <rect key="frame" x="24" y="520" width="345" height="100"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="100" id="ad5-bB-2LN"/>
+                    </constraints>
                 </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="rSK-sW-o55" secondAttribute="trailing" constant="24" id="4tM-eY-okg"/>
+                <constraint firstItem="V6C-0R-D2Q" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="24" id="8kS-iU-zkc"/>
+                <constraint firstItem="Pno-Zj-zjc" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="9qm-2M-opC"/>
                 <constraint firstItem="f0C-yO-kLJ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="A7i-p7-u1F"/>
                 <constraint firstItem="rSK-sW-o55" firstAttribute="centerY" secondItem="gZx-yj-dR2" secondAttribute="centerY" id="DqA-2Q-bCK"/>
                 <constraint firstItem="Dus-Eo-Tva" firstAttribute="leading" secondItem="gZx-yj-dR2" secondAttribute="leading" id="Inj-U1-hbU"/>
                 <constraint firstItem="gZx-yj-dR2" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="JcP-7t-VWe"/>
-                <constraint firstItem="8TB-0e-1ks" firstAttribute="top" secondItem="Dus-Eo-Tva" secondAttribute="bottom" constant="32" id="USk-dd-aTV"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="8TB-0e-1ks" secondAttribute="bottom" id="VJI-3H-3wx"/>
                 <constraint firstItem="gZx-yj-dR2" firstAttribute="top" secondItem="f0C-yO-kLJ" secondAttribute="bottom" constant="32" id="WHd-Qa-bM6"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="8TB-0e-1ks" secondAttribute="trailing" constant="24" id="dNJ-fW-fWo"/>
                 <constraint firstItem="f0C-yO-kLJ" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="dRX-ev-TEo"/>
                 <constraint firstItem="Dus-Eo-Tva" firstAttribute="top" secondItem="Djt-9v-dDg" secondAttribute="bottom" constant="12" id="gex-hg-hMU"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="f0C-yO-kLJ" secondAttribute="trailing" id="h8b-XU-KyI"/>
-                <constraint firstItem="8TB-0e-1ks" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="j43-iL-e7q"/>
+                <constraint firstAttribute="trailing" secondItem="V6C-0R-D2Q" secondAttribute="trailing" constant="24" id="hk8-tO-fAt"/>
+                <constraint firstItem="V6C-0R-D2Q" firstAttribute="top" secondItem="Dus-Eo-Tva" secondAttribute="bottom" constant="8" id="iOM-QS-4f2"/>
+                <constraint firstItem="Pno-Zj-zjc" firstAttribute="top" secondItem="V6C-0R-D2Q" secondAttribute="bottom" constant="8" id="k3R-WM-SdP"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Pno-Zj-zjc" secondAttribute="trailing" constant="24" id="lio-IN-kSp"/>
                 <constraint firstItem="Djt-9v-dDg" firstAttribute="top" secondItem="gZx-yj-dR2" secondAttribute="bottom" constant="8" id="siY-3J-RKh"/>
                 <constraint firstItem="Djt-9v-dDg" firstAttribute="leading" secondItem="gZx-yj-dR2" secondAttribute="leading" id="zKF-Uf-ZvS"/>
             </constraints>
@@ -85,6 +98,9 @@
     </objects>
     <resources>
         <image name="heart" catalog="system" width="128" height="107"/>
+        <namedColor name="Colors/black-20">
+            <color red="0.88627450980392153" green="0.88627450980392153" blue="0.88627450980392153" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
         <namedColor name="Colors/black-50">
             <color red="0.48627450980392156" green="0.48627450980392156" blue="0.48627450980392156" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>

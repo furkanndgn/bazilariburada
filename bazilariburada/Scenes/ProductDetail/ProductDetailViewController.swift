@@ -13,7 +13,7 @@ final class ProductDetailViewController: BaseViewController {
     
     @IBOutlet weak var productStockLabel: UILabel!
     @IBOutlet weak var productQuantityView: ProductQuantityView!
-    @IBOutlet weak var descriptionView: DescriptionStack!
+    @IBOutlet weak var productDescriptionSection: ProductDescriptionSection!
 
     init(viewModel: ProductDetailViewModel) {
         self.viewModel = viewModel
@@ -40,6 +40,6 @@ private extension ProductDetailViewController {
     func configureSubviews() {
         productQuantityView.productStock = viewModel.product.quantity
         productStockLabel.text = "\(viewModel.product.quantity) in stock"
-        descriptionView.descriptionLabel.text = viewModel.product.description
+        productDescriptionSection.configureView(with: "Lorem ipsum dolor sit amet, consectetur adipiscing elit")
     }
 }
