@@ -6,8 +6,8 @@
 //
 
 import UIKit
+import SnapKit
 
-@IBDesignable
 final class ProductQuantityView: UIView {
 
     private var stack: ProductQuantityStack?

@@ -35,6 +35,7 @@ final class ProductReviewsViewController: BaseViewController {
 // MARK: - Setup UI
 private extension ProductReviewsViewController {
     func setupView() {
+        title = "Reviews"
         tableView.delegate = self
         tableView.dataSource = self
         tableView.estimatedRowHeight = 120
@@ -74,5 +75,9 @@ extension ProductReviewsViewController: UITableViewDelegate, UITableViewDataSour
         let review = viewModel.review(by: indexPath.row)
         cell.configure(for: review)
         return cell
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }

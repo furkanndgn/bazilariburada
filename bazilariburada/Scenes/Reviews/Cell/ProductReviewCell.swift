@@ -14,15 +14,6 @@ final class ProductReviewCell: BaseTableViewCell, NibLoadable {
     @IBOutlet weak var reviewDateLabel: UILabel!
     @IBOutlet weak var starRatingView: StarRatingView!
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-    }
-
     func configure(for review: Review) {
         reviewLabel.text = review.comment
         usernameLabel.text = review.username

@@ -59,7 +59,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             return UITableViewCell()
         }
         let product = viewModel.product(by: indexPath.row)
-        cell.configure(product: product)
+        cell.configure(with: product)
         return cell
     }
     

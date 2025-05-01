@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
@@ -12,9 +13,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ProductDetailViewController" customModule="bazilariburada" customModuleProvider="target">
             <connections>
-                <outlet property="productDescriptionSection" destination="Pno-Zj-zjc" id="Tl2-CP-LH8"/>
+                <outlet property="expandableView" destination="Tb6-RC-G4G" id="UIk-UH-942"/>
+                <outlet property="priceLabel" destination="7Xt-r8-UaX" id="v1Z-mG-xwF"/>
                 <outlet property="productQuantityView" destination="Dus-Eo-Tva" id="RmA-qc-ToG"/>
                 <outlet property="productStockLabel" destination="Djt-9v-dDg" id="9NL-bh-5Mj"/>
+                <outlet property="reviewsRoutingView" destination="6fq-Uq-eqg" id="Kh6-qT-wKh"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -57,18 +60,38 @@
                         <constraint firstAttribute="height" constant="44" id="r5S-03-VP6"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V6C-0R-D2Q" customClass="HairlineView" customModule="bazilariburada" customModuleProvider="target">
-                    <rect key="frame" x="24" y="511" width="345" height="1"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Xt-r8-UaX" userLabel="PriceLabel">
+                    <rect key="frame" x="327" y="470.66666666666669" width="42" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Maf-G6-Seo" userLabel="HairlineView1">
+                    <rect key="frame" x="24" y="521" width="345" height="1"/>
                     <color key="backgroundColor" name="Colors/black-20"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="1" id="TZI-S3-fWE"/>
+                        <constraint firstAttribute="height" constant="1" id="agf-LY-lOV"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pno-Zj-zjc" customClass="ProductDescriptionSection" customModule="bazilariburada" customModuleProvider="target">
-                    <rect key="frame" x="24" y="520" width="345" height="100"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tb6-RC-G4G" customClass="ExpandableView" customModule="bazilariburada" customModuleProvider="target">
+                    <rect key="frame" x="24" y="530" width="345" height="40"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="100" id="ad5-bB-2LN"/>
+                        <constraint firstAttribute="height" priority="250" constant="40" id="HPf-2e-iBr"/>
+                        <constraint firstAttribute="height" relation="lessThanOrEqual" priority="750" constant="105" id="kdY-80-h5r"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9nD-cU-ngE" userLabel="HairlineView2">
+                    <rect key="frame" x="24" y="578" width="345" height="1"/>
+                    <color key="backgroundColor" name="Colors/black-20"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="8vc-lV-vPx"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6fq-Uq-eqg" customClass="ReviewsRoutingView" customModule="bazilariburada" customModuleProvider="target">
+                    <rect key="frame" x="24" y="591" width="345" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="tHa-p7-fIn"/>
                     </constraints>
                 </view>
             </subviews>
@@ -76,21 +99,29 @@
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="rSK-sW-o55" secondAttribute="trailing" constant="24" id="4tM-eY-okg"/>
-                <constraint firstItem="V6C-0R-D2Q" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="24" id="8kS-iU-zkc"/>
-                <constraint firstItem="Pno-Zj-zjc" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="9qm-2M-opC"/>
+                <constraint firstItem="6fq-Uq-eqg" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="9aj-ei-w0G"/>
                 <constraint firstItem="f0C-yO-kLJ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="A7i-p7-u1F"/>
+                <constraint firstItem="9nD-cU-ngE" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="24" id="AQK-A2-bsQ"/>
+                <constraint firstItem="7Xt-r8-UaX" firstAttribute="centerY" secondItem="Dus-Eo-Tva" secondAttribute="centerY" id="BnV-Xf-uDU"/>
                 <constraint firstItem="rSK-sW-o55" firstAttribute="centerY" secondItem="gZx-yj-dR2" secondAttribute="centerY" id="DqA-2Q-bCK"/>
                 <constraint firstItem="Dus-Eo-Tva" firstAttribute="leading" secondItem="gZx-yj-dR2" secondAttribute="leading" id="Inj-U1-hbU"/>
                 <constraint firstItem="gZx-yj-dR2" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="JcP-7t-VWe"/>
                 <constraint firstItem="gZx-yj-dR2" firstAttribute="top" secondItem="f0C-yO-kLJ" secondAttribute="bottom" constant="32" id="WHd-Qa-bM6"/>
+                <constraint firstItem="9nD-cU-ngE" firstAttribute="top" secondItem="Tb6-RC-G4G" secondAttribute="bottom" constant="8" id="bb7-g8-roQ"/>
                 <constraint firstItem="f0C-yO-kLJ" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="dRX-ev-TEo"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Tb6-RC-G4G" secondAttribute="trailing" constant="24" id="dwe-6G-UHH"/>
                 <constraint firstItem="Dus-Eo-Tva" firstAttribute="top" secondItem="Djt-9v-dDg" secondAttribute="bottom" constant="12" id="gex-hg-hMU"/>
+                <constraint firstItem="Maf-G6-Seo" firstAttribute="top" secondItem="Dus-Eo-Tva" secondAttribute="bottom" constant="18" id="h87-pg-1Tz"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="f0C-yO-kLJ" secondAttribute="trailing" id="h8b-XU-KyI"/>
-                <constraint firstAttribute="trailing" secondItem="V6C-0R-D2Q" secondAttribute="trailing" constant="24" id="hk8-tO-fAt"/>
-                <constraint firstItem="V6C-0R-D2Q" firstAttribute="top" secondItem="Dus-Eo-Tva" secondAttribute="bottom" constant="8" id="iOM-QS-4f2"/>
-                <constraint firstItem="Pno-Zj-zjc" firstAttribute="top" secondItem="V6C-0R-D2Q" secondAttribute="bottom" constant="8" id="k3R-WM-SdP"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Pno-Zj-zjc" secondAttribute="trailing" constant="24" id="lio-IN-kSp"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="6fq-Uq-eqg" secondAttribute="trailing" constant="24" id="iE4-aJ-sAw"/>
+                <constraint firstItem="Tb6-RC-G4G" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="kEO-vl-PdA"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="7Xt-r8-UaX" secondAttribute="trailing" constant="24" id="qBd-RE-nZz"/>
+                <constraint firstItem="Maf-G6-Seo" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="24" id="sYF-Wk-t7Q"/>
                 <constraint firstItem="Djt-9v-dDg" firstAttribute="top" secondItem="gZx-yj-dR2" secondAttribute="bottom" constant="8" id="siY-3J-RKh"/>
+                <constraint firstItem="Tb6-RC-G4G" firstAttribute="top" secondItem="Maf-G6-Seo" secondAttribute="bottom" constant="8" id="t8j-cj-Wsd"/>
+                <constraint firstItem="6fq-Uq-eqg" firstAttribute="top" secondItem="9nD-cU-ngE" secondAttribute="bottom" constant="12" id="v6T-6n-lBa"/>
+                <constraint firstAttribute="trailing" secondItem="Maf-G6-Seo" secondAttribute="trailing" constant="24" id="xW6-Ry-1qu"/>
+                <constraint firstAttribute="trailing" secondItem="9nD-cU-ngE" secondAttribute="trailing" constant="24" id="yih-1K-4uc"/>
                 <constraint firstItem="Djt-9v-dDg" firstAttribute="leading" secondItem="gZx-yj-dR2" secondAttribute="leading" id="zKF-Uf-ZvS"/>
             </constraints>
             <point key="canvasLocation" x="130.53435114503816" y="-12.67605633802817"/>

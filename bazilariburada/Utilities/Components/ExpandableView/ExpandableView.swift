@@ -9,25 +9,37 @@ import UIKit
 
 final class ExpandableView: UIView, NibLoadable {
 
-    @IBOutlet private weak var headerView: UIView!
-    @IBOutlet private weak var titleLabel: UILabel!
-    @IBOutlet private weak var stateIndicatorImageView: UIImageView!
-    @IBOutlet private weak var bodyView: UIView!
-    @IBOutlet private weak var bodyHeightConstraint: NSLayoutConstraint!
-    @IBOutlet private weak var contentLabel: UILabel!
+    @IBOutlet var contentView: UIView!
+    @IBOutlet weak var headerView: UIView!
+    @IBOutlet weak var mainHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var indicatorImageView: UIImageView!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var contentLabel: UILabel!
 
     private var shouldCollapse = false
+    private var heightConstraint: Double = 50
 
-    private var heightConstraint: Double = 60
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+
+        Bundle.main.loadNibNamed(String(describing: ExpandableView.self), owner: self, options: nil)
+        addSubview(contentView)
+        contentView.frame = bounds
+        contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight, .flexibleBottomMargin]
+    }
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        setTapGesture()
+    }
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        setTapRecognizerToHeader()
     }
 
     func configureView(title: String, indicatorImage: UIImage?, content: String) {
         titleLabel.text = title
-        stateIndicatorImageView.image = indicatorImage
+        indicatorImageView.image = indicatorImage
         contentLabel.text = content
     }
 
@@ -47,25 +59,26 @@ final class ExpandableView: UIView, NibLoadable {
 private extension ExpandableView {
     func animateView(isCollapse: Bool, heightConstraint: Double) {
         shouldCollapse = isCollapse
-        bodyHeightConstraint.constant = CGFloat(heightConstraint)
+        mainHeightConstraint.constant = heightConstraint
         UIView.animate(
             withDuration: 0.3,
             delay: 0,
-            usingSpringWithDamping: 0.6,
-            initialSpringVelocity: 0.5,
+            usingSpringWithDamping: 0.8,
+            initialSpringVelocity: 0.2,
             options: [.curveEaseInOut],
             animations: {
                 self.layoutIfNeeded()
+                self.superview?.layoutIfNeeded()
             },
             completion: nil
         )
         UIView.animate(withDuration: 0.2) {
-            self.stateIndicatorImageView.transform = isCollapse ?
+            self.indicatorImageView.transform = isCollapse ?
             CGAffineTransform(rotationAngle: .pi / 2) : .identity
         }
     }
 
-    func setTapRecognizerToHeader() {
+    func setTapGesture() {
         let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         headerView.addGestureRecognizer(tapRecognizer)
     }
