@@ -7,5 +7,10 @@
 
 import Foundation
 
-enum Constants { }
+enum Constants {
+    enum String {
+        static let appTitle = "bazilariburada"
+        static let empty = ""
+    }
+}
 

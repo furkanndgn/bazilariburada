@@ -13,7 +13,7 @@ class SignInViewController: UIViewController {
     private var viewModel: AuthViewModel
     @Published var password: String = ""
     @Published var username: String = ""
-    
+
     private var validatedPassword: AnyPublisher<String?, Never> {
         $password
             .map { password in
@@ -66,7 +66,7 @@ class SignInViewController: UIViewController {
     }
     
     @IBAction func signIn(_ sender: UIButton) {
-        print("loginButton tapped.")
+        viewModel.login(username: username, password: password)
     }
         
     @IBAction func usernameChanged(_ sender: UITextField) {
@@ -75,5 +75,8 @@ class SignInViewController: UIViewController {
     
     @IBAction func passwordChanged(_ sender: UITextField) {
         password = sender.text ?? ""
+        print(String(describing: sender.text))
     }
 }
+
+

@@ -8,7 +8,7 @@
 import Foundation
 
 /// For endpoints in `Authentication` collection
-final class AuthenticationService: AuthenticationServiceProtocol {
+final class AuthenticationService: AuthenticationServiceProtocol, AccessTokenRefreshProtocol {
 
     private let networkManager: NetworkManagerProtocol
 

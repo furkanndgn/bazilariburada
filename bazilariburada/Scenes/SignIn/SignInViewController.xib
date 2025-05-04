@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -11,8 +12,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SignInViewController" customModule="bazilariburada">
             <connections>
                 <outlet property="loginButton" destination="pQv-kt-WJG" id="jlz-mP-oaW"/>
-                <outlet property="passwordTextField" destination="jxY-0H-gG3" id="UXk-Pd-Os9"/>
-                <outlet property="userNameTextField" destination="BAP-ji-2bz" id="Kgw-nq-6oo"/>
+                <outlet property="passwordTextField" destination="jxY-0H-gG3" id="nyU-pJ-dxh"/>
+                <outlet property="userNameTextField" destination="BAP-ji-2bz" id="LNE-KP-t0J"/>
                 <outlet property="view" destination="DXl-3C-vU1" id="zME-4m-YcB"/>
             </connections>
         </placeholder>
@@ -25,11 +26,17 @@
                     <rect key="frame" x="18" y="228" width="357" height="34"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" returnKeyType="next" textContentType="email"/>
+                    <connections>
+                        <action selector="usernameChanged:" destination="-1" eventType="editingDidEnd" id="BA7-tT-Iwb"/>
+                    </connections>
                 </textField>
                 <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jxY-0H-gG3" userLabel="Password Text Field">
                     <rect key="frame" x="18" y="287" width="357" height="34"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done" secureTextEntry="YES" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="password"/>
+                    <connections>
+                        <action selector="passwordChanged:" destination="-1" eventType="editingDidEnd" id="mxC-dH-V4W"/>
+                    </connections>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" role="primary" translatesAutoresizingMaskIntoConstraints="NO" id="pQv-kt-WJG" userLabel="LogIn Button">
                     <rect key="frame" x="38" y="348" width="317" height="35"/>

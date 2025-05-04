@@ -28,11 +28,6 @@ protocol AuthenticationServiceProtocol {
         completion: @escaping (Result<LoginResponse, NetworkError>) -> Void
     )
 
-    func refreshAccessToken(
-        with refreshToken: String,
-        completion: @escaping (Result<RefreshAccessTokenResponse, NetworkError>) -> Void
-    )
-
     func sendResetPasswordCode(
         to email: String,
         completion: @escaping (Result<ForgetPasswordResponse, NetworkError>) -> Void

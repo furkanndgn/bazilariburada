@@ -7,17 +7,19 @@
 
 import UIKit
 
-final class ProductDetailViewController: BaseViewController {
+final class ProductDetailViewController: BaseViewController, RouteEmitting {
 
-    var viewModel: ProductDetailViewModel
-    
+    var onRoute: ((Route) -> Void)?
+
+    let viewModel: ProductDetailViewModel
+
     @IBOutlet weak var productStockLabel: UILabel!
     @IBOutlet weak var productQuantityView: ProductQuantityView!
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var expandableView: ExpandableView!
     @IBOutlet weak var reviewsRoutingView: ReviewsRoutingView!
 
-    init(viewModel: ProductDetailViewModel) {
+    init(_ viewModel: ProductDetailViewModel) {
         self.viewModel = viewModel
         super.init()
     }
@@ -49,17 +51,20 @@ private extension ProductDetailViewController {
             indicatorImage: UIImage(
                 systemName: "chevron.right"
             ),
-            content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+            content: viewModel.product.description
         )
         reviewsRoutingView.configureView(with: viewModel.product.averageRating)
     }
 
     func handleRouting() {
         reviewsRoutingView.tapPerformed = {
-            let reviewViewController = ProductReviewsViewController(
-                viewModel: ReviewsViewModel(product: self.viewModel.product)
-            )
-            self.navigationController?.pushViewController(reviewViewController, animated: true)
+            self.onRoute?(.toReviewScene(self))
         }
+    }
+}
+
+extension ProductDetailViewController {
+    enum Route {
+        case toReviewScene(UIViewController)
     }
 }

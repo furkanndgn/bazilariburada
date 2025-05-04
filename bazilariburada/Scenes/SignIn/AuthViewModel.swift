@@ -8,21 +8,29 @@
 import Foundation
 import Combine
 
-class AuthViewModel {
-    
-    private let authService = AuthenticationService()
+final class AuthViewModel {
+
+    private let authService: AuthenticationServiceProtocol
     private var cancellables = Set<AnyCancellable>()
     
-    init() {
+    init(authService: AuthenticationServiceProtocol = AuthenticationService()) {
+        self.authService = authService
         addSubscribers()
     }
     
     func login(username: String, password: String) {
-
+        authService.loginUsing(username: username, password: password) { result in
+            switch result {
+            case .success(let response):
+                print(response.accessToken)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
     }
     
     func register(username: String, email: String, password: String) {
-
+        
     }
     
     func activateAccount(email: String, activationCode: String) {

@@ -14,7 +14,7 @@ final class ProductDetailViewModel: ObservableObject {
     let product: Product
     var cancellables = Set<AnyCancellable>()
     
-    init(product: Product) {
+    init(_ product: Product) {
         self.product = product
         cartService = CartService()
     }

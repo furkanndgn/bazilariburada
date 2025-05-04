@@ -12,7 +12,7 @@ class ReviewsRoutingView: UIView {
 
     private var stack: ReviewsRoutingStack?
 
-    var tapPerformed: (() -> Void)?
+    var tapPerformed: EmptyClosure?
 
     override init(frame: CGRect) {
         super.init(frame: frame)

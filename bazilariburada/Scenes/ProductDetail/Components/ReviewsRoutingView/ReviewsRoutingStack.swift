@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ReviewsRoutingStack: UIView, NibLoadable {
+final class ReviewsRoutingStack: UIView, NibLoadable {
 
     @IBOutlet weak var starRatingView: StarRatingView!
 
