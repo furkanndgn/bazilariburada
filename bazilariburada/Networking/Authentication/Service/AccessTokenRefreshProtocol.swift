@@ -12,5 +12,4 @@ protocol AccessTokenRefreshProtocol {
         with refreshToken: String,
         completion: @escaping (Result<RefreshAccessTokenResponse, NetworkError>) -> Void
     )
-
 }

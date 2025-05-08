@@ -41,7 +41,7 @@ final class HomeViewController: UIViewController, RouteEmitting {
     private func setupView() {
         productTableView.dataSource = self
         productTableView.delegate = self
-        self.title = Constants.String.appTitle
+        self.title = Constants.String.Title.app
         self.navigationItem.backButtonTitle = Constants.String.empty
         let nib = ProductCell.getNib()
         productTableView.register(nib, forCellReuseIdentifier: ProductCell.identifier)

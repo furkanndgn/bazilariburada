@@ -15,6 +15,7 @@
             <connections>
                 <outlet property="expandableView" destination="Tb6-RC-G4G" id="UIk-UH-942"/>
                 <outlet property="priceLabel" destination="7Xt-r8-UaX" id="v1Z-mG-xwF"/>
+                <outlet property="productNameLabel" destination="gZx-yj-dR2" id="YQ9-aN-ImX"/>
                 <outlet property="productQuantityView" destination="Dus-Eo-Tva" id="RmA-qc-ToG"/>
                 <outlet property="productStockLabel" destination="Djt-9v-dDg" id="9NL-bh-5Mj"/>
                 <outlet property="reviewsRoutingView" destination="6fq-Uq-eqg" id="Kh6-qT-wKh"/>
@@ -136,7 +137,7 @@
             <color red="0.48627450980392156" green="0.48627450980392156" blue="0.48627450980392156" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
         <systemColor name="secondaryLabelColor">
-            <color red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

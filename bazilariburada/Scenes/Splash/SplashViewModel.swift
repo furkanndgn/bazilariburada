@@ -6,25 +6,26 @@
 //
 
 import Foundation
-import Combine
 
-class SplashViewModel: ObservableObject {
-    
+final class SplashViewModel: ObservableObject {
+
+    private let authenticationManager = AuthenticationManager.shared
     private let authService: AuthenticationService
-    var cancellables = Set<AnyCancellable>()
-    private var refreshToken: String? = UserDefaults.standard.string(forKey: "refreshToken")
-    var accessTokesn: String?
-    
+
+    var accessToken: String?
+
     init(authService: AuthenticationService = AuthenticationService()) {
         self.authService = authService
-        addSubscribers()
-        getAccessToken()
+        accessToken = nil
     }
 
-    func getAccessToken() {
-        guard let refreshToken = refreshToken, !refreshToken.isEmpty else { return }
+    func getAccessToken() async {
     }
-    
-    private func addSubscribers() {
+
+    func validateTokens(completion: @escaping EmptyClosure) async {
+        completion()
+    }
+
+    func runSplashLogic(completion: @escaping EmptyClosure) {
     }
 }

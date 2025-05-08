@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TabBarViewController: UITabBarController {
+final class TabBarViewController: UITabBarController {
 
     let productDetailRouter: ProductDetailRouter
     let homeRouter: HomeRouter

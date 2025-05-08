@@ -8,19 +8,18 @@
 import UIKit
 import Combine
 
-class TestViewController: BaseViewController {
+final class TestViewController: BaseViewController {
 
-    let autService = AuthenticationService()
+    let authService = AuthenticationService()
     let cartService = CartService()
     let orderService = OrderService()
     let productService = ProductService()
     let reviewService = ReviewService()
     let userService = UserService()
+    let authManager = AuthenticationManager.shared
     var userToken: String = ""
     var allProducts: AllProductsResponse? = nil
     var cancellables = Set<AnyCancellable>()
-
-
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,19 +37,44 @@ class TestViewController: BaseViewController {
             .store(in: &cancellables)
     }
 
-    ///MARK: Authentication testing
-    @IBAction func loginPressed(_ sender: UIButton) {
-        autService.loginUsing(username: "furkido", password: "12345678") { result in
+//    MARK: KeychainManagerTest
+    private let serviceIdentifier = Constants.Keychain.serviceIdentifier
+    private let accessTokenAccount = Constants.Keychain.accessAccount
+    private let refreshTokenAccount = Constants.Keychain.refreshAccount
+
+    func login(with username: String =  "furkido", password: String = "12345678") {
+        authService.loginUsing(username: username, password: password) { result in
             switch result {
             case .success(let data):
-                print(data.username)
+                Task {
+                    await self.authManager.saveNewTokens(
+                        accessToken: data.accessToken,
+                        accessTokenExpiresAt: Date().addingTimeInterval(86400),
+                        refreshToken: data.refreshToken,
+                        refreshTokenExpiresAt: Date().addingTimeInterval(604800)
+                    )
+                }
             case .failure(let networkError):
-                print(String(describing: networkError.localizedDescription))
+                print(networkError.localizedDescription)
             }
         }
     }
-    @IBAction func getAllProductPressed(_ sender: UIButton) {
-        productService.getAllProducts()
+
+    @IBAction func saveButtonTapped(_ sender: Any) {
+        login()
+    }
+
+    @IBAction func loadButtonTapped(_ sender: Any) {
+        Task {
+            let access: String? = await authManager.getValidAccessToken()
+            print("access: \(access ?? "no access")")
+        }
+        let refresh: TokenInfo? = try? KeychainManager.shared.load(service: serviceIdentifier, account: refreshTokenAccount)
+        print("refresh: \(refresh?.token ?? "no refresh")")
+
+    }
+    @IBAction func deleteButtonTapped(_ sender: Any) {
+        try? KeychainManager.shared.delete(service: serviceIdentifier, account: accessTokenAccount)
     }
 }
 

@@ -11,6 +11,8 @@ final class NetworkManager: NetworkManagerProtocol {
 
     static var shared: NetworkManagerProtocol = NetworkManager()
 
+    private init() { }
+
     func performRequest<T: Decodable, U: Encodable>(
         endpoint: APIEndpointProtocol,
         body: U?,

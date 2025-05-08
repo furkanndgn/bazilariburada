@@ -7,7 +7,7 @@
 
 import UIKit
 
-class StarsStack: UIStackView, NibLoadable {
+final class StarsStack: UIStackView, NibLoadable {
 
     @IBOutlet weak var starImage1: UIImageView!
     @IBOutlet weak var starImage2: UIImageView!

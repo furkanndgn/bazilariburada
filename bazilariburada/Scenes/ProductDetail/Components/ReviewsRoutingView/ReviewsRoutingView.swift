@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class ReviewsRoutingView: UIView {
+final class ReviewsRoutingView: UIView {
 
     private var stack: ReviewsRoutingStack?
 

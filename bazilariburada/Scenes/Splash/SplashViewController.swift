@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SplashViewController: UIViewController {
+final class SplashViewController: UIViewController {
 
     let viewModel: SplashViewModel
 
@@ -19,31 +19,39 @@ class SplashViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .red
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
-            self.transitionToMainApp()
-        })
+        Task {
+//            await viewModel.getAccessToken()
+            await MainActor.run {
+                self.transitionToMainApp()
+            }
+        }
     }
+}
 
-    private func transitionToMainApp() {
+
+private extension SplashViewController {
+    func transitionToMainApp() {
         guard let scene = view.window?.windowScene else {
             print("No active UIWindowScene found.")
             return
         }
+
         if let window = scene.windows.first {
             let transition = CATransition()
             transition.type = .fade
             transition.duration = 0.3
             window.layer.add(transition, forKey: kCATransition)
-            window.rootViewController = createTabBar()
+            let tabBar = createTabBar()
+            window.rootViewController = tabBar
             window.makeKeyAndVisible()
         }
     }
 
-    private func createTabBar() -> UITabBarController {
+    func createTabBar() -> UITabBarController {
         TabBarViewController()
     }
 }

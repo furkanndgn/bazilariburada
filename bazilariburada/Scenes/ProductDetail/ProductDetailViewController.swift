@@ -13,6 +13,7 @@ final class ProductDetailViewController: BaseViewController, RouteEmitting {
 
     let viewModel: ProductDetailViewModel
 
+    @IBOutlet weak var productNameLabel: UILabel!
     @IBOutlet weak var productStockLabel: UILabel!
     @IBOutlet weak var productQuantityView: ProductQuantityView!
     @IBOutlet weak var priceLabel: UILabel!
@@ -42,15 +43,15 @@ private extension ProductDetailViewController {
         handleRouting()
     }
 
+//    NOT: productNameLabel -> brandNameLabel + productNameLabel
     func configureSubviews() {
+        productNameLabel.text = "\(viewModel.product.brand) \(viewModel.product.name)"
         productQuantityView.productStock = viewModel.product.quantity
-        productStockLabel.text = "\(viewModel.product.quantity) in stock"
+        productStockLabel.text = Constants.String.Build.stock(stock: viewModel.product.quantity).string()
         priceLabel.text = "$\(viewModel.product.price)"
         expandableView.configureView(
-            title: "Product Description",
-            indicatorImage: UIImage(
-                systemName: "chevron.right"
-            ),
+            title: Constants.String.Title.productDescription,
+            indicatorImage: SFSymbol.chevronRight.image(with: .Colors.black100),
             content: viewModel.product.description
         )
         reviewsRoutingView.configureView(with: viewModel.product.averageRating)

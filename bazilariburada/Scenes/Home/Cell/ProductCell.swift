@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ProductCell: BaseTableViewCell, NibLoadable {
+final class ProductCell: BaseTableViewCell, NibLoadable {
 
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var productImageView: UIImageView!

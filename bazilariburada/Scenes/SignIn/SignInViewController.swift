@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-class SignInViewController: UIViewController {
+final class SignInViewController: UIViewController {
     
     private var viewModel: AuthViewModel
     @Published var password: String = ""
@@ -49,7 +49,7 @@ class SignInViewController: UIViewController {
     
     init(viewModel: AuthViewModel = AuthViewModel()) {
         self.viewModel = viewModel
-        super.init(nibName: "SignInViewController", bundle: nil)
+        super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder: NSCoder) {
@@ -66,7 +66,7 @@ class SignInViewController: UIViewController {
     }
     
     @IBAction func signIn(_ sender: UIButton) {
-        viewModel.login(username: username, password: password)
+        viewModel.login(with: "furkido", password: "12345678")
     }
         
     @IBAction func usernameChanged(_ sender: UITextField) {
@@ -75,7 +75,6 @@ class SignInViewController: UIViewController {
     
     @IBAction func passwordChanged(_ sender: UITextField) {
         password = sender.text ?? ""
-        print(String(describing: sender.text))
     }
 }
 
