@@ -74,6 +74,7 @@ extension NetworkManager {
     }
 }
 
+
 private extension NetworkManager {
 
     func buildRequest(with url: URL, and endpoint: APIEndpointProtocol) -> URLRequest{
@@ -138,4 +139,3 @@ private extension NetworkManager {
         }
     }
 }
-
