@@ -27,6 +27,9 @@ final class HomeViewController: UIViewController, RouteEmitting {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+        Task {
+            await viewModel.getProducts()
+        }
     }
     
     private func updateUI() {
@@ -45,10 +48,10 @@ final class HomeViewController: UIViewController, RouteEmitting {
         self.navigationItem.backButtonTitle = Constants.String.empty
         let nib = ProductCell.getNib()
         productTableView.register(nib, forCellReuseIdentifier: ProductCell.identifier)
-        addSubscription()
+        addSubscribers()
     }
     
-    private func addSubscription() {
+    private func addSubscribers() {
         viewModel.$allProducts
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in

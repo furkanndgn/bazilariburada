@@ -90,30 +90,7 @@ private extension AuthenticationManager {
     }
 
     func performRefresh(with refreshToken: String) async throws {
-        let authService = self.authService
-        return try await withCheckedThrowingContinuation { [weak self] continuation in
-            guard let self else {
-                continuation.resume(throwing: NSError(domain: "SelfDeallocated", code: 1))
-                return
-            }
-            authService.refreshAccessToken(with: refreshToken) { result in
-                switch result {
-                case .success(let data):
-                    Task {
-                        await self.saveNewTokens(
-                            accessToken: data.accessToken,
-                            accessTokenExpiresAt: Date().addingTimeInterval(86400),
-                            refreshToken: data.refreshToken,
-                            refreshTokenExpiresAt: Date().addingTimeInterval(604800)
-                        )
-                        continuation.resume()
-                    }
 
-                case .failure(let error):
-                    continuation.resume(throwing: error)
-                }
-            }
-        }
     }
 
     func clearTokens() {

@@ -51,22 +51,6 @@ final class AuthViewModel {
     //    }
 
     func login(with username: String =  "furkido", password: String = "12345678") {
-        authService.loginUsing(username: username, password: password) { result in
-            switch result {
-            case .success(let data):
-                Task {
-                    await self.authManager
-                        .saveNewTokens(
-                            accessToken: data.accessToken,
-                            accessTokenExpiresAt: Date(),
-                            refreshToken: data.refreshToken,
-                            refreshTokenExpiresAt: Date()
-                        )
-                }
-            case .failure(let networkError):
-                print(networkError.localizedDescription)
-            }
-        }
     }
 
     func register(username: String, email: String, password: String) {

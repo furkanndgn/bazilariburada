@@ -13,9 +13,9 @@ final class WishlistService: WishlistServiceProtocol {
 
     private let networkManager: NetworkManagerProtocol
 
-    private let wishlistSubject = PassthroughSubject<Result<[WishlistItem], NetworkError>, Never>()
+    private let wishlistSubject = PassthroughSubject<[WishlistItem]?, Never>()
 
-    var wishlistPublisher: AnyPublisher<Result<[WishlistItem], NetworkError>, Never> {
+    var wishlistPublisher: AnyPublisher<[WishlistItem]?, Never> {
         wishlistSubject.eraseToAnyPublisher()
     }
 
@@ -23,77 +23,53 @@ final class WishlistService: WishlistServiceProtocol {
         self.networkManager = networkManager
     }
 
-    func getUserWishlist(with accessToken: String) {
-        networkManager
-            .performRequest(
+    func getUserWishlist(with accessToken: String) async {
+        do {
+            let response: APIResponse<[WishlistItem]> = try await networkManager.performRequest(
                 endpoint: WishlistEndpoint.getWishlist,
-                responseType: [WishlistItem].self,
                 token: accessToken
-            ) { result in
-                switch result {
-                case .success(let response):
-                    if let data = response.data {
-                        self.wishlistSubject.send(.success(data))
-                    }
-                case .failure(let networkError):
-                    self.wishlistSubject.send(.failure(networkError))
-                }
-            }
+            )
+            wishlistSubject.send(response.data)
+        } catch let error {
+            print(error)
+        }
     }
 
-    func addToWishlist(productID: String, with accessToken: String) {
+    func addToWishlist(productID: String, with accessToken: String) async {
         let addWishlistRequest = AddToWishListRequest(productID: productID)
-        networkManager
-            .performRequest(
+        do {
+            let response: APIResponse<[WishlistItem]> = try await networkManager.performRequest(
                 endpoint: WishlistEndpoint.addProductToWishlist,
-                body: addWishlistRequest,
-                responseType: [WishlistItem].self,
-                token: accessToken
-            ) { result in
-                switch result {
-                case .success(let response):
-                    if let data = response.data {
-                        self.wishlistSubject.send(.success(data))
-                    }
-                case .failure(let networkError):
-                    self.wishlistSubject.send(.failure(networkError))
-                }
-            }
+                token: accessToken,
+                body: addWishlistRequest
+            )
+            wishlistSubject.send(response.data)
+        } catch let error {
+            print(error)
+        }
     }
 
-    func removeFromWishlist(productID: String, with accessToken: String) {
-        networkManager
-            .performRequest(
+    func removeFromWishlist(productID: String, with accessToken: String) async {
+        do {
+            let response: APIResponse<[WishlistItem]> = try await networkManager.performRequest(
                 endpoint: WishlistEndpoint.removeProductFromWishlist(productID: productID),
-                responseType: [WishlistItem].self,
                 token: accessToken
-            ) { result in
-                switch result {
-                case .success(let response):
-                    if let data = response.data {
-                        self.wishlistSubject.send(.success(data))
-                    }
-                case .failure(let networkError):
-                    self.wishlistSubject.send(.failure(networkError))
-                }
-            }
+            )
+            wishlistSubject.send(response.data)
+        } catch let error {
+            print(error)
+        }
     }
 
-    func clearWishlist(with accessToken: String) {
-        networkManager
-            .performRequest(
-                endpoint: WishlistEndpoint.getWishlist,
-                responseType: [WishlistItem].self,
+    func clearWishlist(with accessToken: String) async {
+        do {
+            let response: APIResponse<[WishlistItem]> = try await networkManager.performRequest(
+                endpoint: WishlistEndpoint.clearUserWishlist,
                 token: accessToken
-            ) { result in
-                switch result {
-                case .success(let response):
-                    if let data = response.data {
-                        self.wishlistSubject.send(.success(data))
-                    }
-                case .failure(let networkError):
-                    self.wishlistSubject.send(.failure(networkError))
-                }
-            }
+            )
+            wishlistSubject.send(response.data)
+        } catch let error {
+            print(error)
+        }
     }
 }

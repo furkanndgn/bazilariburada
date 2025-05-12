@@ -8,20 +8,13 @@
 import Foundation
 
 protocol ReviewServiceProtocol {
-
-    func getReviews(of productID: String, completion: @escaping (Result<[Review], NetworkError>) -> Void)
-
+    
+    func getReviews(of productID: String) async -> APIResponse<[Review]>?
     func addReview(
         _ comment: String,
         rating: Int,
         to productID: String,
-        with accessToken: String,
-        completion: @escaping (Result<Review, NetworkError>) -> Void
-    )
-
-    func deleteUserReview(
-        from productID: String,
-        with accessToken: String,
-        completion: @escaping (Result<String, NetworkError>) -> Void
-    )
+        with accessToken: String
+    ) async -> APIResponse<Review>?
+    func deleteUserReview(from productID: String, with accessToken: String) async -> String?
 }

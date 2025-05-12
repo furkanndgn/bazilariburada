@@ -17,85 +17,61 @@ final class CartService: CartServiceProtocol {
         self.networkManager = networkManager
     }
 
-    private var currentCartSubject = PassthroughSubject<Result<Cart, NetworkError>, Never>()
+    private var currentCartSubject = PassthroughSubject<APIResponse<Cart>?, Never>()
 
-    var currentCartPublisher: AnyPublisher<Result<Cart, NetworkError>, Never> {
+    var currentCartPublisher: AnyPublisher<APIResponse<Cart>?, Never> {
         currentCartSubject.eraseToAnyPublisher()
     }
 
-    func addToCart(productID: String, quantity: Int, accessToken: String) {
+    func addToCart(productID: String, quantity: Int, accessToken: String) async {
         let cartRequest = AddItemToCartRequest(productID: productID, quantity: quantity)
-        networkManager
-            .performRequest(
+        do {
+            let response: APIResponse<Cart> = try await networkManager.performRequest(
                 endpoint: CartEndpoint.addProductToCart,
-                body: cartRequest,
-                responseType: Cart.self,
-                token: accessToken
-            ) { result in
-                switch result {
-                case .success(let response):
-                    if let data = response.data {
-                        self.currentCartSubject.send(.success(data))
-                    }
-                case .failure(let networkError):
-                    self.currentCartSubject.send(.failure(networkError))
-                }
-            }
+                token: accessToken,
+                body: cartRequest
+            )
+            currentCartSubject.send(response)
+        } catch let error {
+            print(error)
+        }
     }
 
-    func updateQuantity(of productID: String, with quantity: Int, accessToken: String) {
+    func updateQuantity(of productID: String, with quantity: Int, accessToken: String) async {
         let updateQuantityRequest = UpdateItemQuantityRequest(quantity: quantity)
-        networkManager
-            .performRequest(
+        do {
+            let response: APIResponse<Cart> = try await networkManager.performRequest(
                 endpoint: CartEndpoint.updateQuantity(productID: productID),
-                body: updateQuantityRequest,
-                responseType: Cart.self,
-                token: accessToken
-            ) { result in
-                switch result {
-                case .success(let response):
-                    if let data = response.data {
-                        self.currentCartSubject.send(.success(data))
-                    }
-                case .failure(let networkError):
-                    self.currentCartSubject.send(.failure(networkError))
-                }
-            }
+                token: accessToken,
+                body: updateQuantityRequest
+            )
+            currentCartSubject.send(response)
+        } catch let error {
+            print(error)
+        }
     }
 
-    func removeFromCart(productID: String, accessToken: String) {
-        networkManager
-            .performRequest(
+    func removeFromCart(productID: String, accessToken: String) async {
+        do {
+            let response: APIResponse<Cart> = try await networkManager.performRequest(
                 endpoint: CartEndpoint.removeProductFromCart(productID: productID),
-                responseType: Cart.self,
                 token: accessToken
-            ) { result in
-                switch result {
-                case .success(let response):
-                    if let data = response.data {
-                        self.currentCartSubject.send(.success(data))
-                    }
-                case .failure(let networkError):
-                    self.currentCartSubject.send(.failure(networkError))
-                }
-            }
+            )
+            currentCartSubject.send(response)
+        } catch let error {
+            print(error)
+        }
     }
 
-    func emptyCart(of accessToken: String) {
-        networkManager
-            .performRequest(
+    func emptyCart(of accessToken: String) async {
+        do {
+            let response: APIResponse<Cart> = try await networkManager.performRequest(
                 endpoint: CartEndpoint.emptyCart,
-                responseType: Cart.self,
                 token: accessToken
-            ) { result in
-                switch result {
-                case .success(let response):
-                    if let data = response.data {
-                        self.currentCartSubject.send(.success(data))
-                    }
-                case .failure(let networkError):
-                    self.currentCartSubject.send(.failure(networkError))
-                }
-            }
+            )
+            currentCartSubject.send(response)
+        } catch let error {
+            print(error)
+        }
     }
 }

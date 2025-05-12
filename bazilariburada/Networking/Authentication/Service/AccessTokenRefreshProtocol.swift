@@ -8,8 +8,5 @@
 import Foundation
 
 protocol AccessTokenRefreshProtocol {
-    func refreshAccessToken(
-        with refreshToken: String,
-        completion: @escaping (Result<RefreshAccessTokenResponse, NetworkError>) -> Void
-    )    
+    func refreshAccessToken(with refreshToken: String) async -> APIResponse<RefreshAccessTokenResponse>?
 }

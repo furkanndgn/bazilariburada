@@ -10,19 +10,11 @@ import Combine
 
 protocol OrderServiceProtocol {
 
-    var allOrdersPublisher: AnyPublisher<Result<[Order], NetworkError>, NetworkError> { get }
+    var allOrdersPublisher: AnyPublisher<APIResponse<[Order]>?, Never> { get }
 
-    func placeAnOrder(
-        to address: String,
-        with accessToken: String,
-        completion: @escaping (Result<Order, NetworkError>) -> Void
-    )
+    func placeAnOrder(to address: String, with accessToken: String) async -> APIResponse<Order>?
 
-    func getUserOrder(
-        by orderID: String,
-        with accessToken: String,
-        completion: @escaping (Result<Order, NetworkError>) -> Void
-    )
+    func getUserOrder(by orderID: String, with accessToken: String) async -> APIResponse<Order>?
 
-    func getAllOrders(with accessToken: String)
+    func getAllOrders(with accessToken: String) async
 }

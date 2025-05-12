@@ -10,10 +10,10 @@ import Combine
 
 protocol CartServiceProtocol {
 
-    var currentCartPublisher: AnyPublisher<Result<Cart, NetworkError>, Never> { get }
+    var currentCartPublisher: AnyPublisher<APIResponse<Cart>?, Never> { get }
 
-    func addToCart(productID: String, quantity: Int, accessToken: String)
-    func updateQuantity(of productID: String, with quantity: Int, accessToken: String)
-    func removeFromCart(productID: String, accessToken: String)
-    func emptyCart(of accessToken: String)
+    func addToCart(productID: String, quantity: Int, accessToken: String) async
+    func updateQuantity(of productID: String, with quantity: Int, accessToken: String) async
+    func removeFromCart(productID: String, accessToken: String) async
+    func emptyCart(of accessToken: String) async
 }

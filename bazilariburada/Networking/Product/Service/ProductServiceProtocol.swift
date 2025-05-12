@@ -10,8 +10,8 @@ import Combine
 
 protocol ProductServiceProtocol {
 
-    var allProductsPublisher: AnyPublisher<Result<AllProductsResponse, NetworkError>, Never> { get }
+    var allProductsPublisher: AnyPublisher<APIResponse<AllProductsResponse>?, Never> { get }
 
-    func getAllProducts()
-    func getProduct(by productID: String, completion: @escaping (Result<Product, NetworkError>) -> Void)
+    func getAllProducts() async
+    func getProduct(by productID: String) async -> Product?
 }

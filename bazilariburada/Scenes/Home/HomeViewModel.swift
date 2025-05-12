@@ -10,31 +10,26 @@ import Combine
 
 final class HomeViewModel: ObservableObject {
 
-    private let productService: ProductService
+    private let productService: ProductServiceProtocol
     var cancellables = Set<AnyCancellable>()
     @Published var allProducts: [Product]?
     @Published var productByID: Product?
-    @Published var productCount: Int?
-    
-    init(productService: ProductService = ProductService()) {
+    var productCount: Int? {
+        allProducts?.count
+    }
+
+    init(productService: ProductServiceProtocol = ProductService()) {
         self.productService = productService
         addSubscribers()
-        getProducts()
+
     }
     
-    func getProducts() {
-        productService.getAllProducts()
+    func getProducts() async {
+        await productService.getAllProducts()
     }
     
     func getProductByID(productID: String) {
-        productService.getProduct(by: productID) { [weak self] result in
-            switch result {
-            case .success(let product):
-                self?.productByID = product
-            case .failure(let error):
-                print(String(describing: error.errorDescription))
-            }
-        }
+
     }
     
     func product(by index: Int) -> Product {
@@ -44,14 +39,8 @@ final class HomeViewModel: ObservableObject {
     private func addSubscribers() {
         productService.allProductsPublisher
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] result in
-                switch result {
-                case .success(let data):
-                    self?.allProducts = data.products
-                    self?.productCount = data.products.count
-                case .failure(let error):
-                    print(String(describing: error.errorDescription))
-                }
+            .sink { [weak self] response in
+                self?.allProducts = response?.data?.products
             }
             .store(in: &cancellables)
     }

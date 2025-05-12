@@ -16,136 +16,88 @@ final class AuthenticationService: AuthenticationServiceProtocol, AccessTokenRef
         self.networkManager = networkManager
     }
 
-    func registerUser(
-        username: String,
-        email: String,
-        password: String,
-        completion: @escaping (Result<RegisterResponse, NetworkError>) -> Void
-    ) {
+    func registerUser(username: String, email: String, password: String) async -> String? {
         let registerRequest = RegisterRequest(username: username, email: email, password: password)
-        networkManager
-            .performRequest(
+        var message: String?
+        do {
+            let response: APIResponse<RegisterResponse> = try await networkManager.performRequest(
                 endpoint: AuthenticationEndpoint.register,
-                body: registerRequest,
-                responseType: RegisterResponse.self
-            ) { result in
-                switch result {
-                case .success(let response):
-                    if let data = response.data {
-                        completion(.success(data))
-                    }
-                case .failure(let networkError):
-                    completion(.failure(networkError))
-                }
-            }
+                body: registerRequest
+            )
+            message = response.data?.message
+        } catch let error {
+            print(error.localizedDescription)
+        }
+        return message
     }
 
-    func activateAccount(
-        email: String,
-        activationCode: String,
-        completion: @escaping (Result<String, NetworkError>) -> Void
-    ) {
-        let activateUser = ActivateAccountRequest(email: email, activationCode: activationCode)
-        networkManager
-            .performRequest(
+    func activateAccount(email: String, activationCode: String) async -> String? {
+        let activationRequest = ActivateAccountRequest(email: email, activationCode: activationCode)
+        var message: String?
+        do {
+            let response: APIResponse<EmptyResponse> = try await networkManager.performRequest(
                 endpoint: AuthenticationEndpoint.activateAccount,
-                body: activateUser,
-                responseType: EmptyResponse.self
-            ) { result in
-                switch result {
-                case .success(let response):
-                    completion(.success(response.message))
-                case .failure(let networkError):
-                    completion(.failure(networkError))
-                }
-            }
+                body: activationRequest
+            )
+            message = response.message
+        } catch let error {
+            print(error.localizedDescription)
+        }
+        return message
     }
 
-    func loginUsing(
-        username: String,
-        password: String,
-        completion: @escaping (Result<LoginResponse, NetworkError>) -> Void
-    ) {
+    func loginUsing(username: String, password: String) async -> APIResponse<LoginResponse>? {
         let loginRequest = LoginRequest(username: username, password: password)
-        networkManager
-            .performRequest(
-                endpoint: AuthenticationEndpoint.login,
-                body: loginRequest,
-                responseType: LoginResponse.self
-            ) { result in
-                switch result {
-                case .success(let response):
-                    if let data = response.data {
-                        completion(.success(data))
-                    }
-                case .failure(let networkError):
-                    completion(.failure(networkError))
-                }
-            }
+        do {
+            return try await networkManager
+                .performRequest(endpoint: AuthenticationEndpoint.login, body: loginRequest)
+        } catch let error {
+            print(error)
+            return nil
+        }
     }
 
-    func refreshAccessToken(
-        with refreshToken: String,
-        completion: @escaping (Result<RefreshAccessTokenResponse, NetworkError>) -> Void
-    ) {
+    func refreshAccessToken(with refreshToken: String) async -> APIResponse<RefreshAccessTokenResponse>? {
         let refreshTokenRequest = RefreshTokenRequest(refreshToken: refreshToken)
-        networkManager
-            .performRequest(
-                endpoint: AuthenticationEndpoint.refreshAccessToken,
-                body: refreshTokenRequest,
-                responseType: RefreshAccessTokenResponse.self
-            ) { result in
-                switch result {
-                case .success(let response):
-                    if let data = response.data {
-                        completion(.success(data))
-                    }
-                case .failure(let networkError):
-                    completion(.failure(networkError))
-                }
-            }
+        do {
+            return try await networkManager
+                .performRequest(
+                    endpoint: AuthenticationEndpoint.refreshAccessToken,
+                    body: refreshTokenRequest
+                )
+        } catch let error {
+            print(error.localizedDescription)
+        }
+        return nil
     }
 
-    func sendResetPasswordCode(
-        to email: String,
-        completion: @escaping (Result<ForgetPasswordResponse, NetworkError>) -> Void
-    ) {
+    func sendResetPasswordCode(to email: String) async -> String? {
         let forgotPasswordRequest = ForgotPasswordRequest(email: email)
-        networkManager
-            .performRequest(
+        var message: String?
+        do {
+            let response: APIResponse<ForgetPasswordResponse> = try await networkManager.performRequest(
                 endpoint: AuthenticationEndpoint.forgotPassword,
-                body: forgotPasswordRequest,
-                responseType: ForgetPasswordResponse.self
-            ) { result in
-                switch result {
-                case .success(let response):
-                    if let data = response.data {
-                        completion(.success(data))
-                    }
-                case .failure(let networkError):
-                    completion(.failure(networkError))
-                }
-            }
+                body: forgotPasswordRequest
+            )
+            message = response.data?.message
+        } catch let error {
+            print(error.localizedDescription)
+        }
+        return message
     }
 
-    func resetPassword(
-        resetPasswordCode: String,
-        newPassword: String,
-        completion: @escaping (Result<String, NetworkError>) -> Void
-    ) {
+    func resetPassword(resetPasswordCode: String, newPassword: String) async -> String? {
         let resetPasswordRequest = ResetPasswordRequest(resetPasswordCode: resetPasswordCode, newPassword: newPassword)
-        networkManager
-            .performRequest(
+        var message: String?
+        do {
+            let response: APIResponse<EmptyResponse> = try await networkManager.performRequest(
                 endpoint: AuthenticationEndpoint.resetPassword,
-                body: resetPasswordRequest,
-                responseType: EmptyResponse.self
-            ) { result in
-                switch result {
-                case .success(let response):
-                    completion(.success(response.message))
-                case .failure(let networkError):
-                    completion(.failure(networkError))
-                }
-            }
+                body: resetPasswordRequest
+            )
+            message = response.message
+        } catch let error {
+            print(error.localizedDescription)
+        }
+        return message
     }
 }

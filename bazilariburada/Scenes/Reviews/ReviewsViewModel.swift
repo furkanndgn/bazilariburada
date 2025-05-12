@@ -27,8 +27,6 @@ final class ReviewsViewModel {
     }
     
     func getProductReviews() {
-        reviewService.getReviews(of: product.id) { result in
-        }
     }
     
     func addReview(comment: String, rating: Int, userData: LoginResponse) {

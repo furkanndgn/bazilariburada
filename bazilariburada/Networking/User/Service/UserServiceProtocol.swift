@@ -9,12 +9,9 @@ import Foundation
 
 protocol UserServiceProtocol {
 
-    func getUserProfile(with accessToken: String, completion: @escaping (Result<User, NetworkError>) -> Void)
-
+    func getUserProfile(with accessToken: String) async -> APIResponse<User>?
     func updateUserProfile(
         newUsername: String,
         newPassword: String,
-        with accessToken: String,
-        completion: @escaping (Result<String, NetworkError>) -> Void
-    )
+        with accessToken: String) async -> String?
 }

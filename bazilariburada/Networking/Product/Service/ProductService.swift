@@ -17,43 +17,32 @@ final class ProductService: ProductServiceProtocol {
         self.networkManager = networkManager
     }
 
-    private let allProductsSubject = PassthroughSubject<Result<AllProductsResponse, NetworkError>, Never>()
+    private let allProductsSubject = PassthroughSubject<APIResponse<AllProductsResponse>?, Never>()
 
-    var allProductsPublisher: AnyPublisher<Result<AllProductsResponse, NetworkError>, Never> {
+    var allProductsPublisher: AnyPublisher<APIResponse<AllProductsResponse>?, Never> {
         allProductsSubject.eraseToAnyPublisher()
     }
 
-    func getAllProducts() {
-        networkManager
-            .performRequest(
-                endpoint: ProductEndpoint.getAllProducts(),
-                responseType: AllProductsResponse.self
-            ) { result in
-                switch result {
-                case .success(let response):
-                    if let data = response.data {
-                        self.allProductsSubject.send(.success(data))
-                    }
-                case .failure(let networkError):
-                    self.allProductsSubject.send(.failure(networkError))
-                }
-            }
+    func getAllProducts() async {
+        do {
+            let response: APIResponse<AllProductsResponse> = try await networkManager.performRequest(
+                endpoint: ProductEndpoint.getAllProducts())
+            allProductsSubject.send(response)
+        } catch let error {
+            print(error)
+        }
     }
 
-    func getProduct(by productID: String, completion: @escaping (Result<Product, NetworkError>) -> Void) {
-        networkManager
-            .performRequest(
-                endpoint: ProductEndpoint.getProduct(productID: productID),
-                responseType: Product.self
-            ) { result in
-                switch result {
-                case .success(let response):
-                    if let data = response.data {
-                        completion(.success(data))
-                    }
-                case .failure(let networkError):
-                    completion(.failure(networkError))
-                }
-            }
+    func getProduct(by productID: String) async -> Product? {
+        var product: Product?
+        do {
+            let response: APIResponse<Product> = try await networkManager.performRequest(
+                endpoint: ProductEndpoint.getProduct(productID: productID)
+            )
+            product = response.data
+        } catch let error {
+            print(error)
+        }
+        return product
     }
 }

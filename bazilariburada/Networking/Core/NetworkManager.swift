@@ -9,133 +9,218 @@ import Foundation
 
 final class NetworkManager: NetworkManagerProtocol {
 
-    static var shared: NetworkManagerProtocol = NetworkManager()
+    static let shared: NetworkManagerProtocol = NetworkManager()
 
-    private init() { }
+    private let session: URLSession
+    private let decoder: JSONDecoder
+    private let encoder: JSONEncoder
+
+    private init(session: URLSession = .shared,
+                 decoder: JSONDecoder = .init(),
+                 encoder: JSONEncoder = .init()) {
+        self.session = session
+        self.decoder = decoder
+        self.encoder = encoder
+    }
 
     func performRequest<T: Decodable, U: Encodable>(
         endpoint: APIEndpointProtocol,
-        body: U?,
-        responseType: T.Type,
         token: String? = nil,
-        completion: @escaping (Result<APIResponse<T>, NetworkError>) -> Void
-    ) {
-
-        guard let url = APIURLBuilder.buildURL(for: endpoint) else {
-            return completion(.failure(.invalidURL))
-        }
-
-        var request = buildRequest(with: url, and: endpoint)
-
-        if endpoint.isRequiringAuthentication {
-            addToken(&request, token: token) { error in
-                completion(.failure(error))
-            }
-        }
-
-        if let body = body {
-            addBody(&request, body: body) { error in
-                completion(.failure(error))
-            }
-        }
-
-        let task = URLSession.shared.dataTask(with: request) { [weak self] (data, response, error) in
-
-            guard let self = self else { return }
-
-            if let error = error {
-                return completion(.failure(.unknown(error)))
+        body: U? = nil,
+        timeoutInterval: TimeInterval = 30.0
+    ) async throws -> APIResponse<T> {
+        let request = try buildRequest(for: endpoint, body: body, token: token, timeoutInterval: timeoutInterval)
+#if DEBUG
+        logRequest(request)
+#endif
+        return try await withThrowingTaskGroup(of: APIResponse<T>.self) { group in
+            group.addTask { [weak self] in
+                guard let self else { throw NetworkError.unknown(nil) }
+                return try await self.executeRequest(request)
             }
 
-            self.validateHTTPResponse(response, completion: completion)
+            group.addTask {
+                try await Task.sleep(nanoseconds: UInt64(timeoutInterval * 1_000_000_000))
+                throw NetworkError.timeout
+            }
 
-            if let data = data {
-                self.decodeData(data, responseType: responseType, completion: completion)
+            do {
+                let result = try await group.next()!
+                group.cancelAll()
+                return result
+            } catch {
+                group.cancelAll()
+                throw error
             }
         }
-        task.resume()
     }
+
+    func performRequestWithRetry<T: Decodable, U: Encodable>(
+        endpoint: APIEndpointProtocol,
+        token: String? = nil,
+        body: U?,
+        maxRetries: Int = 3,
+        initialDelay: TimeInterval = 1.0
+    ) async throws -> APIResponse<T> {
+        var currentDelay = initialDelay
+
+        for _ in 0..<maxRetries {
+            do {
+                return try await performRequest(endpoint: endpoint, token: token, body: body)
+            } catch {
+                guard (error as? NetworkError)?.isRetryable ?? false else { throw error }
+
+                try await Task.sleep(nanoseconds: UInt64(currentDelay * 1_000_000_000))
+                currentDelay *= 2
+            }
+        }
+        throw NetworkError.maxRetriesReached(maxRetries)
+    }
+
 }
 
+
+// MARK: - For Requests Without Body
 extension NetworkManager {
     func performRequest<T: Decodable>(
         endpoint: APIEndpointProtocol,
-        responseType: T.Type,
         token: String? = nil,
-        completion: @escaping (Result<APIResponse<T>, NetworkError>) -> Void
-    ) {
-        performRequest(
+        timeoutInterval: TimeInterval = 30.0
+    ) async throws -> APIResponse<T> {
+        try await performRequest(
             endpoint: endpoint,
             body: Optional<EmptyRequest>.none,
-            responseType: responseType,
-            token: token,
-            completion: completion
+            timeoutInterval: timeoutInterval
+        )
+    }
+    func performRequestWithRetry<T: Decodable>(
+        endpoint: APIEndpointProtocol,
+        token: String? = nil,
+        maxRetries: Int = 3,
+        initialDelay: TimeInterval = 1.0
+    ) async throws -> APIResponse<T> {
+        try await performRequestWithRetry(
+            endpoint: endpoint,
+            body: Optional<EmptyRequest>.none,
+            maxRetries: maxRetries,
+            initialDelay: initialDelay
         )
     }
 }
 
 
+// MARK: - Private Implementation
 private extension NetworkManager {
+    func buildRequest<U: Encodable>(
+        for endpoint: APIEndpointProtocol,
+        body: U? = nil,
+        token: String? = nil,
+        timeoutInterval: TimeInterval = 30
+    ) throws -> URLRequest {
+        guard let url = APIURLBuilder.buildURL(for: endpoint) else {
+            throw NetworkError.invalidURL
+        }
 
-    func buildRequest(with url: URL, and endpoint: APIEndpointProtocol) -> URLRequest{
-        var request = URLRequest(url: url)
+        var request = URLRequest(
+            url: url,
+            cachePolicy: .reloadIgnoringLocalCacheData,
+            timeoutInterval: timeoutInterval
+        )
+
         request.httpMethod = endpoint.pathAndMethod.method.rawValue
         request.setValue(ContentType.json.rawValue, forHTTPHeaderField: HTTPHeaderField.contentType.rawValue)
+
+        if endpoint.isRequiringAuthentication {
+            guard let token = token else { throw NetworkError.missingToken }
+            request.addValue("Bearer \(token)", forHTTPHeaderField: HTTPHeaderField.authorization.rawValue)
+        }
+
+        if let body = body {
+            do {
+                request.httpBody = try encode(body: body)
+            } catch {
+                throw NetworkError
+                    .encodingFailed(context: "Request body encoding failed", underlyingError: error)
+            }
+        }
+
         return request
     }
 
-
-    func addToken(_ request: inout URLRequest, token: String?, completion: (NetworkError) -> Void) {
-        guard let token = token else {
-            return completion(.missingToken)
-        }
-        request.setValue("Bearer \(token)", forHTTPHeaderField: HTTPHeaderField.authorization.rawValue)
+    func executeRequest<T: Decodable>(_ request: URLRequest) async throws -> T {
+        let (data, response) = try await session.data(for: request)
+#if DEBUG
+        logResponse(response, data: data)
+#endif
+        try validate(response: response, data: data)
+        return try decode(data: data)
     }
 
-    func addBody<T: Encodable>(
-        _ request: inout URLRequest,
-        body: T,
-        completion: (NetworkError) -> Void
-    )  {
+    func encode(body: Encodable) throws -> Data {
         do {
-            request.httpBody = try JSONEncoder().encode(body)
-        } catch let encodingError as EncodingError {
-            completion(.encodingFailed(underlyingError: encodingError))
+            return try encoder.encode(body)
+        } catch let error as EncodingError {
+            throw NetworkError.encodingFailed(context: "Request body encoding failed", underlyingError: error)
         } catch {
-            completion(.unknown(error))
+            throw NetworkError.unknown(error)
         }
     }
 
-    func validateHTTPResponse<T: Decodable>(
-        _ response: URLResponse?,
-        completion: @escaping(Result<APIResponse<T>, NetworkError>) -> Void
-    ) {
+    func validate(response: URLResponse, data: Data) throws {
         guard let httpResponse = response as? HTTPURLResponse else {
-            completion(.failure(.invalidResponse))
-            return
+            throw NetworkError.invalidResponse
         }
 
-        guard (200...299).contains(httpResponse.statusCode) else {
-            completion(.failure(.serverError(statusCode: httpResponse.statusCode)))
-            return
+        guard (200..<300).contains(httpResponse.statusCode) else {
+            let errorResponse = try? decoder.decode(APIResponse<APIError>.self, from: data)
+            throw NetworkError.serverError(
+                statusCode: httpResponse.statusCode,
+                message: errorResponse?.message ?? "Server error",
+                responseData: data
+            )
         }
     }
 
-    func decodeData<T: Decodable> (
-        _ data: Data,
-        responseType: T.Type,
-        completion: @escaping(Result<APIResponse<T>, NetworkError>) -> Void
-    ) {
+    func decode<T: Decodable>(data: Data) throws -> T {
         do {
-            let jsonData = try JSONDecoder().decode(APIResponse<T>.self, from: data)
-            completion(.success(jsonData))
-        } catch let error {
-            if let decodingError = error as? DecodingError {
-                return completion(.failure(.decodingFailed(underlyingError: decodingError)))
-            }
-            else {
-                return completion(.failure(.unknown(error)))
-            }
+            return try decoder.decode(T.self, from: data)
+        } catch let error as DecodingError {
+            throw NetworkError.decodingFailed(context: "Response decoding failed", underlyingError: error)
+        } catch {
+            throw NetworkError.unknown(error)
         }
+    }
+}
+
+
+// MARK: - Logging
+private extension NetworkManager {
+    func logRequest(_ request: URLRequest) {
+        let headers = request.allHTTPHeaderFields?.map { "\($0.key): \($0.value)" }.joined(separator: "\n") ?? "None"
+        let body = request.httpBody.flatMap { String(data: $0, encoding: .utf8) } ?? "Empty"
+
+        print("""
+        🌐 [Network Request]
+        URL: \(request.url?.absoluteString ?? "nil")
+        Method: \(request.httpMethod ?? "nil")
+        Headers:
+        \(headers)
+        Body:
+        \(body)
+        """)
+    }
+
+    func logResponse(_ response: URLResponse, data: Data) {
+        guard let httpResponse = response as? HTTPURLResponse else { return }
+        let body = String(data: data, encoding: .utf8) ?? "Unable to decode response body"
+
+        print("""
+        📩 [Network Response]
+        Status Code: \(httpResponse.statusCode)
+        Headers:
+        \(httpResponse.allHeaderFields.map { "\($0.key): \($0.value)" }.joined(separator: "\n"))
+        Body:
+        \(body)
+        """)
     }
 }

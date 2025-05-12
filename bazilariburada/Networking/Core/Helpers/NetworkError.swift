@@ -7,37 +7,26 @@
 
 import Foundation
 
-enum NetworkError: LocalizedError {
+enum NetworkError: Error {
     case invalidURL
-    case requestFailed(URLError)
-    case missingToken
-    case decodingFailed(underlyingError: DecodingError)
-    case serverError(statusCode: Int, message: String? = nil)
-    case encodingFailed(underlyingError: EncodingError)
-    case unauthorized(message: String? = nil)
     case invalidResponse
-    case unknown(Error)
+    case missingToken
+    case serverError(statusCode: Int, message: String, responseData: Data)
+    case encodingFailed(context: String, underlyingError: Error)
+    case decodingFailed(context: String, underlyingError: Error)
+    case authenticationRequired
+    case timeout
+    case maxRetriesReached(Int)
+    case unknown(Error?)
 
-    var errorDescription: String? {
+    var isRetryable: Bool {
         switch self {
-        case .invalidURL:
-            return "Invalid URL. Please verify the endpoint."
-        case .requestFailed(let urlError):
-            return "Network request failed: \(urlError.localizedDescription)"
-        case .missingToken:
-            return "Authentication required. Please log in."
-        case .decodingFailed(let error):
-            return "Data parsing failed: \(error.contextualDescription)"
-        case .serverError(let statusCode, let message):
-            return message ?? "Server error (HTTP \(statusCode))"
-        case .encodingFailed(let error):
-            return "Request encoding failed: \(error.localizedDescription)"
-        case .unauthorized(let message):
-            return message ?? "Session expired. Please re-authenticate."
-        case .invalidResponse:
-            return "Received malformed server response."
-        case .unknown(let error):
-            return "Unexpected error: \(error.localizedDescription)"
+        case .serverError(let code, _, _):
+            return [408, 429, 500, 502, 503, 504].contains(code)
+        case .timeout:
+            return true
+        default:
+            return false
         }
     }
 }

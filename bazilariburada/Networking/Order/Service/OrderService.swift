@@ -17,74 +17,51 @@ final class OrderService: OrderServiceProtocol {
         self.networkManager = networkManager
     }
 
-    private let allOrdersSubject = PassthroughSubject<Result<[Order], NetworkError>, NetworkError>()
+    private let allOrdersSubject = PassthroughSubject<APIResponse<[Order]>?, Never>()
 
-    var allOrdersPublisher: AnyPublisher<Result<[Order], NetworkError>, NetworkError> {
+    var allOrdersPublisher: AnyPublisher<APIResponse<[Order]>?, Never> {
         allOrdersSubject.eraseToAnyPublisher()
     }
 
-    func placeAnOrder(
-        to address: String,
-        with accessToken: String,
-        completion: @escaping (Result<Order, NetworkError>) -> Void
-    ) {
+    func placeAnOrder(to address: String, with accessToken: String) async -> APIResponse<Order>? {
         let orderRequest = OrderRequest(address: address)
-        networkManager
-            .performRequest(
-                endpoint: OrderEndpoint.placeOrder,
-                body: orderRequest,
-                responseType: Order.self,
-                token: accessToken
-            ) { result in
-                switch result {
-                case .success(let response):
-                    if let data = response.data {
-                        completion(.success(data))
-                    }
-                case .failure(let networkError):
-                    completion(.failure(networkError))
-                }
-            }
+        do {
+            return try await networkManager
+                .performRequest(
+                    endpoint: OrderEndpoint.placeOrder,
+                    token: accessToken,
+                    body: orderRequest
+                )
+        } catch let error {
+            print(error)
+        }
+        return nil
     }
 
-    func getUserOrder(
-        by orderID: String,
-        with accessToken: String,
-        completion: @escaping (Result<Order, NetworkError>) -> Void
-    ) {
-        networkManager
-            .performRequest(
-                endpoint: OrderEndpoint.getOrder(orderID: orderID),
-                responseType: Order.self,
-                token: accessToken
-            ) { result in
-                switch result {
-                case .success(let response):
-                    if let data = response.data {
-                        completion(.success(data))
-                    }
-                case .failure(let networkError):
-                    completion(.failure(networkError))
-                }
-            }
+    func getUserOrder(by orderID: String, with accessToken: String) async -> APIResponse<Order>? {
+        do {
+            return try await networkManager
+                .performRequest(
+                    endpoint: OrderEndpoint.getOrder(orderID: orderID),
+                    token: accessToken
+                )
+        } catch let error {
+            print(error)
+        }
+        return nil
     }
 
-    func getAllOrders(with accessToken: String) {
-        networkManager
-            .performRequest(
-                endpoint: OrderEndpoint.getAllOrders,
-                responseType: [Order].self,
-                token: accessToken
-            ) { result in
-                switch result {
-                case .success(let response):
-                    if let data = response.data {
-                        self.allOrdersSubject.send(.success(data))
-                    }
-                case .failure(let networkError):
-                    self.allOrdersSubject.send(.failure(networkError))
-                }
-            }
+    func getAllOrders(with accessToken: String) async {
+        do {
+            let response: APIResponse<[Order]> = try await networkManager
+                .performRequest(
+                    endpoint: OrderEndpoint.placeOrder,
+                    token: accessToken
+                )
+            allOrdersSubject.send(response)
+        } catch let error {
+            print(error)
+        }
     }
 }
 

@@ -16,40 +16,32 @@ final class UserService: UserServiceProtocol {
         self.networkManager = networkManager
     }
 
-    func getUserProfile(with accessToken: String, completion: @escaping (Result<User, NetworkError>) -> Void) {
-        networkManager
-            .performRequest(endpoint: UserEndpoint.getUserProfile, responseType: User.self) { result in
-                switch result {
-                case .success(let response):
-                    if let data = response.data {
-                        completion(.success(data))
-                    }
-                case .failure(let networkError):
-                    completion(.failure(networkError))
-                }
-            }
+    func getUserProfile(with accessToken: String) async -> APIResponse<User>? {
+        do {
+            return try await networkManager
+                .performRequest(endpoint: UserEndpoint.getUserProfile, token: accessToken)
+        } catch let error {
+            print(error)
+        }
+        return nil
     }
 
     func updateUserProfile(
         newUsername: String,
         newPassword: String,
-        with accessToken: String,
-        completion: @escaping (Result<String, NetworkError>) -> Void
-    ) {
-        let updateProfileRequest = UpdateProfileRequest(username: newUsername, password: newPassword)
-        networkManager
-            .performRequest(
-                endpoint: UserEndpoint.updateUser,
-                body: updateProfileRequest,
-                responseType: String.self,
-                token: accessToken
-            ) { result in
-                switch result {
-                case .success(let response):
-                    completion(.success(response.message))
-                case .failure(let networkError):
-                    completion(.failure(networkError))
-                }
+        with accessToken: String) async -> String? {
+            let updateProfileRequest = UpdateProfileRequest(username: newUsername, password: newPassword)
+            var message: String?
+            do {
+                let response: APIResponse<UpdateUserProfileResponse> = try await networkManager.performRequest(
+                    endpoint: UserEndpoint.updateUser,
+                    token: accessToken,
+                    body: updateProfileRequest
+                )
+                message = response.message
+            } catch let error {
+                print(error)
             }
-    }
+            return message
+        }
 }
