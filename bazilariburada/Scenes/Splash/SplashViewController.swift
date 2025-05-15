@@ -19,14 +19,13 @@ final class SplashViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .red
         Task {
-//            await viewModel.getAccessToken()
             await MainActor.run {
-                self.transitionToMainApp()
+                self.transitionToAuthenticationFlow()
             }
         }
     }
@@ -34,7 +33,8 @@ final class SplashViewController: UIViewController {
 
 
 private extension SplashViewController {
-    func transitionToMainApp() {
+
+    func transitionToAppFlow() {
         guard let scene = view.window?.windowScene else {
             print("No active UIWindowScene found.")
             return
@@ -47,6 +47,24 @@ private extension SplashViewController {
             window.layer.add(transition, forKey: kCATransition)
             let tabBar = createTabBar()
             window.rootViewController = tabBar
+            window.makeKeyAndVisible()
+        }
+    }
+
+    func transitionToAuthenticationFlow() {
+        guard let scene = view.window?.windowScene else {
+            print("No active UIWindowScene found.")
+            return
+        }
+
+        if let window = scene.windows.first {
+            let transition = CATransition()
+            transition.type = .fade
+            transition.duration = 0.3
+            window.layer.add(transition, forKey: kCATransition)
+            let onboardingScreen = OnBoardingRouter().createOnboardingScreen()
+            let navigationController = UINavigationController(rootViewController: onboardingScreen)
+            window.rootViewController = navigationController
             window.makeKeyAndVisible()
         }
     }

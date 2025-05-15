@@ -9,11 +9,14 @@ import UIKit
 
 protocol NibLoadable { }
 
-extension NibLoadable where Self: UIView {
-
+extension NibLoadable {
     static var nibName: String {
         return String(describing: self)
     }
+}
+
+extension NibLoadable where Self: UIView {
+
 
     static func loadFromNib() -> Self? {
         let bundle = Bundle(for: Self.self)

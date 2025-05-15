@@ -9,7 +9,7 @@ import Foundation
 
 protocol AuthenticationServiceProtocol {
 
-    func registerUser(username: String, email: String, password: String) async -> String?
+    func registerUser(username: String, email: String, password: String) async -> Int?
 
     func activateAccount(email: String, activationCode: String) async -> String?
 

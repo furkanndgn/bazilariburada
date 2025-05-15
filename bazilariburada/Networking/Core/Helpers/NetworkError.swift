@@ -12,6 +12,7 @@ enum NetworkError: Error {
     case invalidResponse
     case missingToken
     case serverError(statusCode: Int, message: String, responseData: Data)
+    case clientError(response: APIResponse<EmptyResponse?>)
     case encodingFailed(context: String, underlyingError: Error)
     case decodingFailed(context: String, underlyingError: Error)
     case authenticationRequired

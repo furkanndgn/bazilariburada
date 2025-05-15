@@ -16,19 +16,19 @@ final class AuthenticationService: AuthenticationServiceProtocol, AccessTokenRef
         self.networkManager = networkManager
     }
 
-    func registerUser(username: String, email: String, password: String) async -> String? {
+    func registerUser(username: String, email: String, password: String) async -> Int? {
         let registerRequest = RegisterRequest(username: username, email: email, password: password)
-        var message: String?
+        var statusCode: Int?
         do {
-            let response: APIResponse<RegisterResponse> = try await networkManager.performRequest(
+            let response: APIResponse<RegisterResponse?> = try await networkManager.performRequest(
                 endpoint: AuthenticationEndpoint.register,
                 body: registerRequest
             )
-            message = response.data?.message
+            statusCode = response.status
         } catch let error {
             print(error.localizedDescription)
         }
-        return message
+        return statusCode
     }
 
     func activateAccount(email: String, activationCode: String) async -> String? {

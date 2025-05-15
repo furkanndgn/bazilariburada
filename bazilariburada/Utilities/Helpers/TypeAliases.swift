@@ -7,4 +7,6 @@
 
 import Foundation
 
-typealias EmptyClosure = () -> Void
+typealias Completion = () -> Void
+typealias MessageHandler = (String?) -> Void
+typealias StatusHandler = (Int?) -> Void

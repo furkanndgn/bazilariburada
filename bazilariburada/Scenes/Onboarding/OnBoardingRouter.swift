@@ -23,10 +23,8 @@ final class OnBoardingRouter {
 
 
 private extension OnBoardingRouter {
-
     func pushRegistrationScreen(_ sender: UIViewController) {
-        let viewModel = AuthViewModel()
-        let viewController = SignInViewController(viewModel: viewModel)
+        let viewController = RegistrationViewController(RegistrationViewModel())
         sender.navigationController?.pushViewController(viewController, animated: true)
     }
 }

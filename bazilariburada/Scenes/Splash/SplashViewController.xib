@@ -2,7 +2,9 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -18,39 +20,61 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="bazilariburada" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8lp-rB-J9e">
-                    <rect key="frame" x="94.000000000000014" y="490" width="205.33333333333337" height="40.666666666666629"/>
-                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
-                    <color key="textColor" systemColor="systemBackgroundColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cart" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="4EP-pX-9Qz">
-                    <rect key="frame" x="111.66666666666669" y="367.66666666666669" width="170" height="118"/>
-                    <color key="tintColor" systemColor="systemBackgroundColor"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zbd-jH-EKV">
+                    <rect key="frame" x="0.0" y="366" width="393" height="120"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Images/Logo-Green" translatesAutoresizingMaskIntoConstraints="NO" id="Idw-Br-1aW">
+                            <rect key="frame" x="12" y="0.0" width="120" height="120"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="120" id="DnB-OV-jLR"/>
+                                <constraint firstAttribute="height" constant="120" id="qG7-vO-6ee"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="bazilariburada" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6cg-T0-k5g">
+                            <rect key="frame" x="132" y="32" width="249" height="37"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="31"/>
+                            <color key="textColor" name="Colors/green-100"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="online grocery" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rlg-E3-Yih">
+                            <rect key="frame" x="132" y="69" width="249" height="19"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" name="Colors/green-100"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="120" id="HYV-9t-63F"/>
-                        <constraint firstAttribute="width" constant="170" id="PjG-Id-kJc"/>
+                        <constraint firstItem="Rlg-E3-Yih" firstAttribute="trailing" secondItem="6cg-T0-k5g" secondAttribute="trailing" id="9xg-ji-1fH"/>
+                        <constraint firstAttribute="trailing" secondItem="6cg-T0-k5g" secondAttribute="trailing" constant="12" id="JSt-tc-XSe"/>
+                        <constraint firstAttribute="bottom" secondItem="Idw-Br-1aW" secondAttribute="bottom" id="TcV-fe-mqX"/>
+                        <constraint firstItem="Rlg-E3-Yih" firstAttribute="top" secondItem="6cg-T0-k5g" secondAttribute="bottom" id="UPs-7e-fs3"/>
+                        <constraint firstItem="Idw-Br-1aW" firstAttribute="top" secondItem="Zbd-jH-EKV" secondAttribute="top" id="i8w-KT-DXS"/>
+                        <constraint firstItem="6cg-T0-k5g" firstAttribute="leading" secondItem="Idw-Br-1aW" secondAttribute="trailing" id="mDc-UG-QuP"/>
+                        <constraint firstItem="6cg-T0-k5g" firstAttribute="top" secondItem="Zbd-jH-EKV" secondAttribute="top" constant="32" id="mgw-pV-Y0X"/>
+                        <constraint firstItem="Idw-Br-1aW" firstAttribute="leading" secondItem="Zbd-jH-EKV" secondAttribute="leading" constant="12" id="rMd-iZ-OwH"/>
+                        <constraint firstAttribute="bottom" secondItem="Rlg-E3-Yih" secondAttribute="bottom" constant="32" id="ypa-XT-Kgh"/>
+                        <constraint firstItem="Rlg-E3-Yih" firstAttribute="leading" secondItem="6cg-T0-k5g" secondAttribute="leading" id="zhh-3j-Bog"/>
                     </constraints>
-                </imageView>
+                </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="IWb-Nm-KzN"/>
-            <color key="backgroundColor" systemColor="systemOrangeColor"/>
+            <color key="backgroundColor" name="Colors/green-100"/>
             <constraints>
-                <constraint firstItem="4EP-pX-9Qz" firstAttribute="centerX" secondItem="Fla-0O-2VG" secondAttribute="centerX" id="UDr-oW-RtJ"/>
-                <constraint firstItem="4EP-pX-9Qz" firstAttribute="centerY" secondItem="Fla-0O-2VG" secondAttribute="centerY" id="aeS-5Q-4Vf"/>
-                <constraint firstItem="8lp-rB-J9e" firstAttribute="centerX" secondItem="Fla-0O-2VG" secondAttribute="centerX" id="au7-kl-aoB"/>
-                <constraint firstItem="8lp-rB-J9e" firstAttribute="top" secondItem="4EP-pX-9Qz" secondAttribute="bottom" constant="4" id="bHa-9O-fs9"/>
+                <constraint firstItem="Zbd-jH-EKV" firstAttribute="centerY" secondItem="Fla-0O-2VG" secondAttribute="centerY" id="E5O-gL-rMI"/>
+                <constraint firstItem="Zbd-jH-EKV" firstAttribute="leading" secondItem="Fla-0O-2VG" secondAttribute="leading" id="I3Q-U3-KvI"/>
+                <constraint firstItem="IWb-Nm-KzN" firstAttribute="trailing" secondItem="Zbd-jH-EKV" secondAttribute="trailing" id="srS-Jg-TVN"/>
             </constraints>
             <point key="canvasLocation" x="66" y="-659"/>
         </view>
     </objects>
     <resources>
-        <image name="cart" catalog="system" width="128" height="102"/>
+        <image name="Images/Logo-Green" width="1024" height="1024"/>
+        <namedColor name="Colors/green-100">
+            <color red="0.32549019607843138" green="0.69411764705882351" blue="0.45882352941176469" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemOrangeColor">
-            <color red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

@@ -22,10 +22,10 @@ final class SplashViewModel: ObservableObject {
     func getAccessToken() async {
     }
 
-    func validateTokens(completion: @escaping EmptyClosure) async {
+    func validateTokens(completion: @escaping Completion) async {
         completion()
     }
 
-    func runSplashLogic(completion: @escaping EmptyClosure) {
+    func runSplashLogic(completion: @escaping Completion) {
     }
 }

@@ -23,6 +23,12 @@ extension Constants.String {
     enum Title {
         static let app = "bazilariburada"
         static let productDescription = "Product Description"
+        static let routeToLogin = "If you already have an account"
+    }
+
+    enum Error {
+        static let defaultTitle = "Error"
+        static let userExistsMessage = "User already exists"
     }
 
     enum Build {

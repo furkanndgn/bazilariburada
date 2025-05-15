@@ -152,7 +152,11 @@ private extension NetworkManager {
 #if DEBUG
         logResponse(response, data: data)
 #endif
-        try validate(response: response, data: data)
+        do {
+            try validate(response: response, data: data)
+        } catch NetworkError.clientError(let response) {
+
+        }
         return try decode(data: data)
     }
 
@@ -171,8 +175,16 @@ private extension NetworkManager {
             throw NetworkError.invalidResponse
         }
 
+        if (200..<300).contains(httpResponse.statusCode) {
+            return
+        }
+
+        if (400..<500).contains(httpResponse.statusCode) {
+            return
+        }
+
         guard (200..<300).contains(httpResponse.statusCode) else {
-            let errorResponse = try? decoder.decode(APIResponse<APIError>.self, from: data)
+            let errorResponse = try? decoder.decode(APIResponse<EmptyResponse?>.self, from: data)
             throw NetworkError.serverError(
                 statusCode: httpResponse.statusCode,
                 message: errorResponse?.message ?? "Server error",
