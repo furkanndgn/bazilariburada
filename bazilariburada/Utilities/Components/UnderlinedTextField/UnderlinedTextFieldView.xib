@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UnderlinedTextFieldView" customModule="bazilariburada" customModuleProvider="target">
+            <connections>
+                <outlet property="contentView" destination="ZDc-ak-Yse" id="oZZ-D7-Cxg"/>
+                <outlet property="descriptionLabel" destination="APn-JS-muD" id="eN8-l8-jtW"/>
+                <outlet property="textField" destination="aOZ-3C-REh" id="iZ7-6H-LcX"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="ZDc-ak-Yse">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="123"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="APn-JS-muD" userLabel="DescriptionLabel">
+                    <rect key="frame" x="4" y="4" width="39.666666666666664" height="19.333333333333332"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <color key="textColor" name="Colors/black-50"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aOZ-3C-REh" userLabel="TextField">
+                    <rect key="frame" x="0.0" y="31.333333333333336" width="393" height="86.666666666666657"/>
+                    <color key="textColor" name="Colors/black-100"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gj0-oq-Z9I" userLabel="HairLineView">
+                    <rect key="frame" x="0.0" y="122" width="393" height="1"/>
+                    <color key="backgroundColor" name="Colors/black-20"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="ftl-2Y-rKX"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="ZNL-o9-aRz"/>
+            <constraints>
+                <constraint firstItem="aOZ-3C-REh" firstAttribute="trailing" secondItem="ZNL-o9-aRz" secondAttribute="trailing" id="3Lb-A5-ybN"/>
+                <constraint firstItem="APn-JS-muD" firstAttribute="leading" secondItem="ZDc-ak-Yse" secondAttribute="leading" constant="4" id="MTY-X9-SiI"/>
+                <constraint firstItem="Gj0-oq-Z9I" firstAttribute="top" secondItem="aOZ-3C-REh" secondAttribute="bottom" constant="4" id="MuS-9u-Z0u"/>
+                <constraint firstItem="aOZ-3C-REh" firstAttribute="leading" secondItem="ZNL-o9-aRz" secondAttribute="leading" id="PLp-6e-HoC"/>
+                <constraint firstItem="APn-JS-muD" firstAttribute="top" secondItem="ZDc-ak-Yse" secondAttribute="top" constant="4" id="VgF-Ps-off"/>
+                <constraint firstItem="Gj0-oq-Z9I" firstAttribute="leading" secondItem="ZDc-ak-Yse" secondAttribute="leading" id="iaU-RR-3Ii"/>
+                <constraint firstAttribute="bottom" secondItem="Gj0-oq-Z9I" secondAttribute="bottom" id="ojy-jj-A4h"/>
+                <constraint firstAttribute="trailing" secondItem="Gj0-oq-Z9I" secondAttribute="trailing" id="pFI-Td-xoe"/>
+                <constraint firstItem="aOZ-3C-REh" firstAttribute="top" secondItem="APn-JS-muD" secondAttribute="bottom" constant="8" id="rIy-MN-4ob"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-86.25954198473282" y="240.49295774647888"/>
+        </view>
+    </objects>
+    <resources>
+        <namedColor name="Colors/black-100">
+            <color red="0.094117647058823528" green="0.090196078431372548" blue="0.14509803921568629" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+        <namedColor name="Colors/black-20">
+            <color red="0.88627450980392153" green="0.88627450980392153" blue="0.88627450980392153" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+        <namedColor name="Colors/black-50">
+            <color red="0.48627450980392156" green="0.48627450980392156" blue="0.48627450980392156" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+    </resources>
+</document>

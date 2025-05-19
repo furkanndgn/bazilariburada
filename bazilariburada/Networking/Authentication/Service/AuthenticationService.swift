@@ -25,25 +25,32 @@ final class AuthenticationService: AuthenticationServiceProtocol, AccessTokenRef
                 body: registerRequest
             )
             statusCode = response.status
-        } catch let error {
+        } catch let error as NetworkError {
+            switch error {
+            case .clientError(let response):
+                statusCode = response.status
+            default:
+                print(error.localizedDescription)
+            }
+        } catch {
             print(error.localizedDescription)
         }
         return statusCode
     }
 
-    func activateAccount(email: String, activationCode: String) async -> String? {
+    func activateAccount(email: String, activationCode: String) async -> Int? {
         let activationRequest = ActivateAccountRequest(email: email, activationCode: activationCode)
-        var message: String?
+        var statusCode: Int?
         do {
             let response: APIResponse<EmptyResponse> = try await networkManager.performRequest(
                 endpoint: AuthenticationEndpoint.activateAccount,
                 body: activationRequest
             )
-            message = response.message
+            statusCode = response.status
         } catch let error {
             print(error.localizedDescription)
         }
-        return message
+        return statusCode
     }
 
     func loginUsing(username: String, password: String) async -> APIResponse<LoginResponse>? {

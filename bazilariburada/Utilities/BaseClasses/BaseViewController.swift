@@ -35,4 +35,12 @@ class BaseViewController: UIViewController {
     func commonInit() {
         // Override in subclasses for common setup
     }
+
+    func hideNavigationBar(animated: Bool = true) {
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+
+    func showNavigationBar(animated: Bool = true) {
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
 }

@@ -22,6 +22,7 @@ final class HomeRouter {
 }
 
 
+// MARK: - Setup Routing
 private extension HomeRouter {
 
     func createHomeScreen() -> UIViewController {
@@ -30,15 +31,15 @@ private extension HomeRouter {
         viewController.onRoute = {
             switch $0 {
             case .toProductDetail(let sender, let product):
-                self.createProductDetailScreen(sender, for: product)
+                self.pushProductDetailScreen(for: product, sender)
             }
         }
         return viewController
     }
 
-    func createProductDetailScreen(_ sender: UIViewController, for product: Product) {
-        let productDetailRouter = ProductDetailRouter()
-        let viewController = productDetailRouter.createProductDetailScreen(for: product)
+    func pushProductDetailScreen(for product: Product, _ sender: UIViewController) {
+        let router = ProductDetailRouter()
+        let viewController = router.createProductDetailScreen(for: product)
         sender.navigationController?.pushViewController(viewController, animated: true)
     }
 }

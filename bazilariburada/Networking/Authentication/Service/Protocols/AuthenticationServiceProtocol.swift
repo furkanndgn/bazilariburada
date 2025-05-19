@@ -11,7 +11,7 @@ protocol AuthenticationServiceProtocol {
 
     func registerUser(username: String, email: String, password: String) async -> Int?
 
-    func activateAccount(email: String, activationCode: String) async -> String?
+    func activateAccount(email: String, activationCode: String) async -> Int?
 
     func loginUsing(username: String, password: String) async -> APIResponse<LoginResponse>?
 

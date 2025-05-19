@@ -22,9 +22,11 @@ final class OnBoardingRouter {
 }
 
 
+// MARK: - Setup Routing
 private extension OnBoardingRouter {
     func pushRegistrationScreen(_ sender: UIViewController) {
-        let viewController = RegistrationViewController(RegistrationViewModel())
+        let router = SignUpRouter()
+        let viewController = router.createRegistrationScreen()
         sender.navigationController?.pushViewController(viewController, animated: true)
     }
 }

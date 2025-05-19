@@ -116,7 +116,7 @@ private extension NetworkManager {
         body: U? = nil,
         token: String? = nil,
         timeoutInterval: TimeInterval = 30
-    ) throws -> URLRequest {
+    ) throws(NetworkError) -> URLRequest {
         guard let url = APIURLBuilder.buildURL(for: endpoint) else {
             throw NetworkError.invalidURL
         }
@@ -154,13 +154,13 @@ private extension NetworkManager {
 #endif
         do {
             try validate(response: response, data: data)
-        } catch NetworkError.clientError(let response) {
-
+        } catch let error {
+            throw error
         }
         return try decode(data: data)
     }
 
-    func encode(body: Encodable) throws -> Data {
+    func encode(body: Encodable) throws(NetworkError) -> Data {
         do {
             return try encoder.encode(body)
         } catch let error as EncodingError {
@@ -170,20 +170,21 @@ private extension NetworkManager {
         }
     }
 
-    func validate(response: URLResponse, data: Data) throws {
+    func validate(response: URLResponse, data: Data) throws(NetworkError) {
         guard let httpResponse = response as? HTTPURLResponse else {
             throw NetworkError.invalidResponse
         }
 
-        if (200..<300).contains(httpResponse.statusCode) {
+        switch httpResponse.statusCode {
+        case 200..<300:
             return
-        }
-
-        if (400..<500).contains(httpResponse.statusCode) {
-            return
-        }
-
-        guard (200..<300).contains(httpResponse.statusCode) else {
+        case 400..<500:
+            if let errorResponse = try? decoder.decode(APIResponse<EmptyResponse?>.self, from: data) {
+                throw NetworkError.clientError(response: errorResponse)
+            } else {
+                throw NetworkError.invalidResponse
+            }
+        default:
             let errorResponse = try? decoder.decode(APIResponse<EmptyResponse?>.self, from: data)
             throw NetworkError.serverError(
                 statusCode: httpResponse.statusCode,
@@ -193,7 +194,7 @@ private extension NetworkManager {
         }
     }
 
-    func decode<T: Decodable>(data: Data) throws -> T {
+    func decode<T: Decodable>(data: Data) throws(NetworkError) -> T {
         do {
             return try decoder.decode(T.self, from: data)
         } catch let error as DecodingError {
@@ -209,7 +210,7 @@ private extension NetworkManager {
 private extension NetworkManager {
     func logRequest(_ request: URLRequest) {
         let headers = request.allHTTPHeaderFields?.map { "\($0.key): \($0.value)" }.joined(separator: "\n") ?? "None"
-        let body = request.httpBody.flatMap { String(data: $0, encoding: .utf8) } ?? "Empty"
+        var body = makePretty(request.httpBody)
 
         print("""
         🌐 [Network Request]
@@ -224,7 +225,7 @@ private extension NetworkManager {
 
     func logResponse(_ response: URLResponse, data: Data) {
         guard let httpResponse = response as? HTTPURLResponse else { return }
-        let body = String(data: data, encoding: .utf8) ?? "Unable to decode response body"
+        let body = makePretty(data)
 
         print("""
         📩 [Network Response]
@@ -234,5 +235,16 @@ private extension NetworkManager {
         Body:
         \(body)
         """)
+    }
+
+    func makePretty(_ data: Data?) -> String {
+        var string = ""
+        guard let data else { return string }
+        if let jsonObject = try? JSONSerialization.jsonObject(with: data),
+           let prettyData = try? JSONSerialization.data(withJSONObject: jsonObject, options: .prettyPrinted),
+           let prettyString = String(data: prettyData, encoding: .utf8) {
+            string = prettyString
+        }
+        return string
     }
 }
