@@ -29,6 +29,7 @@ class BaseViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupBackButton()
         commonInit()
     }
 
@@ -42,5 +43,10 @@ class BaseViewController: UIViewController {
 
     func showNavigationBar(animated: Bool = true) {
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+
+    private func setupBackButton() {
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        navigationController?.navigationBar.tintColor = .Colors.black100
     }
 }

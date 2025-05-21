@@ -1,5 +1,5 @@
 //
-//  Registration ViewController.swift
+//  SignUpViewController.swift
 //  bazilariburada
 //
 //  Created by Furkan Doğan on 13.05.2025.
@@ -20,10 +20,11 @@ final class SignUpViewController: BaseViewController, RouteEmitting {
     @IBOutlet weak var passwordWarningLabel: UILabel!
     @IBOutlet weak var dummyRegisterButton: UIButton!
 
-    var onRoute: ((Route) -> Void)?
 
     private let viewModel: SignUpViewModel
     private var cancellables = Set<AnyCancellable>()
+
+    var onRoute: ((Route) -> Void)?
 
     init(_ viewModel: SignUpViewModel) {
         self.viewModel = viewModel
@@ -37,7 +38,7 @@ final class SignUpViewController: BaseViewController, RouteEmitting {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
-        setupBindings()
+        addSubscribers()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -45,17 +46,7 @@ final class SignUpViewController: BaseViewController, RouteEmitting {
         hideNavigationBar(animated: animated)
     }
 
-}
-
-
-// MARK: - Setup Scene
-private extension SignUpViewController {
-    func setupView() {
-        setupLoginButton()
-        setupTextFields()
-    }
-
-    func setupBindings() {
+    private  func addSubscribers() {
         viewModel.$isRegisterEnabled
             .receive(on: DispatchQueue.main)
             .sink { [weak self] isEnabled in
@@ -63,7 +54,6 @@ private extension SignUpViewController {
                 self?.dummyRegisterButton.isHidden = isEnabled
             }
             .store(in: &cancellables)
-
         viewModel.$isEmailValid
             .receive(on: DispatchQueue.main)
             .sink { [weak self] isValid in
@@ -92,22 +82,23 @@ private extension SignUpViewController {
             }
             .store(in: &cancellables)
     }
+}
 
-    func setupLoginButton() {
-        let attributedString = NSAttributedString(
-            string: Constants.String.Title.routeToLogin,
-            attributes: [.underlineStyle: NSUnderlineStyle.single.rawValue]
-        )
-        routeToLoginButton.setAttributedTitle(attributedString, for: .normal)
+
+// MARK: - Setup UI
+private extension SignUpViewController {
+    func setupView() {
+        setupTextFields()
     }
+
 
     func setupTextFields() {
         emailTextField.textField.addTarget(self, action: #selector(emailChanged), for: .editingChanged)
-        emailTextField.configureView(.email, description: "Email", placeHolder: "Enter your email address")
+        emailTextField.configureView(according: .email)
         usernameTextField.textField.addTarget(self, action: #selector(usernameChanged), for: .editingChanged)
-        usernameTextField.configureView(.username, description: "Username", placeHolder: "Enter your username")
+        usernameTextField.configureView(according: .username)
         passwordTextField.textField.addTarget(self, action: #selector(passwordChanged), for: .editingChanged)
-        passwordTextField.configureView(.password, description: "Password", placeHolder: "Enter your password")
+        passwordTextField.configureView(according: .password)
     }
 }
 
@@ -115,15 +106,15 @@ private extension SignUpViewController {
 // MARK: - Activation functions
 private extension SignUpViewController {
 
-    @IBAction func usernameChanged(_ sender: UITextField) {
+    @objc func usernameChanged(_ sender: UITextField) {
         viewModel.username = sender.text ?? ""
     }
 
-    @IBAction func emailChanged(_ sender: UITextField) {
+    @objc func emailChanged(_ sender: UITextField) {
         viewModel.email = sender.text ?? ""
     }
 
-    @IBAction func passwordChanged(_ sender: UITextField) {
+    @objc func passwordChanged(_ sender: UITextField) {
         viewModel.password = sender.text ?? ""
     }
 
@@ -144,11 +135,7 @@ private extension SignUpViewController {
 
     @IBAction func registerButtonTapped(_ sender: UIButton) {
         viewModel
-            .register(
-                username: viewModel.username,
-                email: viewModel.email,
-                password: viewModel.password
-            ) { [weak self] statusCode in
+            .register() { [weak self] statusCode in
                 guard let self else { return }
                 if statusCode == 409 {
                     DispatchQueue.main.async {
@@ -157,7 +144,7 @@ private extension SignUpViewController {
                 } else if statusCode == 200 {
                     onRoute?(.toActivationScreen(self, viewModel.email))
                 }
-        }
+            }
     }
 
     @IBAction private func routeToLoginTapped(_ sender: Any) {

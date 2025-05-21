@@ -6,40 +6,41 @@
 //
 
 import Foundation
-
 enum Constants {
-    enum String {
-        static let empty = ""
-    }
-
     enum Keychain {
         static let serviceIdentifier = "com.bazilariburada.auth"
         static let accessAccount = "accessToken"
         static let refreshAccount = "refreshToken"
     }
-}
 
-extension Constants.String {
-    enum Title {
-        static let app = "bazilariburada"
-        static let productDescription = "Product Description"
-        static let routeToLogin = "If you already have an account"
+    enum Text {
+        enum Title {
+            static let mainApp = "bazilariburada"
+            static let productDescription = "Product Description"
+            static let email = "Email"
+            static let username = "Username"
+            static let password = "Password"
+        }
+
+        enum Placeholder {
+            static let email = "Enter your email address"
+            static let username = "Enter your username"
+            static let password = "Enter your password"
+        }
+
+        enum Error {
+            static let defaultTitle = "Error"
+            static let userExists = "User already exists"
+        }
     }
 
-    enum Error {
-        static let defaultTitle = "Error"
-        static let userExistsMessage = "User already exists"
-    }
-
-    enum Build {
-        case stock(stock: Int)
-
-        func string() -> String {
-            switch self {
-            case .stock(let stock):
-                return "\(stock) in stock"
-            }
+    enum Formatter {
+        static func stock(_ stock: Int) -> String {
+            return "\(stock) in stock"
+        }
+        static func activationMessage(_ email: String) -> String {
+            let maskedEmail = email.maskedEmail
+            return "Enter 6-digit code, sent to \(maskedEmail))"
         }
     }
 }
-

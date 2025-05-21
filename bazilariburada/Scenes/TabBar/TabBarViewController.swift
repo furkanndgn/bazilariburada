@@ -46,7 +46,7 @@ private extension TabBarViewController {
     }
 
     func createProfileScreen() -> UINavigationController{
-        let profileScreen = LoginViewController(viewModel: AuthenticationViewModel())
+        let profileScreen = LoginViewController(LoginViewModel())
         let navigationController = UINavigationController(rootViewController: profileScreen)
         navigationController.tabBarItem = UITabBarItem(title: "", image: UIImage(systemName: "person"), tag: 1)
         return navigationController

@@ -210,7 +210,7 @@ private extension NetworkManager {
 private extension NetworkManager {
     func logRequest(_ request: URLRequest) {
         let headers = request.allHTTPHeaderFields?.map { "\($0.key): \($0.value)" }.joined(separator: "\n") ?? "None"
-        var body = makePretty(request.httpBody)
+        let body = makePretty(request.httpBody)
 
         print("""
         🌐 [Network Request]

@@ -124,8 +124,17 @@
                         <constraint firstAttribute="width" constant="300" id="yi5-0I-O6W"/>
                     </constraints>
                     <state key="normal" title="Button"/>
-                    <buttonConfiguration key="configuration" style="plain" title="If you already have an account">
-                        <fontDescription key="titleFontDescription" type="system" weight="semibold" pointSize="14"/>
+                    <buttonConfiguration key="configuration" style="plain">
+                        <attributedString key="attributedTitle">
+                            <fragment content="If you already have an account">
+                                <attributes>
+                                    <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <font key="NSFont" size="14" name="SFProDisplay-Semibold"/>
+                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                    <integer key="NSUnderline" value="1"/>
+                                </attributes>
+                            </fragment>
+                        </attributedString>
                         <color key="baseForegroundColor" systemColor="labelColor"/>
                     </buttonConfiguration>
                     <connections>

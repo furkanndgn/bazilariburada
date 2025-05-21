@@ -14,10 +14,9 @@ final class SignUpViewModel: AuthenticationViewModel {
     @Published var email = ""
     @Published var password = ""
     @Published private(set) var isRegisterEnabled = false
-
-    @Published var isEmailValid = false
-    @Published var isUsernameValid = false
-    @Published var isPasswordValid = false
+    @Published private(set) var isEmailValid = false
+    @Published private(set) var isUsernameValid = false
+    @Published private(set) var isPasswordValid = false
 
     private var cancellables = Set<AnyCancellable>()
 
@@ -26,7 +25,7 @@ final class SignUpViewModel: AuthenticationViewModel {
         addSubscribers()
     }
 
-    func register(username: String, email: String, password: String, completion: @escaping StatusHandler) {
+    func register(completion: @escaping StatusHandler) {
         Task {
             let statusCode = await authenticationService.registerUser(
                 username: username,
@@ -50,26 +49,16 @@ private extension SignUpViewModel {
             .map { [weak self] in self?.validateEmail($0) ?? false }
             .assign(to: &$isEmailValid)
         $username
-            .map { [weak self] in self?.validateUsername($0) ?? false}
+            .map { CredentialValidator.validateUsername($0)}
             .assign(to: &$isUsernameValid)
         $password
-            .map { [weak self] in self?.validatePassword($0) ?? false }
+            .map { CredentialValidator.validatePassword($0) }
             .assign(to: &$isPasswordValid)
-    }
-
-    func validatePassword(_ password: String) -> Bool {
-        guard password.count >= 8 else { return false }
-        return true
-    }
-
-    func validateUsername(_ username: String) -> Bool {
-        guard username.count >= 3, username.count <= 20 else { return false }
-        return true
     }
 
     func validateEmail(_ email: String) -> Bool {
         do {
-            try EmailValidator.validateEmail(email)
+            try CredentialValidator.validateEmail(email)
         } catch {
             return false
         }

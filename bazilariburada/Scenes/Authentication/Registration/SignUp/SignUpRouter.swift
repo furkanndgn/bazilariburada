@@ -11,7 +11,8 @@ final class SignUpRouter {
     func createRegistrationScreen() -> BaseViewController {
         let viewModel = SignUpViewModel()
         let viewController = SignUpViewController(viewModel)
-        viewController.onRoute = {
+        viewController.onRoute = { [weak self] in
+            guard let self else { return }
             switch $0 {
             case .toLoginScreen(let sender):
                 self.pushLoginScreen(sender)
@@ -26,14 +27,15 @@ final class SignUpRouter {
 
 // MARK: - Setup Routing
 private extension SignUpRouter {
-
     func pushLoginScreen(_ sender: BaseViewController) {
-        let viewModel = LoginViewModel()
-        let viewController = LoginViewController(viewModel: viewModel)
+        let router = LoginRouter()
+        let viewController = router.createLoginScreen()
         sender.navigationController?.pushViewController(viewController, animated: true)
     }
 
     func pushActivationScreen(with email: String, _ sender: UIViewController) {
-
+        let router = ActivationRouter()
+        let viewController = router.createActivationScreenWith(email: email)
+        sender.navigationController?.pushViewController(viewController, animated: true)
     }
 }

@@ -11,7 +11,8 @@ final class OnBoardingRouter {
 
     func createOnboardingScreen() -> UIViewController {
         let viewController = OnboardingViewController()
-        viewController.onRoute = {
+        viewController.onRoute = { [weak self] in
+            guard let self else { return }
             switch $0 {
             case .toRegisterScene(let sender):
                 self.pushRegistrationScreen(sender)

@@ -14,8 +14,8 @@ class ErrorPopupViewController: UIViewController, NibLoadable {
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var container: UIView!
 
-    private var errorTitle = Constants.String.Error.defaultTitle
-    private var errorMessage = Constants.String.empty
+    private var errorTitle = Constants.Text.Error.defaultTitle
+    private var errorMessage = ""
 
     var onDismiss: Completion?
 

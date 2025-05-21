@@ -47,10 +47,10 @@ private extension ProductDetailViewController {
     func configureSubviews() {
         productNameLabel.text = "\(viewModel.product.brand) \(viewModel.product.name)"
         productQuantityView.productStock = viewModel.product.quantity
-        productStockLabel.text = Constants.String.Build.stock(stock: viewModel.product.quantity).string()
+        productStockLabel.text = Constants.Formatter.stock(viewModel.product.quantity)
         priceLabel.text = "$\(viewModel.product.price)"
         expandableView.configureView(
-            title: Constants.String.Title.productDescription,
+            title: Constants.Text.Title.productDescription,
             indicatorImage: SFSymbol.chevronRight.image(with: .Colors.black100),
             content: viewModel.product.description
         )

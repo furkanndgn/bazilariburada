@@ -23,10 +23,7 @@ class UnderlinedTextFieldView: UIView, NibLoadable {
         commonInit()
     }
 
-    func configureView(_ useCase: UseCase, description: String, placeHolder: String) {
-        descriptionLabel.text = description
-        textField.placeholder = placeHolder
-
+    func configureView(according useCase: UseCase) {
         switch useCase {
         case .email:
             configureToEmailSpec()
@@ -77,6 +74,8 @@ private extension UnderlinedTextFieldView {
     }
 
     func configureToEmailSpec() {
+        descriptionLabel.text = Constants.Text.Title.email
+        textField.placeholder = Constants.Text.Placeholder.email
         textField.textContentType = .emailAddress
         textField.keyboardType = .emailAddress
         textField.autocapitalizationType = .none
@@ -85,6 +84,8 @@ private extension UnderlinedTextFieldView {
     }
 
     func configureToUsernameSpec() {
+        descriptionLabel.text = Constants.Text.Title.username
+        textField.placeholder = Constants.Text.Placeholder.username
         textField.textContentType = .username
         textField.keyboardType = .default
         textField.autocapitalizationType = .none
@@ -93,6 +94,8 @@ private extension UnderlinedTextFieldView {
     }
 
     func configureToPasswordSpec() {
+        descriptionLabel.text = Constants.Text.Title.password
+        textField.placeholder = Constants.Text.Placeholder.password
         textField.textContentType = .password
         textField.keyboardType = .default
         textField.autocapitalizationType = .none

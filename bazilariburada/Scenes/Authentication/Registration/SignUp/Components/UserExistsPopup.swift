@@ -11,8 +11,8 @@ import Foundation
 class UserExistsPopup: ErrorPopupViewController {
     override func viewDidLoad() {
         configurePopup(
-            title: Constants.String.Error.defaultTitle,
-            message: Constants.String.Error.userExistsMessage
+            title: Constants.Text.Error.defaultTitle,
+            message: Constants.Text.Error.userExists
         )
         super.viewDidLoad()
     }

@@ -44,8 +44,8 @@ final class HomeViewController: UIViewController, RouteEmitting {
     private func setupView() {
         productTableView.dataSource = self
         productTableView.delegate = self
-        self.title = Constants.String.Title.app
-        self.navigationItem.backButtonTitle = Constants.String.empty
+        self.title = Constants.Text.Title.mainApp
+        self.navigationItem.backButtonTitle = ""
         let nib = ProductCell.getNib()
         productTableView.register(nib, forCellReuseIdentifier: ProductCell.identifier)
         addSubscribers()

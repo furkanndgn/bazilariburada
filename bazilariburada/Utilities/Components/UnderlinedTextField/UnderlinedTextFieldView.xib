@@ -27,8 +27,8 @@
                     <color key="textColor" name="Colors/black-50"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aOZ-3C-REh" userLabel="TextField">
-                    <rect key="frame" x="0.0" y="31.333333333333336" width="393" height="86.666666666666657"/>
+                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aOZ-3C-REh" userLabel="TextField">
+                    <rect key="frame" x="4" y="31.333333333333336" width="385" height="86.666666666666657"/>
                     <color key="textColor" name="Colors/black-100"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <textInputTraits key="textInputTraits"/>
@@ -43,10 +43,10 @@
             </subviews>
             <viewLayoutGuide key="safeArea" id="ZNL-o9-aRz"/>
             <constraints>
-                <constraint firstItem="aOZ-3C-REh" firstAttribute="trailing" secondItem="ZNL-o9-aRz" secondAttribute="trailing" id="3Lb-A5-ybN"/>
+                <constraint firstItem="aOZ-3C-REh" firstAttribute="trailing" secondItem="ZNL-o9-aRz" secondAttribute="trailing" constant="-4" id="3Lb-A5-ybN"/>
                 <constraint firstItem="APn-JS-muD" firstAttribute="leading" secondItem="ZDc-ak-Yse" secondAttribute="leading" constant="4" id="MTY-X9-SiI"/>
                 <constraint firstItem="Gj0-oq-Z9I" firstAttribute="top" secondItem="aOZ-3C-REh" secondAttribute="bottom" constant="4" id="MuS-9u-Z0u"/>
-                <constraint firstItem="aOZ-3C-REh" firstAttribute="leading" secondItem="ZNL-o9-aRz" secondAttribute="leading" id="PLp-6e-HoC"/>
+                <constraint firstItem="aOZ-3C-REh" firstAttribute="leading" secondItem="ZNL-o9-aRz" secondAttribute="leading" constant="4" id="PLp-6e-HoC"/>
                 <constraint firstItem="APn-JS-muD" firstAttribute="top" secondItem="ZDc-ak-Yse" secondAttribute="top" constant="4" id="VgF-Ps-off"/>
                 <constraint firstItem="Gj0-oq-Z9I" firstAttribute="leading" secondItem="ZDc-ak-Yse" secondAttribute="leading" id="iaU-RR-3Ii"/>
                 <constraint firstAttribute="bottom" secondItem="Gj0-oq-Z9I" secondAttribute="bottom" id="ojy-jj-A4h"/>

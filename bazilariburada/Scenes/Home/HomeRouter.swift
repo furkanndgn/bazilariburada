@@ -28,7 +28,8 @@ private extension HomeRouter {
     func createHomeScreen() -> UIViewController {
         let viewModel = HomeViewModel()
         let viewController = HomeViewController(viewModel)
-        viewController.onRoute = {
+        viewController.onRoute = { [weak self] in
+            guard let self else { return }
             switch $0 {
             case .toProductDetail(let sender, let product):
                 self.pushProductDetailScreen(for: product, sender)

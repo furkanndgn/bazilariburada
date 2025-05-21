@@ -4,7 +4,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -12,6 +11,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ActivationViewController" customModule="bazilariburada" customModuleProvider="target">
             <connections>
+                <outlet property="emailMessage" destination="2He-4C-PFJ" id="drv-K7-6mb"/>
+                <outlet property="resendButton" destination="Rle-Kn-xV2" id="Jky-uN-fkv"/>
+                <outlet property="textFieldView" destination="HBp-C3-BZR" id="xdg-tM-k6L"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -35,13 +37,13 @@
                     <blurEffect style="systemThinMaterial"/>
                 </visualEffectView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Verify your email to start" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zhd-d7-LBA">
-                    <rect key="frame" x="24" y="298" width="268.66666666666669" height="31.333333333333314"/>
+                    <rect key="frame" x="24" y="239" width="268.66666666666669" height="31.333333333333314"/>
                     <fontDescription key="fontDescription" type="system" pointSize="26"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SgW-3m-DJq">
-                    <rect key="frame" x="24" y="329.33333333333331" width="321.33333333333331" height="31.333333333333314"/>
+                    <rect key="frame" x="24" y="270.33333333333331" width="321.33333333333331" height="31.333333333333314"/>
                     <attributedString key="attributedText">
                         <fragment content="shopping with ">
                             <attributes>
@@ -59,52 +61,109 @@
                     </attributedString>
                     <nil key="highlightedColor"/>
                 </label>
-                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter 6 digit activation code" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mBd-B0-Zib" userLabel="ActivationTextField">
-                    <rect key="frame" x="24" y="384.66666666666669" width="345" height="34"/>
-                    <color key="backgroundColor" name="Colors/black-20"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                    <textInputTraits key="textInputTraits" keyboardType="numberPad" textContentType="one-time-code"/>
-                </textField>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qcl-EC-AsS" userLabel="ActivateButton">
-                    <rect key="frame" x="46.666666666666657" y="710" width="300" height="60"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="60" id="Zah-r6-UQu"/>
-                        <constraint firstAttribute="width" constant="300" id="pb3-Sy-zVi"/>
-                    </constraints>
-                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                    <state key="normal" title="Get Started"/>
-                    <buttonConfiguration key="configuration" style="filled" title="Activate">
-                        <backgroundConfiguration key="background" cornerRadius="12"/>
-                        <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <color key="baseBackgroundColor" name="Colors/green-100"/>
-                    </buttonConfiguration>
-                </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter the 6-digit activation code sent to example@email.com" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RMg-cF-QQG" userLabel="UsernameErrorLabel">
-                    <rect key="frame" x="24" y="426.66666666666669" width="345" height="13.333333333333314"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                    <color key="textColor" systemColor="systemRedColor"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter 6-digit code" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2He-4C-PFJ">
+                    <rect key="frame" x="24" y="325.66666666666669" width="345" height="20.333333333333314"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HBp-C3-BZR" customClass="OTPTextFieldView" customModule="bazilariburada" customModuleProvider="target">
+                    <rect key="frame" x="24" y="370" width="345" height="60"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="60" id="PBU-gO-73B"/>
+                    </constraints>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rle-Kn-xV2" userLabel="ResendButton">
+                    <rect key="frame" x="124.33333333333333" y="462" width="144.33333333333337" height="30.333333333333314"/>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="plain">
+                        <attributedString key="attributedTitle">
+                            <fragment content="Didn't">
+                                <attributes>
+                                    <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <font key="NSFont" size="14" name="SFProDisplay-Semibold"/>
+                                    <font key="NSOriginalFont" size="12" name="Symbol"/>
+                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                    <integer key="NSUnderline" value="1"/>
+                                </attributes>
+                            </fragment>
+                            <fragment content=" ">
+                                <attributes>
+                                    <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <font key="NSFont" size="14" name="SFProDisplay-Semibold"/>
+                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                    <integer key="NSUnderline" value="1"/>
+                                </attributes>
+                            </fragment>
+                            <fragment content="get">
+                                <attributes>
+                                    <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <font key="NSFont" size="14" name="SFProDisplay-Semibold"/>
+                                    <font key="NSOriginalFont" size="12" name="Symbol"/>
+                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                    <integer key="NSUnderline" value="1"/>
+                                </attributes>
+                            </fragment>
+                            <fragment content=" ">
+                                <attributes>
+                                    <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <font key="NSFont" size="14" name="SFProDisplay-Semibold"/>
+                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                    <integer key="NSUnderline" value="1"/>
+                                </attributes>
+                            </fragment>
+                            <fragment content="the">
+                                <attributes>
+                                    <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <font key="NSFont" size="14" name="SFProDisplay-Semibold"/>
+                                    <font key="NSOriginalFont" size="12" name="Symbol"/>
+                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                    <integer key="NSUnderline" value="1"/>
+                                </attributes>
+                            </fragment>
+                            <fragment content=" ">
+                                <attributes>
+                                    <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <font key="NSFont" size="14" name="SFProDisplay-Semibold"/>
+                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                    <integer key="NSUnderline" value="1"/>
+                                </attributes>
+                            </fragment>
+                            <fragment content="code">
+                                <attributes>
+                                    <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <font key="NSFont" size="14" name="SFProDisplay-Semibold"/>
+                                    <font key="NSOriginalFont" size="12" name="Symbol"/>
+                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                    <integer key="NSUnderline" value="1"/>
+                                </attributes>
+                            </fragment>
+                        </attributedString>
+                    </buttonConfiguration>
+                    <connections>
+                        <action selector="resendButtonTapped:" destination="-1" eventType="touchUpInside" id="eis-lJ-GaE"/>
+                    </connections>
+                </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="azG-3e-XRu" secondAttribute="bottom" id="0vO-bS-mRo"/>
-                <constraint firstItem="RMg-cF-QQG" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="6DC-4K-tOF"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="mBd-B0-Zib" secondAttribute="trailing" constant="24" id="AcJ-fq-MuN"/>
-                <constraint firstItem="mBd-B0-Zib" firstAttribute="top" secondItem="SgW-3m-DJq" secondAttribute="bottom" constant="24" id="BUl-rq-uzx"/>
-                <constraint firstItem="zhd-d7-LBA" firstAttribute="top" secondItem="g1s-hi-GWW" secondAttribute="bottom" constant="48" id="FP3-aN-wkB"/>
+                <constraint firstItem="2He-4C-PFJ" firstAttribute="top" secondItem="SgW-3m-DJq" secondAttribute="bottom" constant="24" id="5M2-aF-3AF"/>
+                <constraint firstItem="zhd-d7-LBA" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="180" id="FP3-aN-wkB"/>
+                <constraint firstItem="HBp-C3-BZR" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="Fef-nL-3Gg"/>
                 <constraint firstItem="g1s-hi-GWW" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="J0V-oQ-UiR"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="2He-4C-PFJ" secondAttribute="trailing" constant="24" id="KCK-NK-zmu"/>
                 <constraint firstItem="azG-3e-XRu" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="KR8-Kb-bpi"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="qcl-EC-AsS" secondAttribute="bottom" constant="48" id="LlL-qR-sJt"/>
+                <constraint firstItem="Rle-Kn-xV2" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="MyH-k1-LnS"/>
+                <constraint firstItem="Rle-Kn-xV2" firstAttribute="top" secondItem="HBp-C3-BZR" secondAttribute="bottom" constant="32" id="NjA-r5-MY0"/>
+                <constraint firstItem="HBp-C3-BZR" firstAttribute="top" secondItem="2He-4C-PFJ" secondAttribute="bottom" constant="24" id="TcM-dH-JRK"/>
                 <constraint firstItem="g1s-hi-GWW" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="YUN-d7-z6s"/>
-                <constraint firstItem="RMg-cF-QQG" firstAttribute="top" secondItem="mBd-B0-Zib" secondAttribute="bottom" constant="8" id="Ydp-om-zVh"/>
                 <constraint firstItem="azG-3e-XRu" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="ZyC-Sz-BVB"/>
-                <constraint firstItem="qcl-EC-AsS" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="bRg-9r-6LV"/>
-                <constraint firstItem="mBd-B0-Zib" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="dMQ-b1-ViA"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="HBp-C3-BZR" secondAttribute="trailing" constant="24" id="b9t-qW-iOp"/>
                 <constraint firstItem="SgW-3m-DJq" firstAttribute="top" secondItem="zhd-d7-LBA" secondAttribute="bottom" id="dd6-9Y-x9V"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="RMg-cF-QQG" secondAttribute="trailing" constant="24" id="eRP-Ve-TYx"/>
+                <constraint firstItem="2He-4C-PFJ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="hWt-6g-xRe"/>
                 <constraint firstItem="g1s-hi-GWW" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="idL-i2-JJy"/>
                 <constraint firstItem="azG-3e-XRu" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="lWR-mq-l7E"/>
                 <constraint firstItem="zhd-d7-LBA" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="tB5-b2-yyw"/>
@@ -115,17 +174,8 @@
     </objects>
     <resources>
         <image name="Images/FruitsBackground" width="6000" height="4000"/>
-        <namedColor name="Colors/black-20">
-            <color red="0.88627450980392153" green="0.88627450980392153" blue="0.88627450980392153" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-        </namedColor>
-        <namedColor name="Colors/green-100">
-            <color red="0.32549019607843138" green="0.69411764705882351" blue="0.45882352941176469" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
