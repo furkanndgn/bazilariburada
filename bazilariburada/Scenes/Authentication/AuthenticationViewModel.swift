@@ -18,10 +18,6 @@ class AuthenticationViewModel {
         self.authenticationService = authService
     }
 
-    func login(with username: String =  "furkido", password: String = "12345678") {
-    }
-
-
     func getResetPasswordCode(email: String) {
 
     }

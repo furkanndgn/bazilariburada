@@ -12,6 +12,12 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginViewController" customModule="bazilariburada" customModuleProvider="target">
             <connections>
+                <outlet property="dummyLoginButton" destination="OD5-MS-yjL" id="yV9-1S-DX2"/>
+                <outlet property="loginButton" destination="Nk7-Dv-ZGz" id="FV8-76-DIn"/>
+                <outlet property="passwordTextField" destination="Nki-Ca-xZL" id="kkL-Uh-B8r"/>
+                <outlet property="passwordWarningLabel" destination="l2O-c2-0Ef" id="qTm-10-KsN"/>
+                <outlet property="usernameTextField" destination="BcN-Fj-ub3" id="dtP-6k-PaE"/>
+                <outlet property="usernameWarningLabel" destination="dJ9-rI-NGr" id="2Xk-J0-VYA"/>
                 <outlet property="view" destination="DXl-3C-vU1" id="zME-4m-YcB"/>
             </connections>
         </placeholder>
@@ -35,30 +41,49 @@
                     <blurEffect style="systemThinMaterial"/>
                 </visualEffectView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welacome back to" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jOC-HK-UI9">
-                    <rect key="frame" x="24" y="298" width="206.33333333333334" height="32.333333333333314"/>
+                    <rect key="frame" x="24" y="298" width="206.33333333333334" height="31.333333333333314"/>
                     <fontDescription key="fontDescription" type="system" pointSize="26"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="bazilariburada" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2HG-DJ-lLP">
-                    <rect key="frame" x="24" y="330.33333333333331" width="158" height="32.333333333333314"/>
+                    <rect key="frame" x="24" y="329.33333333333331" width="158" height="31.333333333333314"/>
                     <fontDescription key="fontDescription" type="system" pointSize="26"/>
                     <color key="textColor" name="Colors/green-100"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="elG-SF-DRn" userLabel="EmailTextField">
-                    <rect key="frame" x="24" y="394.66666666666669" width="345" height="34"/>
-                    <color key="backgroundColor" name="Colors/black-20"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" enablesReturnKeyAutomatically="YES" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="email"/>
-                </textField>
-                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RMc-8y-XPw" userLabel="PasswordTextField">
-                    <rect key="frame" x="24" y="440.66666666666669" width="345" height="34"/>
-                    <color key="backgroundColor" name="Colors/black-20"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" secureTextEntry="YES" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="password"/>
-                </textField>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nk7-Dv-ZGz" userLabel="RegisterButton">
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="cj4-cz-EoK" userLabel="TextFieldStack">
+                    <rect key="frame" x="24" y="384.66666666666669" width="345" height="160.00000000000006"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BcN-Fj-ub3" userLabel="UsernameTextfield" customClass="UnderlinedTextFieldView" customModule="bazilariburada" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="345" height="80"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="80" id="iHZ-xA-2gS"/>
+                            </constraints>
+                        </view>
+                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username must be between 3 and 20 characters long" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dJ9-rI-NGr" userLabel="UsernameWarning">
+                            <rect key="frame" x="0.0" y="80" width="345" height="0.0"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <color key="textColor" name="Colors/orange-100"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nki-Ca-xZL" userLabel="PasswordTextfield" customClass="UnderlinedTextFieldView" customModule="bazilariburada" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="80" width="345" height="80"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="80" id="qVf-7d-U7A"/>
+                            </constraints>
+                        </view>
+                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password must be at least 8 characters long" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l2O-c2-0Ef" userLabel="PasswordWarning">
+                            <rect key="frame" x="0.0" y="159.99999999999994" width="345" height="0.0"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <color key="textColor" name="Colors/orange-100"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                </stackView>
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nk7-Dv-ZGz" userLabel="LoginButton">
                     <rect key="frame" x="46.666666666666657" y="710" width="300" height="60"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="300" id="Bvj-H9-JCl"/>
@@ -72,52 +97,72 @@
                         <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="baseBackgroundColor" name="Colors/green-100"/>
                     </buttonConfiguration>
+                    <connections>
+                        <action selector="loginTapped:" destination="-1" eventType="touchUpInside" id="ypO-cM-uTk"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OD5-MS-yjL" userLabel="DummyLoginButton">
+                    <rect key="frame" x="46.666666666666657" y="710" width="300" height="60"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="300" id="7dj-Om-hPO"/>
+                        <constraint firstAttribute="height" constant="60" id="hSl-zx-9jo"/>
+                    </constraints>
+                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                    <state key="normal" title="Get Started"/>
+                    <buttonConfiguration key="configuration" style="filled" title="Sign Up">
+                        <backgroundConfiguration key="background" cornerRadius="12"/>
+                        <color key="baseForegroundColor" systemColor="tertiaryLabelColor"/>
+                        <color key="baseBackgroundColor" systemColor="tertiarySystemFillColor"/>
+                    </buttonConfiguration>
+                    <connections>
+                        <action selector="dummyLoginTapped:" destination="-1" eventType="touchUpInside" id="lR2-Pp-db4"/>
+                    </connections>
                 </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="6iM-ls-njP"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="2HG-DJ-lLP" firstAttribute="leading" secondItem="jOC-HK-UI9" secondAttribute="leading" id="0zx-fr-BEr"/>
+                <constraint firstItem="OD5-MS-yjL" firstAttribute="trailing" secondItem="Nk7-Dv-ZGz" secondAttribute="trailing" id="1u0-Wq-rfy"/>
+                <constraint firstItem="OD5-MS-yjL" firstAttribute="leading" secondItem="Nk7-Dv-ZGz" secondAttribute="leading" id="5Fd-64-lDB"/>
                 <constraint firstItem="vom-sU-Zld" firstAttribute="leading" secondItem="6iM-ls-njP" secondAttribute="leading" id="7v1-GB-W9f"/>
+                <constraint firstItem="OD5-MS-yjL" firstAttribute="bottom" secondItem="Nk7-Dv-ZGz" secondAttribute="bottom" id="9ly-gd-NrO"/>
                 <constraint firstItem="jOC-HK-UI9" firstAttribute="top" secondItem="Oup-LG-Rbh" secondAttribute="bottom" constant="48" id="CL5-Ji-Yj3"/>
                 <constraint firstItem="6iM-ls-njP" firstAttribute="bottom" secondItem="Nk7-Dv-ZGz" secondAttribute="bottom" constant="48" id="CZR-Zu-re4"/>
                 <constraint firstItem="Nk7-Dv-ZGz" firstAttribute="centerX" secondItem="DXl-3C-vU1" secondAttribute="centerX" id="FWD-VY-BHi"/>
                 <constraint firstItem="vom-sU-Zld" firstAttribute="trailing" secondItem="6iM-ls-njP" secondAttribute="trailing" id="FXz-PD-pqp"/>
                 <constraint firstItem="jOC-HK-UI9" firstAttribute="leading" secondItem="6iM-ls-njP" secondAttribute="leading" constant="24" id="FvY-Mk-nyp"/>
                 <constraint firstAttribute="bottom" secondItem="vom-sU-Zld" secondAttribute="bottom" id="I3E-Bh-czU"/>
-                <constraint firstItem="elG-SF-DRn" firstAttribute="top" secondItem="2HG-DJ-lLP" secondAttribute="bottom" constant="32" id="LFo-qO-52R"/>
+                <constraint firstItem="6iM-ls-njP" firstAttribute="trailing" secondItem="cj4-cz-EoK" secondAttribute="trailing" constant="24" id="LXq-6f-tkx"/>
                 <constraint firstItem="2HG-DJ-lLP" firstAttribute="top" secondItem="jOC-HK-UI9" secondAttribute="bottom" id="M7W-3A-LYZ"/>
                 <constraint firstItem="6iM-ls-njP" firstAttribute="trailing" secondItem="Oup-LG-Rbh" secondAttribute="trailing" id="NW3-uB-QCJ"/>
+                <constraint firstItem="cj4-cz-EoK" firstAttribute="top" secondItem="2HG-DJ-lLP" secondAttribute="bottom" constant="24" id="Vt6-4m-2lR"/>
                 <constraint firstItem="Oup-LG-Rbh" firstAttribute="leading" secondItem="6iM-ls-njP" secondAttribute="leading" id="Ykv-tb-g1F"/>
+                <constraint firstItem="cj4-cz-EoK" firstAttribute="leading" secondItem="6iM-ls-njP" secondAttribute="leading" constant="24" id="asT-jG-xKf"/>
                 <constraint firstItem="Oup-LG-Rbh" firstAttribute="top" secondItem="DXl-3C-vU1" secondAttribute="top" id="dTh-bv-iwk"/>
                 <constraint firstItem="vom-sU-Zld" firstAttribute="top" secondItem="DXl-3C-vU1" secondAttribute="top" id="hnn-9C-qHR"/>
-                <constraint firstItem="RMc-8y-XPw" firstAttribute="top" secondItem="elG-SF-DRn" secondAttribute="bottom" constant="12" id="klf-6K-QiU"/>
-                <constraint firstItem="elG-SF-DRn" firstAttribute="leading" secondItem="6iM-ls-njP" secondAttribute="leading" constant="24" id="lY2-4a-AEm"/>
-                <constraint firstItem="RMc-8y-XPw" firstAttribute="leading" secondItem="elG-SF-DRn" secondAttribute="leading" id="r48-zc-wlf"/>
-                <constraint firstItem="6iM-ls-njP" firstAttribute="trailing" secondItem="elG-SF-DRn" secondAttribute="trailing" constant="24" id="sir-V1-0wW"/>
-                <constraint firstItem="RMc-8y-XPw" firstAttribute="trailing" secondItem="elG-SF-DRn" secondAttribute="trailing" id="yPs-jV-au0"/>
+                <constraint firstItem="OD5-MS-yjL" firstAttribute="top" secondItem="Nk7-Dv-ZGz" secondAttribute="top" id="wb6-NO-mO4"/>
             </constraints>
             <point key="canvasLocation" x="130.53435114503816" y="-658.45070422535218"/>
         </view>
-        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="HxE-nQ-ut1">
-            <rect key="frame" x="0.0" y="0.0" width="42" height="34"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-            <nil key="textColor"/>
-            <nil key="highlightedColor"/>
-            <point key="canvasLocation" x="-334.35114503816794" y="-716.19718309859161"/>
-        </label>
     </objects>
     <resources>
         <image name="Images/FruitsBackground" width="6000" height="4000"/>
-        <namedColor name="Colors/black-20">
-            <color red="0.88627450980392153" green="0.88627450980392153" blue="0.88627450980392153" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-        </namedColor>
         <namedColor name="Colors/green-100">
             <color red="0.32549019607843138" green="0.69411764705882351" blue="0.45882352941176469" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
+        <namedColor name="Colors/orange-100">
+            <color red="0.95294117647058818" green="0.37647058823529411" blue="0.24705882352941178" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="tertiaryLabelColor">
+            <color red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.29803921570000003" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="tertiarySystemFillColor">
+            <color red="0.46274509800000002" green="0.46274509800000002" blue="0.50196078430000002" alpha="0.12" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

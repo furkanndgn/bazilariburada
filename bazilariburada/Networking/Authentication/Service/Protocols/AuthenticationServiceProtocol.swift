@@ -13,7 +13,7 @@ protocol AuthenticationServiceProtocol {
 
     func activateAccount(email: String, activationCode: String) async -> Int?
 
-    func loginUsing(username: String, password: String) async -> APIResponse<LoginResponse>?
+    func loginUsing(username: String, password: String) async -> Int?
 
     func sendResetPasswordCode(to email: String) async -> String?
 

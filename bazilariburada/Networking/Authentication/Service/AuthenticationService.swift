@@ -53,15 +53,17 @@ final class AuthenticationService: AuthenticationServiceProtocol, AccessTokenRef
         return statusCode
     }
 
-    func loginUsing(username: String, password: String) async -> APIResponse<LoginResponse>? {
+    func loginUsing(username: String, password: String) async -> Int? {
         let loginRequest = LoginRequest(username: username, password: password)
+        var statusCode: Int?
         do {
-            return try await networkManager
+            let response: APIResponse<LoginResponse> = try await networkManager
                 .performRequest(endpoint: AuthenticationEndpoint.login, body: loginRequest)
+            statusCode = response.status
         } catch let error {
             print(error)
-            return nil
         }
+        return statusCode
     }
 
     func refreshAccessToken(with refreshToken: String) async -> APIResponse<RefreshAccessTokenResponse>? {
