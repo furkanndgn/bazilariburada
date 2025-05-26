@@ -22,6 +22,6 @@ final class OnboardingViewController: BaseViewController, RouteEmitting {
 
 extension OnboardingViewController {
     enum Route {
-        case toRegisterScene(UIViewController)
+        case toRegisterScene(BaseViewController)
     }
 }

@@ -8,6 +8,6 @@
 import Foundation
 
 struct AddItemToCartRequest: Encodable {
-    let productID: String
+    let productId: String
     let quantity: Int
 }

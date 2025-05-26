@@ -43,7 +43,8 @@ private extension ProductDetailViewController {
         handleRouting()
     }
 
-//    NOT: productNameLabel -> brandNameLabel + productNameLabel
+
+//    TODO: productNameLabel -> brandNameLabel + productNameLabel
     func configureSubviews() {
         productNameLabel.text = "\(viewModel.product.brand) \(viewModel.product.name)"
         productQuantityView.productStock = viewModel.product.quantity

@@ -13,7 +13,7 @@ final class HomeViewController: UIViewController, RouteEmitting {
     var onRoute: ((Route) -> Void)?
     let viewModel: HomeViewModel
 
-    @IBOutlet weak var productTableView: UITableView!
+    @IBOutlet weak var productCollectionView: UICollectionView!
 
     init(_ viewModel: HomeViewModel = HomeViewModel()) {
         self.viewModel = viewModel
@@ -34,20 +34,20 @@ final class HomeViewController: UIViewController, RouteEmitting {
     
     private func updateUI() {
         if let products = viewModel.allProducts, !products.isEmpty {
-            productTableView.reloadData()
-            productTableView.isHidden = false
+            productCollectionView.reloadData()
+            productCollectionView.isHidden = false
         } else {
-           productTableView.isHidden = true
+            productCollectionView.isHidden = true
         }
     }
 
     private func setupView() {
-        productTableView.dataSource = self
-        productTableView.delegate = self
+        productCollectionView.dataSource = self
+        productCollectionView.delegate = self
         self.title = Constants.Text.Title.mainApp
         self.navigationItem.backButtonTitle = ""
         let nib = ProductCell.getNib()
-        productTableView.register(nib, forCellReuseIdentifier: ProductCell.identifier)
+        productCollectionView.register(nib, forCellWithReuseIdentifier: ProductCell.identifier)
         addSubscribers()
     }
     
@@ -58,36 +58,49 @@ final class HomeViewController: UIViewController, RouteEmitting {
                 self?.updateUI()
             }
             .store(in: &viewModel.cancellables)
+
     }
 }
 
 
-extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+extension HomeViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel.productCount ?? 0
     }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: ProductCell.identifier,
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: ProductCell.identifier,
             for: indexPath
-        ) as? ProductCell
-        else {
-            return UITableViewCell()
+        ) as? ProductCell else {
+            return UICollectionViewCell()
         }
         let product = viewModel.product(by: indexPath.row)
         cell.configure(with: product)
+        cell.onTap = { [weak self] id in
+            cell.setLoading(true)
+            Task {
+                await self?.viewModel.addToCart(by: id)
+            }
+            self?.viewModel.onCartUpdate = {
+                cell.setLoading(false)
+            }
+        }
         return cell
     }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: true)
         let product = viewModel.product(by: indexPath.row)
         self.onRoute?(.toProductDetail(self, product))
     }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 75
+
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        sizeForItemAt indexPath: IndexPath
+    ) -> CGSize {
+        return CGSize(width: 172, height: 248)
     }
 }
 
