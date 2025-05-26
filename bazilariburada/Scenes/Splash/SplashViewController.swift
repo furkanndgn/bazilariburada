@@ -7,13 +7,15 @@
 
 import UIKit
 
-final class SplashViewController: UIViewController {
+final class SplashViewController: BaseViewController {
 
-    let viewModel: SplashViewModel
+    private let viewModel: SplashViewModel
+
+    var onComplete: ((Bool) -> Void)?
 
     init(viewModel: SplashViewModel = SplashViewModel()) {
         self.viewModel = viewModel
-        super.init(nibName: nil, bundle: nil)
+        super.init()
     }
 
     required init?(coder: NSCoder) {
@@ -22,54 +24,9 @@ final class SplashViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .red
         Task {
-            await MainActor.run {
-                self.transitionToAuthenticationFlow()
-            }
+            let isValid = await viewModel.validateTokens()
+            onComplete?(isValid)
         }
-    }
-}
-
-
-private extension SplashViewController {
-
-    func transitionToAppFlow() {
-        guard let scene = view.window?.windowScene else {
-            print("No active UIWindowScene found.")
-            return
-        }
-
-        if let window = scene.windows.first {
-            let transition = CATransition()
-            transition.type = .fade
-            transition.duration = 0.3
-            window.layer.add(transition, forKey: kCATransition)
-            let tabBar = createTabBar()
-            window.rootViewController = tabBar
-            window.makeKeyAndVisible()
-        }
-    }
-
-    func transitionToAuthenticationFlow() {
-        guard let scene = view.window?.windowScene else {
-            print("No active UIWindowScene found.")
-            return
-        }
-
-        if let window = scene.windows.first {
-            let transition = CATransition()
-            transition.type = .fade
-            transition.duration = 0.3
-            window.layer.add(transition, forKey: kCATransition)
-            let onboardingScreen = OnBoardingRouter().createOnboardingScreen()
-            let navigationController = UINavigationController(rootViewController: onboardingScreen)
-            window.rootViewController = navigationController
-            window.makeKeyAndVisible()
-        }
-    }
-
-    func createTabBar() -> UITabBarController {
-        TabBarViewController()
     }
 }

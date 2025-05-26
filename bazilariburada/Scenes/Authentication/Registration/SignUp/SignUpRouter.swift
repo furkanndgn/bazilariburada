@@ -7,7 +7,14 @@
 
 import UIKit
 
+@MainActor
 final class SignUpRouter {
+
+    var loginRouter: LoginRouter?
+    var activationViewController: ActivationViewController?
+
+    var onUserLoggedIn: Completion?
+
     func createRegistrationScreen() -> BaseViewController {
         let viewModel = SignUpViewModel()
         let viewController = SignUpViewController(viewModel)
@@ -28,14 +35,47 @@ final class SignUpRouter {
 // MARK: - Setup Routing
 private extension SignUpRouter {
     func pushLoginScreen(_ sender: BaseViewController) {
-        let router = LoginRouter()
-        let viewController = router.createLoginScreen()
-        sender.navigationController?.pushViewController(viewController, animated: true)
+        Task { @MainActor in
+            loginRouter = LoginRouter()
+            loginRouter?.onUserLoggedIn = { [weak self] in
+                self?.onUserLoggedIn?()
+            }
+            let viewController = loginRouter!.createLoginScreen()
+            sender.navigationController?.pushWithFade(viewController)
+        }
+    }
+
+    func pushLoginScreen(_ sender: BaseViewController, activationViewController: ActivationViewController) {
+        Task { @MainActor in
+            loginRouter = LoginRouter()
+            loginRouter?.onUserLoggedIn = { [weak self] in
+                self?.onUserLoggedIn?()
+            }
+            let viewController = loginRouter!.createLoginScreen()
+            sender.navigationController?.pushWithFade(viewController)
+            activationViewController.navigationController?.popViewController(animated: false)
+        }
     }
 
     func pushActivationScreen(with email: String, _ sender: UIViewController) {
-        let router = ActivationRouter()
-        let viewController = router.createActivationScreenWith(email: email)
-        sender.navigationController?.pushViewController(viewController, animated: true)
+        Task { @MainActor in
+            let viewModel = ActivationViewModel(email: email)
+            activationViewController = ActivationViewController(viewModel)
+            activationViewController!.onFinish = { [weak self] result in
+                DispatchQueue.main.async {
+                    switch result {
+                    case .success:
+                        self?.activationViewController?.navigationController?.popViewController(animated: false)
+                        self?.pushLoginScreen(
+                            sender as! BaseViewController,
+                            activationViewController: (self?.activationViewController)!
+                        )
+                    case .failure:
+                        self?.activationViewController?.navigationController?.popViewController(animated: true)
+                    }
+                }
+            }
+            sender.navigationController?.pushViewController(activationViewController!, animated: true)
+        }
     }
 }

@@ -24,9 +24,9 @@ actor AuthenticationManager {
     private init() { }
 
     func saveNewTokens(
-        accessToken: String,
+        _ accessToken: String,
         accessTokenExpiresAt: Date,
-        refreshToken: String,
+        _ refreshToken: String,
         refreshTokenExpiresAt: Date
     ) {
         let accessTokenInfo = TokenInfo(token: accessToken, expiresAt: accessTokenExpiresAt)

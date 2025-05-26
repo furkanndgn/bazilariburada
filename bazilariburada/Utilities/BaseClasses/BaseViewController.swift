@@ -33,6 +33,10 @@ class BaseViewController: UIViewController {
         commonInit()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+
     func commonInit() {
         // Override in subclasses for common setup
     }

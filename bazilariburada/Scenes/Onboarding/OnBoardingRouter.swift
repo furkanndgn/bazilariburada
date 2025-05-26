@@ -7,9 +7,13 @@
 
 import UIKit
 
+@MainActor
 final class OnBoardingRouter {
 
-    func createOnboardingScreen() -> UIViewController {
+    var router: SignUpRouter?
+    var onUserLoggedIn: Completion?
+
+    func createOnboardingScreen() -> BaseViewController {
         let viewController = OnboardingViewController()
         viewController.onRoute = { [weak self] in
             guard let self else { return }
@@ -25,9 +29,12 @@ final class OnBoardingRouter {
 
 // MARK: - Setup Routing
 private extension OnBoardingRouter {
-    func pushRegistrationScreen(_ sender: UIViewController) {
-        let router = SignUpRouter()
-        let viewController = router.createRegistrationScreen()
+    func pushRegistrationScreen(_ sender: BaseViewController) {
+        router = SignUpRouter()
+        router?.onUserLoggedIn = { [weak self] in
+            self?.onUserLoggedIn?()
+        }
+        let viewController = router!.createRegistrationScreen()
         sender.navigationController?.pushViewController(viewController, animated: true)
     }
 }

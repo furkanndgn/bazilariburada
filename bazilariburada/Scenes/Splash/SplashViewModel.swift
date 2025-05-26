@@ -12,20 +12,20 @@ final class SplashViewModel: ObservableObject {
     private let authenticationManager = AuthenticationManager.shared
     private let authService: AuthenticationService
 
-    var accessToken: String?
-
     init(authService: AuthenticationService = AuthenticationService()) {
         self.authService = authService
-        accessToken = nil
     }
 
-    func getAccessToken() async {
+    func validateTokens() async -> Bool {
+        guard let token = await authenticationManager.accessToken else {
+            return false
+        }
+        print(token)
+        return true
     }
+}
 
-    func validateTokens(completion: @escaping Completion) async {
-        completion()
-    }
 
-    func runSplashLogic(completion: @escaping Completion) {
-    }
+enum TokenValidation {
+    case valid, invalid
 }

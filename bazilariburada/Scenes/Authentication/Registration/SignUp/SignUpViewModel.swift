@@ -38,7 +38,7 @@ final class SignUpViewModel: AuthenticationViewModel {
 }
 
 
-// MARK: - Helpers
+// MARK: - Subscriptions
 private extension SignUpViewModel {
     func addSubscribers() {
         Publishers

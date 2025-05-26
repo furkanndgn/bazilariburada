@@ -7,6 +7,7 @@
 
 import UIKit
 
+@MainActor
 final class TabBarViewController: UITabBarController {
 
     let productDetailRouter: ProductDetailRouter
@@ -42,7 +43,7 @@ final class TabBarViewController: UITabBarController {
 private extension TabBarViewController {
 
     func createHomeScreen() -> UINavigationController {
-        homeRouter.initialScreen()
+            homeRouter.initialScreen()
     }
 
     func createProfileScreen() -> UINavigationController{

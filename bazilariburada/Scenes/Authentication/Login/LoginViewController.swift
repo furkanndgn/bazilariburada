@@ -39,7 +39,7 @@ final class LoginViewController: BaseViewController, RouteEmitting {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        showNavigationBar(animated: animated)
+        hideNavigationBar()
     }
 
     private func addSubscribers() {
@@ -99,6 +99,14 @@ final class LoginViewController: BaseViewController, RouteEmitting {
             }
         }
     }
+
+    @IBAction func registerTapped(_ sender: Any) {
+        onRoute?(.toRegisterScreen(self))
+    }
+    
+    @IBAction func forgotPasswordTapped(_ sender: Any) {
+        onRoute?(.toForgotPasswordScreen(self))
+    }
 }
 
 
@@ -122,5 +130,6 @@ extension LoginViewController {
     enum Route {
         case toMainScreen(BaseViewController)
         case toRegisterScreen(BaseViewController)
+        case toForgotPasswordScreen(BaseViewController)
     }
 }

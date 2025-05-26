@@ -31,6 +31,8 @@ class UnderlinedTextFieldView: UIView, NibLoadable {
             configureToPasswordSpec()
         case .username:
             configureToUsernameSpec()
+        case .securityCode:
+            configureToSecurityCodeSpec()
         }
     }
 
@@ -104,6 +106,13 @@ private extension UnderlinedTextFieldView {
         textField.returnKeyType = .done
     }
 
+    func configureToSecurityCodeSpec() {
+        descriptionLabel.text = Constants.Text.Title.securityCode
+        textField.placeholder = Constants.Text.Placeholder.securityCode
+        textField.textContentType = .oneTimeCode
+        textField.keyboardType = .numberPad
+    }
+
     func shake(_ views: UIView...) {
         let animation = CAKeyframeAnimation(keyPath: "transform.translation.x")
         animation.timingFunction = CAMediaTimingFunction(name: .linear)
@@ -118,5 +127,5 @@ private extension UnderlinedTextFieldView {
 
 // MARK: - Helper Enum
 enum UseCase {
-    case email, password, username
+    case email, password, username, securityCode
 }

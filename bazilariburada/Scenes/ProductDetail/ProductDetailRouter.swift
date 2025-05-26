@@ -12,8 +12,7 @@ final class ProductDetailRouter {
     func createProductDetailScreen(for product: Product) -> UIViewController {
         let viewModel = ProductDetailViewModel(product)
         let viewController = ProductDetailViewController(viewModel)
-        viewController.onRoute = { [weak self] in
-            guard let self else { return }
+        viewController.onRoute = { 
             switch $0 {
             case .toReviewScene(let sender):
                 self.pushReviewScreen(for: product, sender)

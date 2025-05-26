@@ -20,12 +20,14 @@ enum Constants {
             static let email = "Email"
             static let username = "Username"
             static let password = "Password"
+            static let securityCode = "Security Code"
         }
 
         enum Placeholder {
             static let email = "Enter your email address"
             static let username = "Enter your username"
             static let password = "Enter your password"
+            static let securityCode = "Enter code sent to your email"
         }
 
         enum Error {

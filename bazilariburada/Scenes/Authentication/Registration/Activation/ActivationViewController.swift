@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class ActivationViewController: BaseViewController, RouteEmitting {
+final class ActivationViewController: BaseViewController {
 
     private let viewModel: ActivationViewModel
 
@@ -15,7 +15,7 @@ final class ActivationViewController: BaseViewController, RouteEmitting {
     @IBOutlet weak var emailMessage: UILabel!
     @IBOutlet weak var resendButton: UIButton!
 
-    var onRoute: ((Route) -> Void)?
+    var onFinish: ((ActivationResult) -> Void)?
 
     init(_ viewModel: ActivationViewModel) {
         self.viewModel = viewModel
@@ -37,7 +37,7 @@ final class ActivationViewController: BaseViewController, RouteEmitting {
     }
 
     @IBAction func resendButtonTapped(_ sender: Any) {
-        onRoute?(.toRegisterScreen(self))
+        onFinish?(.failure)
     }
 }
 
@@ -50,9 +50,9 @@ private extension ActivationViewController {
             guard let self, let activationCode else { return }
             self.viewModel.activateAccount(activationCode, completion: { statusCode in
                 if statusCode == 200 {
-                    self.onRoute?(.toMainScreen(self))
+                    self.onFinish?(.success)
                 } else {
-// note: error popup
+                    // TODO: Error popup
                 }
             })
         }
@@ -78,10 +78,7 @@ extension ActivationViewController: UITextFieldDelegate {
 }
 
 
-// MARK: - Setup Routing
-extension ActivationViewController {
-    enum Route {
-        case toMainScreen(_ sender: BaseViewController)
-        case toRegisterScreen(_ sender: BaseViewController)
-    }
+enum ActivationResult {
+    case success
+    case failure
 }
