@@ -13,9 +13,9 @@ protocol AuthenticationServiceProtocol {
 
     func activateAccount(email: String, activationCode: String) async -> Int?
 
-    func loginUsing(username: String, password: String) async -> Int?
+    func loginUsing(username: String, password: String) async -> APIResponse<LoginResponse>?
 
-    func sendResetPasswordCode(to email: String) async -> String?
+    func sendResetPasswordCode(to email: String) async -> Int?
 
-    func resetPassword(resetPasswordCode: String, newPassword: String) async -> String?
+    func resetPassword(email: String, resetPasswordCode: String, newPassword: String) async -> Int?
 }

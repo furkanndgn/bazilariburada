@@ -10,20 +10,9 @@ import Combine
 
 class AuthenticationViewModel {
 
-    private let authManager = AuthenticationManager.shared
-
     internal let authenticationService: AuthenticationServiceProtocol
 
     init(authService: AuthenticationServiceProtocol = AuthenticationService()) {
         self.authenticationService = authService
     }
-
-    func getResetPasswordCode(email: String) {
-
-    }
-
-    func resetPassword(securityCode: String, newPassword: String) {
-
-    }
 }
-

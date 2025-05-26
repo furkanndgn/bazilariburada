@@ -1,5 +1,5 @@
 //
-//  MainScreenViewController.swift
+//  HomeViewModel.swift
 //  bazilariburada
 //
 //  Created by Furkan Doğan on 23.11.2024.
@@ -20,8 +20,6 @@ final class HomeViewModel: ObservableObject {
 
     @Published var allProducts: [Product]?
     @Published var productByID: Product?
-
-    var currentCart: Cart?
 
     var productCount: Int? {
         allProducts?.count
@@ -50,8 +48,12 @@ final class HomeViewModel: ObservableObject {
     func addToCart(by id: String) async {
         await cartService.addToCart(productID: id, quantity: 1, accessToken: accessToken)
     }
+}
 
-    private func addSubscribers() {
+
+// MARK: - Setup subscriptions
+private extension HomeViewModel {
+    func addSubscribers() {
         productService.allProductsPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] response in

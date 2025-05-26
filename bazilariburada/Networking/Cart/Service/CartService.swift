@@ -24,7 +24,7 @@ final class CartService: CartServiceProtocol {
     }
 
     func addToCart(productID: String, quantity: Int, accessToken: String) async {
-        let cartRequest = AddItemToCartRequest(productID: productID, quantity: quantity)
+        let cartRequest = AddItemToCartRequest(productId: productID, quantity: quantity)
         do {
             let response: APIResponse<Cart> = try await networkManager.performRequest(
                 endpoint: CartEndpoint.addProductToCart,

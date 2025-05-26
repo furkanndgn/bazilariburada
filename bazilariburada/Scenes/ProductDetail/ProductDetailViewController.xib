@@ -13,6 +13,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ProductDetailViewController" customModule="bazilariburada" customModuleProvider="target">
             <connections>
+                <outlet property="activityIndicator" destination="n4v-9R-FxT" id="F5c-Ya-5jc"/>
+                <outlet property="addButton" destination="orQ-79-Xbo" id="ih9-6E-gHd"/>
                 <outlet property="expandableView" destination="Tb6-RC-G4G" id="UIk-UH-942"/>
                 <outlet property="priceLabel" destination="7Xt-r8-UaX" id="v1Z-mG-xwF"/>
                 <outlet property="productNameLabel" destination="gZx-yj-dR2" id="YQ9-aN-ImX"/>
@@ -101,7 +103,7 @@
                                         <constraint firstAttribute="height" constant="40" id="tHa-p7-fIn"/>
                                     </constraints>
                                 </view>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="orQ-79-Xbo" userLabel="RegisterButton">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="orQ-79-Xbo" userLabel="AddButton">
                                     <rect key="frame" x="46.666666666666657" y="620" width="300" height="60"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="60" id="FVd-G1-6Gc"/>
@@ -110,15 +112,23 @@
                                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                     <state key="normal" title="Get Started"/>
-                                    <buttonConfiguration key="configuration" style="filled" title="Sign Up">
+                                    <buttonConfiguration key="configuration" style="filled" title="Add to cart">
                                         <backgroundConfiguration key="background" cornerRadius="12"/>
                                         <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="baseBackgroundColor" name="Colors/green-100"/>
                                     </buttonConfiguration>
+                                    <connections>
+                                        <action selector="addButtonTapped:" destination="-1" eventType="touchUpInside" id="cZt-7V-z4u"/>
+                                    </connections>
                                 </button>
+                                <activityIndicatorView hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="n4v-9R-FxT">
+                                    <rect key="frame" x="46.666666666666657" y="620" width="300" height="60"/>
+                                    <color key="backgroundColor" name="Colors/green-100"/>
+                                </activityIndicatorView>
                             </subviews>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             <constraints>
+                                <constraint firstItem="n4v-9R-FxT" firstAttribute="top" secondItem="orQ-79-Xbo" secondAttribute="top" id="1qa-1h-J7R"/>
                                 <constraint firstItem="rSK-sW-o55" firstAttribute="top" secondItem="f0C-yO-kLJ" secondAttribute="bottom" constant="18" id="4Wc-Bc-d8O"/>
                                 <constraint firstItem="6fq-Uq-eqg" firstAttribute="top" secondItem="9nD-cU-ngE" secondAttribute="bottom" constant="12" id="967-he-erq"/>
                                 <constraint firstAttribute="trailing" secondItem="6fq-Uq-eqg" secondAttribute="trailing" constant="24" id="9T3-aN-FkN"/>
@@ -129,6 +139,8 @@
                                 <constraint firstItem="Maf-G6-Seo" firstAttribute="top" secondItem="Dus-Eo-Tva" secondAttribute="bottom" constant="24" id="Eng-Av-JVw"/>
                                 <constraint firstAttribute="trailing" secondItem="f0C-yO-kLJ" secondAttribute="trailing" id="F59-jO-3g7"/>
                                 <constraint firstAttribute="trailing" secondItem="9nD-cU-ngE" secondAttribute="trailing" constant="24" id="Gm3-AW-kz4"/>
+                                <constraint firstItem="n4v-9R-FxT" firstAttribute="centerX" secondItem="orQ-79-Xbo" secondAttribute="centerX" id="HrQ-zB-GvM"/>
+                                <constraint firstItem="n4v-9R-FxT" firstAttribute="width" secondItem="orQ-79-Xbo" secondAttribute="width" id="MyV-BS-nBu"/>
                                 <constraint firstItem="Tb6-RC-G4G" firstAttribute="top" secondItem="Maf-G6-Seo" secondAttribute="bottom" constant="12" id="OE3-9l-zgt"/>
                                 <constraint firstAttribute="bottom" secondItem="orQ-79-Xbo" secondAttribute="bottom" id="Orh-Eg-5kO"/>
                                 <constraint firstAttribute="trailing" secondItem="rSK-sW-o55" secondAttribute="trailing" constant="18" id="PBX-gd-KbS"/>
@@ -145,6 +157,8 @@
                                 <constraint firstItem="Maf-G6-Seo" firstAttribute="leading" secondItem="REQ-JX-eqT" secondAttribute="leading" constant="24" id="kyU-Sx-hr7"/>
                                 <constraint firstItem="orQ-79-Xbo" firstAttribute="centerX" secondItem="REQ-JX-eqT" secondAttribute="centerX" id="s1E-Zn-l5P"/>
                                 <constraint firstItem="6fq-Uq-eqg" firstAttribute="leading" secondItem="REQ-JX-eqT" secondAttribute="leading" constant="24" id="tMB-fs-TCH"/>
+                                <constraint firstItem="n4v-9R-FxT" firstAttribute="height" secondItem="orQ-79-Xbo" secondAttribute="height" id="w9x-z8-28c"/>
+                                <constraint firstItem="n4v-9R-FxT" firstAttribute="bottom" secondItem="orQ-79-Xbo" secondAttribute="bottom" id="xJD-vn-93j"/>
                                 <constraint firstItem="f0C-yO-kLJ" firstAttribute="top" secondItem="REQ-JX-eqT" secondAttribute="top" id="xYo-70-bqO"/>
                                 <constraint firstItem="orQ-79-Xbo" firstAttribute="top" secondItem="6fq-Uq-eqg" secondAttribute="bottom" constant="48" id="zXY-Lg-cLa"/>
                             </constraints>

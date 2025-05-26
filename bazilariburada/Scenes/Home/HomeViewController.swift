@@ -31,7 +31,7 @@ final class HomeViewController: UIViewController, RouteEmitting {
             await viewModel.getProducts()
         }
     }
-    
+
     private func updateUI() {
         if let products = viewModel.allProducts, !products.isEmpty {
             productCollectionView.reloadData()
@@ -50,7 +50,7 @@ final class HomeViewController: UIViewController, RouteEmitting {
         productCollectionView.register(nib, forCellWithReuseIdentifier: ProductCell.identifier)
         addSubscribers()
     }
-    
+
     private func addSubscribers() {
         viewModel.$allProducts
             .receive(on: DispatchQueue.main)

@@ -8,6 +8,7 @@
 import Foundation
 
 extension String {
+///     Mask email for safety. Ex. a * * * * @gmail.com
     var maskedEmail: String {
         let parts = split(separator: "@")
         guard parts.count == 2 else { return self }
@@ -16,5 +17,11 @@ extension String {
         let firstChar = username.first.map { String($0) } ?? ""
         let mask = String(repeating: "*", count: max(0, username.count - 1))
         return "\(firstChar)\(mask)@\(domain)"
+    }
+
+    func isoDate() -> Date? {
+        let formatter = ISO8601DateFormatter()
+        formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        return formatter.date(from: self)
     }
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-actor AuthenticationManager {
+class AuthenticationManager {
 
     static let shared = AuthenticationManager()
 

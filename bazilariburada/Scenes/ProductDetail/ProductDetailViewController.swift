@@ -19,6 +19,8 @@ final class ProductDetailViewController: BaseViewController, RouteEmitting {
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var expandableView: ExpandableView!
     @IBOutlet weak var reviewsRoutingView: ReviewsRoutingView!
+    @IBOutlet weak var addButton: UIButton!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
     init(_ viewModel: ProductDetailViewModel) {
         self.viewModel = viewModel
@@ -33,8 +35,17 @@ final class ProductDetailViewController: BaseViewController, RouteEmitting {
         super.viewDidLoad()
         setupView()
     }
+
+    @IBAction func addButtonTapped(_ sender: Any) {
+        setLoading(true)
+        Task {
+            await viewModel.addToCart(quantity: productQuantityView.quantity)
+        }
+    }
 }
 
+
+// MARK: - Setup UI
 private extension ProductDetailViewController {
 
     func setupView() {
@@ -56,11 +67,27 @@ private extension ProductDetailViewController {
             content: viewModel.product.description
         )
         reviewsRoutingView.configureView(with: viewModel.product.averageRating)
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.layer.cornerRadius = 12
+        viewModel.onCartUpdate = { [weak self] in
+            self?.setLoading(false)
+        }
     }
 
     func handleRouting() {
         reviewsRoutingView.tapPerformed = {
             self.onRoute?(.toReviewScene(self))
+        }
+    }
+
+    func setLoading(_ loading: Bool) {
+        if loading {
+            addButton.isHidden = true
+            activityIndicator.startAnimating()
+            activityIndicator.isHidden = false
+        } else {
+            addButton.isHidden = false
+            activityIndicator.stopAnimating()
         }
     }
 }

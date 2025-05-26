@@ -53,17 +53,16 @@ final class AuthenticationService: AuthenticationServiceProtocol, AccessTokenRef
         return statusCode
     }
 
-    func loginUsing(username: String, password: String) async -> Int? {
+    func loginUsing(username: String, password: String) async -> APIResponse<LoginResponse>? {
         let loginRequest = LoginRequest(username: username, password: password)
-        var statusCode: Int?
+        var response: APIResponse<LoginResponse>?
         do {
-            let response: APIResponse<LoginResponse> = try await networkManager
+            response = try await networkManager
                 .performRequest(endpoint: AuthenticationEndpoint.login, body: loginRequest)
-            statusCode = response.status
         } catch let error {
             print(error)
         }
-        return statusCode
+        return response
     }
 
     func refreshAccessToken(with refreshToken: String) async -> APIResponse<RefreshAccessTokenResponse>? {
@@ -80,33 +79,33 @@ final class AuthenticationService: AuthenticationServiceProtocol, AccessTokenRef
         return nil
     }
 
-    func sendResetPasswordCode(to email: String) async -> String? {
+    func sendResetPasswordCode(to email: String) async -> Int? {
         let forgotPasswordRequest = ForgotPasswordRequest(email: email)
-        var message: String?
+        var statusCode: Int?
         do {
             let response: APIResponse<ForgetPasswordResponse> = try await networkManager.performRequest(
                 endpoint: AuthenticationEndpoint.forgotPassword,
                 body: forgotPasswordRequest
             )
-            message = response.data?.message
+            statusCode = response.status
         } catch let error {
             print(error.localizedDescription)
         }
-        return message
+        return statusCode
     }
 
-    func resetPassword(resetPasswordCode: String, newPassword: String) async -> String? {
-        let resetPasswordRequest = ResetPasswordRequest(resetPasswordCode: resetPasswordCode, newPassword: newPassword)
-        var message: String?
+    func resetPassword(email: String, resetPasswordCode: String, newPassword: String) async -> Int? {
+        let resetPasswordRequest = ResetPasswordRequest(email: email, resetPasswordCode: resetPasswordCode, newPassword: newPassword)
+        var statusCode: Int?
         do {
             let response: APIResponse<EmptyResponse> = try await networkManager.performRequest(
                 endpoint: AuthenticationEndpoint.resetPassword,
                 body: resetPasswordRequest
             )
-            message = response.message
+            statusCode = response.status
         } catch let error {
             print(error.localizedDescription)
         }
-        return message
+        return statusCode
     }
 }

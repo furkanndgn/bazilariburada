@@ -19,7 +19,7 @@ final class LoginRouter {
         viewController.onRoute = { [weak self] in
             guard let self else { return }
             switch $0 {
-            case .toMainScreen(let sender):
+            case .toMainScreen(_):
                 self.onUserLoggedIn?()
             case .toRegisterScreen(let sender):
                 self.popToRegisterScreen(sender)

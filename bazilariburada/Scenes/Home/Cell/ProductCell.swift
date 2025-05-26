@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ProductCell: BaseCollectionViewCell, NibLoadable {
+final class ProductCell: BaseCollectionViewCell, NibLoadable {
 
     var product: Product?
 

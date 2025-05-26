@@ -13,6 +13,10 @@ final class ProductQuantityView: UIView {
     private var stack: ProductQuantityStack?
     var productStock = 1
 
+    var quantity: Int {
+        stack?.quantity ?? 0
+    }
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
