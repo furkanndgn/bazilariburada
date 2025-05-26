@@ -16,6 +16,8 @@ final class LoginViewModel: AuthenticationViewModel {
     @Published private(set) var isUsernameValid = false
     @Published private(set) var isPasswordValid = false
 
+    private let authenticationManager = AuthenticationManager.shared
+
     private var cancellables = Set<AnyCancellable>()
 
     init() {
@@ -23,10 +25,22 @@ final class LoginViewModel: AuthenticationViewModel {
         addSubscribers()
     }
 
+
     func login(completion: @escaping StatusHandler) {
         Task {
-            let statusCode = await authenticationService.loginUsing(username: username, password: password)
-            completion(statusCode)
+            let response = await authenticationService.loginUsing(username: username, password: password)
+            if response?.status == 200, let data = response?.data, let date = response?.timestamp.isoDate() {
+                let accessTokenExpiresAt = date.addingTimeInterval(86400)
+                let refreshTokenExpiresAt = date.addingTimeInterval(604800)
+                authenticationManager
+                    .saveNewTokens(
+                        data.accessToken,
+                        accessTokenExpiresAt: accessTokenExpiresAt,
+                        data.refreshToken,
+                        refreshTokenExpiresAt: refreshTokenExpiresAt
+                    )
+            }
+            completion(response?.status)
         }
     }
 }

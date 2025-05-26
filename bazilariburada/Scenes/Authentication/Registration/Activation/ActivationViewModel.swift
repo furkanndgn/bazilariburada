@@ -13,6 +13,7 @@ final class ActivationViewModel: AuthenticationViewModel {
 
     init(email: String) {
         self.email = email
+        super.init()
     }
 
     func activateAccount(_ activationCode: String, completion: @escaping StatusHandler) {
