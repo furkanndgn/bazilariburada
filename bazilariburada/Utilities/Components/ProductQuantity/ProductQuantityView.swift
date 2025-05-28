@@ -26,6 +26,10 @@ final class ProductQuantityView: UIView {
         super.init(coder: coder)
         setupView()
     }
+
+    func setQuantity(_ quantity: Int) {
+        stack?.quantity = quantity
+    }
 }
 
 private extension ProductQuantityView {

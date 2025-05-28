@@ -9,7 +9,8 @@ import Foundation
 
 struct Product: Decodable {
     let id, name, description, imageURL, category, brand, weight: String
-    let price, averageRating: Double
+    let price: Double
+    let averageRating: Double?
     let quantity: Int
     let reviews: [Review]
     

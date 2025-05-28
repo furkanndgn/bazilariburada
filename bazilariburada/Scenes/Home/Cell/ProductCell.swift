@@ -28,9 +28,9 @@ final class ProductCell: BaseCollectionViewCell, NibLoadable {
         activityIndicator.layer.cornerRadius = 12
         self.product = product
         nameLabel.text = "\(product.brand) \(product.name)"
-        priceLabel.text = product.price.formatted(.currency(code: "USD"))
+        priceLabel.text = product.price.asCurrency(locale: Locale(identifier: "en_US"))
 //        productImageView.image = UIImage(systemName: "bag.fill")
-        ratingLabel.text = String(format: "%.1f", product.averageRating)
+        ratingLabel.text = String(format: "%.1f", product.averageRating ?? 0)
     }
 
     func setLoading(_ loading: Bool) {

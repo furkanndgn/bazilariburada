@@ -42,9 +42,9 @@ private extension ProductReviewsViewController {
         let nib = ProductReviewCell.getNib()
         tableView.register(nib, forCellReuseIdentifier: ProductReviewCell.identifier)
         viewModel.getProductReviews()
-        let averageRatingString = String(format: "%.1f", viewModel.product.averageRating)
+        let averageRatingString = String(format: "%.1f", viewModel.product.averageRating ?? 0)
         ratingLabel.text = "Rating: \(averageRatingString)/5"
-        starRatingView.configureView(with: viewModel.product.averageRating)
+        starRatingView.configureView(with: viewModel.product.averageRating ?? 0)
         updateUI()
     }
 

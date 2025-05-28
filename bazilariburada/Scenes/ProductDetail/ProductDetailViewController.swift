@@ -71,17 +71,18 @@ private extension ProductDetailViewController {
 
 
 //    TODO: productNameLabel -> brandNameLabel + productNameLabel
+    // TODO: Implement image
     func configureSubviews() {
         productNameLabel.text = "\(viewModel.product.brand) \(viewModel.product.name)"
         productQuantityView.productStock = viewModel.product.quantity
         productStockLabel.text = Constants.Formatter.stock(viewModel.product.quantity)
-        priceLabel.text = "$\(viewModel.product.price)"
+        priceLabel.text = viewModel.product.price.asCurrency(locale: Locale(identifier: "en_US"))
         expandableView.configureView(
             title: Constants.Text.Title.productDescription,
             indicatorImage: SFSymbol.chevronRight.image(with: .Colors.black100),
             content: viewModel.product.description
         )
-        reviewsRoutingView.configureView(with: viewModel.product.averageRating)
+        reviewsRoutingView.configureView(with: viewModel.product.averageRating ?? 0)
         activityIndicator.hidesWhenStopped = true
         activityIndicator.layer.cornerRadius = 12
         viewModel.onCartUpdate = { [weak self] in
