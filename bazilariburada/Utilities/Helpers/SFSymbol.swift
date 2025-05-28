@@ -12,6 +12,8 @@ enum SFSymbol: String {
     case halfStarFill = "star.leadinghalf.filled"
     case star = "star"
     case chevronRight = "chevron.right"
+    case heart = "heart"
+    case heartFill = "heart.fill"
 
     func image(with tintColor: UIColor) -> UIImage? {
         UIImage(systemName: self.rawValue)?.withTintColor(tintColor, renderingMode: .alwaysOriginal)

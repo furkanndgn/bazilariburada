@@ -23,7 +23,7 @@ enum WishlistEndpoint: APIEndpointProtocol {
         case .getWishlist:
             return ("/wishlist", .GET)
         case .addProductToWishlist:
-            return ("/wishlist", .PATCH)
+            return ("/wishlist", .POST)
         case .removeProductFromWishlist(let productID):
             return ("/wishlist/\(productID)", .DELETE)
         case .clearUserWishlist:

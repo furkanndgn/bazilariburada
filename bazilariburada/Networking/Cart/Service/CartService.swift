@@ -23,6 +23,18 @@ final class CartService: CartServiceProtocol {
         currentCartSubject.eraseToAnyPublisher()
     }
 
+    func getUserCart(accessToken: String) async {
+        do {
+            let response: APIResponse<Cart> = try await networkManager.performRequest(
+                endpoint: CartEndpoint.getUserCart,
+                token: accessToken
+            )
+            currentCartSubject.send(response)
+        } catch let error {
+            print(error)
+        }
+    }
+
     func addToCart(productID: String, quantity: Int, accessToken: String) async {
         let cartRequest = AddItemToCartRequest(productId: productID, quantity: quantity)
         do {

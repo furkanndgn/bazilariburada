@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 final class ProductDetailViewController: BaseViewController, RouteEmitting {
 
@@ -21,6 +22,9 @@ final class ProductDetailViewController: BaseViewController, RouteEmitting {
     @IBOutlet weak var reviewsRoutingView: ReviewsRoutingView!
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var favoriteButton: UIButton!
+
+    var cancellables = Set<AnyCancellable>()
 
     init(_ viewModel: ProductDetailViewModel) {
         self.viewModel = viewModel
@@ -34,12 +38,23 @@ final class ProductDetailViewController: BaseViewController, RouteEmitting {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+        addSubscribers()
     }
 
     @IBAction func addButtonTapped(_ sender: Any) {
         setLoading(true)
         Task {
             await viewModel.addToCart(quantity: productQuantityView.quantity)
+        }
+    }
+
+    @IBAction func favoriteButtonTapped(_ sender: Any) {
+        Task {
+            if viewModel.isInWishlist {
+                await viewModel.removeFromWishlist()
+            } else {
+                await viewModel.addToWishlist()
+            }
         }
     }
 }
@@ -90,8 +105,35 @@ private extension ProductDetailViewController {
             activityIndicator.stopAnimating()
         }
     }
+
+    func setFavorited(_ favorited: Bool) {
+        if favorited {
+            UIView.animate(withDuration: 0.3) { [weak self] in
+                self?.favoriteButton.setImage(SFSymbol.heartFill.image(with: .systemRed), for: .normal)
+            }
+        } else {
+            UIView.animate(withDuration: 0.3) { [weak self] in
+                self?.favoriteButton.setImage(SFSymbol.heart.image(with: .systemGray), for: .normal)
+            }
+        }
+    }
 }
 
+
+// MARK: - Setup Subscriptions
+private extension ProductDetailViewController {
+    func addSubscribers() {
+        viewModel.$isInWishlist
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] isInWishlist in
+                self?.setFavorited(isInWishlist)
+            }
+            .store(in: &cancellables)
+    }
+}
+
+
+// MARK: - Handle Routing
 extension ProductDetailViewController {
     enum Route {
         case toReviewScene(UIViewController)

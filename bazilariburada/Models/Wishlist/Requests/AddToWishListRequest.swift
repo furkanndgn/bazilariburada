@@ -8,5 +8,5 @@
 import Foundation
 
 struct AddToWishListRequest: Encodable {
-    let productID: String
+    let productId: String
 }

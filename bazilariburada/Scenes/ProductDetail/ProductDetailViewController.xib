@@ -16,6 +16,7 @@
                 <outlet property="activityIndicator" destination="n4v-9R-FxT" id="F5c-Ya-5jc"/>
                 <outlet property="addButton" destination="orQ-79-Xbo" id="ih9-6E-gHd"/>
                 <outlet property="expandableView" destination="Tb6-RC-G4G" id="UIk-UH-942"/>
+                <outlet property="favoriteButton" destination="rSK-sW-o55" id="Sg0-tg-Pmh"/>
                 <outlet property="priceLabel" destination="7Xt-r8-UaX" id="v1Z-mG-xwF"/>
                 <outlet property="productNameLabel" destination="gZx-yj-dR2" id="YQ9-aN-ImX"/>
                 <outlet property="productQuantityView" destination="Dus-Eo-Tva" id="RmA-qc-ToG"/>
@@ -41,8 +42,8 @@
                                         <constraint firstAttribute="height" constant="300" id="DQB-rf-u7A"/>
                                     </constraints>
                                 </imageView>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Product Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gZx-yj-dR2" userLabel="ProductNameLabel">
-                                    <rect key="frame" x="18" y="318" width="148" height="28.666666666666686"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Product Name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gZx-yj-dR2" userLabel="ProductNameLabel">
+                                    <rect key="frame" x="18" y="318" width="305" height="28.666666666666686"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
@@ -54,12 +55,19 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rSK-sW-o55" userLabel="FavoriteButton">
-                                    <rect key="frame" x="324.33333333333331" y="318" width="50.666666666666686" height="34.333333333333314"/>
+                                    <rect key="frame" x="335" y="318" width="40" height="40"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="40" id="T2l-Ow-LPo"/>
+                                        <constraint firstAttribute="width" constant="40" id="ZES-ag-uFF"/>
+                                    </constraints>
                                     <state key="normal" title="Button"/>
                                     <buttonConfiguration key="configuration" style="plain">
                                         <imageReference key="image" image="heart" catalog="system" symbolScale="large"/>
                                         <color key="baseForegroundColor" name="Colors/black-50"/>
                                     </buttonConfiguration>
+                                    <connections>
+                                        <action selector="favoriteButtonTapped:" destination="-1" eventType="touchUpInside" id="shA-U7-9C6"/>
+                                    </connections>
                                 </button>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dus-Eo-Tva" customClass="ProductQuantityView" customModule="bazilariburada" customModuleProvider="target">
                                     <rect key="frame" x="18" y="386" width="120" height="44"/>
@@ -142,6 +150,7 @@
                                 <constraint firstItem="n4v-9R-FxT" firstAttribute="centerX" secondItem="orQ-79-Xbo" secondAttribute="centerX" id="HrQ-zB-GvM"/>
                                 <constraint firstItem="n4v-9R-FxT" firstAttribute="width" secondItem="orQ-79-Xbo" secondAttribute="width" id="MyV-BS-nBu"/>
                                 <constraint firstItem="Tb6-RC-G4G" firstAttribute="top" secondItem="Maf-G6-Seo" secondAttribute="bottom" constant="12" id="OE3-9l-zgt"/>
+                                <constraint firstItem="rSK-sW-o55" firstAttribute="leading" secondItem="gZx-yj-dR2" secondAttribute="trailing" constant="12" id="OFd-aq-PTX"/>
                                 <constraint firstAttribute="bottom" secondItem="orQ-79-Xbo" secondAttribute="bottom" id="Orh-Eg-5kO"/>
                                 <constraint firstAttribute="trailing" secondItem="rSK-sW-o55" secondAttribute="trailing" constant="18" id="PBX-gd-KbS"/>
                                 <constraint firstItem="Djt-9v-dDg" firstAttribute="leading" secondItem="REQ-JX-eqT" secondAttribute="leading" constant="18" id="Su3-rX-1E8"/>

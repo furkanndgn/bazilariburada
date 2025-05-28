@@ -13,9 +13,9 @@ final class WishlistService: WishlistServiceProtocol {
 
     private let networkManager: NetworkManagerProtocol
 
-    private let wishlistSubject = PassthroughSubject<[WishlistItem]?, Never>()
+    private let wishlistSubject = PassthroughSubject<Wishlist?, Never>()
 
-    var wishlistPublisher: AnyPublisher<[WishlistItem]?, Never> {
+    var wishlistPublisher: AnyPublisher<Wishlist?, Never> {
         wishlistSubject.eraseToAnyPublisher()
     }
 
@@ -25,7 +25,7 @@ final class WishlistService: WishlistServiceProtocol {
 
     func getUserWishlist(with accessToken: String) async {
         do {
-            let response: APIResponse<[WishlistItem]> = try await networkManager.performRequest(
+            let response: APIResponse<Wishlist> = try await networkManager.performRequest(
                 endpoint: WishlistEndpoint.getWishlist,
                 token: accessToken
             )
@@ -35,10 +35,10 @@ final class WishlistService: WishlistServiceProtocol {
         }
     }
 
-    func addToWishlist(productID: String, with accessToken: String) async {
-        let addWishlistRequest = AddToWishListRequest(productID: productID)
+    func addItemToWishlist(_ productID: String, with accessToken: String) async {
+        let addWishlistRequest = AddToWishListRequest(productId: productID)
         do {
-            let response: APIResponse<[WishlistItem]> = try await networkManager.performRequest(
+            let response: APIResponse<Wishlist> = try await networkManager.performRequest(
                 endpoint: WishlistEndpoint.addProductToWishlist,
                 token: accessToken,
                 body: addWishlistRequest
@@ -51,7 +51,7 @@ final class WishlistService: WishlistServiceProtocol {
 
     func removeFromWishlist(productID: String, with accessToken: String) async {
         do {
-            let response: APIResponse<[WishlistItem]> = try await networkManager.performRequest(
+            let response: APIResponse<Wishlist> = try await networkManager.performRequest(
                 endpoint: WishlistEndpoint.removeProductFromWishlist(productID: productID),
                 token: accessToken
             )
@@ -63,7 +63,7 @@ final class WishlistService: WishlistServiceProtocol {
 
     func clearWishlist(with accessToken: String) async {
         do {
-            let response: APIResponse<[WishlistItem]> = try await networkManager.performRequest(
+            let response: APIResponse<Wishlist> = try await networkManager.performRequest(
                 endpoint: WishlistEndpoint.clearUserWishlist,
                 token: accessToken
             )

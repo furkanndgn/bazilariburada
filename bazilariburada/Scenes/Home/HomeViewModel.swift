@@ -14,9 +14,7 @@ final class HomeViewModel: ObservableObject {
     private let cartService: CartServiceProtocol
     var cancellables = Set<AnyCancellable>()
 
-    private var accessToken: String {
-        AuthenticationManager.shared.accessToken ?? ""
-    }
+    private var accessToken = ""
 
     @Published var allProducts: [Product]?
     @Published var productByID: Product?
@@ -46,6 +44,7 @@ final class HomeViewModel: ObservableObject {
     }
 
     func addToCart(by id: String) async {
+        accessToken = await AuthenticationManager.shared.accessToken ?? ""
         await cartService.addToCart(productID: id, quantity: 1, accessToken: accessToken)
     }
 }

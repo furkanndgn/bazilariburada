@@ -89,6 +89,7 @@ extension NetworkManager {
     ) async throws -> APIResponse<T> {
         try await performRequest(
             endpoint: endpoint,
+            token: token,
             body: Optional<EmptyRequest>.none,
             timeoutInterval: timeoutInterval
         )
@@ -101,6 +102,7 @@ extension NetworkManager {
     ) async throws -> APIResponse<T> {
         try await performRequestWithRetry(
             endpoint: endpoint,
+            token: token,
             body: Optional<EmptyRequest>.none,
             maxRetries: maxRetries,
             initialDelay: initialDelay

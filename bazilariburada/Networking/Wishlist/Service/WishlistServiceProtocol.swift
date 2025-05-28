@@ -10,10 +10,10 @@ import Combine
 
 protocol WishlistServiceProtocol {
 
-    var wishlistPublisher: AnyPublisher<[WishlistItem]?, Never> { get }
+    var wishlistPublisher: AnyPublisher<Wishlist?, Never> { get }
 
     func getUserWishlist(with accessToken: String) async
-    func addToWishlist(productID: String, with accessToken: String) async
+    func addItemToWishlist(_ productID: String, with accessToken: String) async
     func removeFromWishlist(productID: String, with accessToken: String) async
     func clearWishlist(with accessToken: String) async
 }
