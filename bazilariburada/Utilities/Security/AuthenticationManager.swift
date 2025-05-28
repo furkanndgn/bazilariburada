@@ -11,14 +11,16 @@ class AuthenticationManager {
 
     static let shared = AuthenticationManager()
 
-    private let authService: AccessTokenRefreshProtocol = AuthenticationService()
+    private let authenticationService: AccessTokenRefreshProtocol = AuthenticationService()
     private let keychainManager = KeychainManager.shared
     private let serviceIdentifier = Constants.Keychain.serviceIdentifier
     private let accessTokenAccount = Constants.Keychain.accessAccount
     private let refreshTokenAccount = Constants.Keychain.refreshAccount
 
     var accessToken: String? {
-        getValidAccessToken()
+        get async {
+            await getValidAccessToken()
+        }
     }
 
     private init() { }
@@ -40,30 +42,20 @@ class AuthenticationManager {
         }
     }
 
-    func validateTokens() async {
-        guard accessToken == nil else { return }
-
-        guard let refreshToken = getValidRefreshToken() else {
-            logout()
-            return
-        }
-
+    func logout() {
         do {
-            try await performRefresh(with: refreshToken)
+            try keychainManager.delete(service: serviceIdentifier, account: accessTokenAccount)
+            try keychainManager.delete(service: serviceIdentifier, account: refreshTokenAccount)
         } catch let error {
             print(error.localizedDescription)
         }
-    }
-
-    func logout() {
-        clearTokens()
     }
 }
 
 
 private extension AuthenticationManager {
 
-    func getValidAccessToken() -> String? {
+    func getValidAccessToken() async -> String? {
         var accessTokenInfo: TokenInfo? = nil
         do {
             accessTokenInfo = try keychainManager.load(service: serviceIdentifier, account: accessTokenAccount)
@@ -71,11 +63,28 @@ private extension AuthenticationManager {
             print(error.localizedDescription)
         }
 
-        guard let accessTokenInfo, accessTokenInfo.expiresAt > Date().addingTimeInterval(3600) else {
+        if let accessTokenInfo, accessTokenInfo.expiresAt > Date().addingTimeInterval(3600) {
+            return accessTokenInfo.token
+        }
+
+        guard let refreshToken = getValidRefreshToken() else {
+            logout()
             return nil
         }
 
-        return accessTokenInfo.token
+        await performRefresh(with: refreshToken)
+
+        do {
+            accessTokenInfo = try keychainManager.load(service: serviceIdentifier, account: accessTokenAccount)
+            if let accessTokenInfo, accessTokenInfo.expiresAt > Date().addingTimeInterval(3600) {
+                return accessTokenInfo.token
+            }
+        } catch {
+            print(error.localizedDescription)
+        }
+
+        logout()
+        return nil
     }
 
     func getValidRefreshToken() -> String? {
@@ -85,20 +94,21 @@ private extension AuthenticationManager {
         } catch let error {
             print(error.localizedDescription)
         }
-        guard let refreshTokenInfo, refreshTokenInfo.expiresAt > Date().addingTimeInterval(60) else { return nil }
+        guard let refreshTokenInfo, refreshTokenInfo.expiresAt > Date().addingTimeInterval(3600) else { return nil }
         return refreshTokenInfo.token
     }
 
-    func performRefresh(with refreshToken: String) async throws {
-
-    }
-
-    func clearTokens() {
-        do {
-            try keychainManager.delete(service: serviceIdentifier, account: accessTokenAccount)
-            try keychainManager.delete(service: serviceIdentifier, account: refreshTokenAccount)
-        } catch let error {
-            print(error.localizedDescription)
+    func performRefresh(with refreshToken: String) async {
+        let response = await authenticationService.refreshAccessToken(with: refreshToken)
+        if response?.status == 200, let data = response?.data, let date = response?.timestamp.isoDate() {
+            let accessTokenExpiresAt = date.addingTimeInterval(86400)
+            let refreshTokenExpiresAt = date.addingTimeInterval(604800)
+            saveNewTokens(
+                data.accessToken,
+                accessTokenExpiresAt: accessTokenExpiresAt,
+                data.refreshToken,
+                refreshTokenExpiresAt: refreshTokenExpiresAt
+            )
         }
     }
 }
