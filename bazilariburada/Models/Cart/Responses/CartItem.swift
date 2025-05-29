@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct CartItem: Decodable {
+struct CartItem: Decodable, Equatable {
     let productID, productName: String
     let quantity: Int
     let price: Double

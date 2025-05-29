@@ -26,23 +26,24 @@ final class ProductReviewsViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel.getProductReviews()
         setupView()
     }
-
 }
 
 
 // MARK: - Setup UI
 private extension ProductReviewsViewController {
     func setupView() {
+        // TODO: Fix
         title = "Reviews"
         tableView.delegate = self
         tableView.dataSource = self
         tableView.estimatedRowHeight = 120
         let nib = ProductReviewCell.getNib()
         tableView.register(nib, forCellReuseIdentifier: ProductReviewCell.identifier)
-        viewModel.getProductReviews()
         let averageRatingString = String(format: "%.1f", viewModel.product.averageRating ?? 0)
+        // TODO: fix
         ratingLabel.text = "Rating: \(averageRatingString)/5"
         starRatingView.configureView(with: viewModel.product.averageRating ?? 0)
         updateUI()
@@ -67,8 +68,10 @@ extension ProductReviewsViewController: UITableViewDelegate, UITableViewDataSour
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: ProductReviewCell.identifier,
-                                                       for: indexPath) as? ProductReviewCell
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: ProductReviewCell.identifier,
+            for: indexPath
+        ) as? ProductReviewCell
         else {
             return UITableViewCell()
         }

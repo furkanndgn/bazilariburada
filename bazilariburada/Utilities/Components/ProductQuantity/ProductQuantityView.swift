@@ -13,6 +13,8 @@ final class ProductQuantityView: UIView {
     private var stack: ProductQuantityStack?
     var productStock = 1
 
+    var onQuantityChange: ((Int) -> Void)?
+
     var quantity: Int {
         stack?.quantity ?? 0
     }
@@ -41,6 +43,7 @@ private extension ProductQuantityView {
         setupConstraints(of: viewFromNib)
         updateView(with: 1)
         stack?.onQuantityChanged = { [weak self] newQuantity in
+            self?.onQuantityChange?(newQuantity)
             self?.updateView(with: newQuantity)
         }
     }

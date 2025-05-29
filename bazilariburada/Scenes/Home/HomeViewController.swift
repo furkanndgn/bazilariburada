@@ -8,16 +8,18 @@
 import UIKit
 import Combine
 
-final class HomeViewController: UIViewController, RouteEmitting {
+final class HomeViewController: BaseViewController, RouteEmitting {
 
     var onRoute: ((Route) -> Void)?
     let viewModel: HomeViewModel
+
+    private var cancellables = Set<AnyCancellable>()
 
     @IBOutlet weak var productCollectionView: UICollectionView!
 
     init(_ viewModel: HomeViewModel = HomeViewModel()) {
         self.viewModel = viewModel
-        super.init(nibName: nil, bundle: nil)
+        super.init()
     }
 
     required init?(coder: NSCoder) {
@@ -31,8 +33,12 @@ final class HomeViewController: UIViewController, RouteEmitting {
             await viewModel.getProducts()
         }
     }
+}
 
-    private func updateUI() {
+
+// MARK: - Setup UI
+private extension HomeViewController {
+    func updateUI() {
         if let products = viewModel.allProducts, !products.isEmpty {
             productCollectionView.reloadData()
             productCollectionView.isHidden = false
@@ -41,7 +47,7 @@ final class HomeViewController: UIViewController, RouteEmitting {
         }
     }
 
-    private func setupView() {
+    func setupView() {
         productCollectionView.dataSource = self
         productCollectionView.delegate = self
         self.title = Constants.Text.Title.mainApp
@@ -51,13 +57,13 @@ final class HomeViewController: UIViewController, RouteEmitting {
         addSubscribers()
     }
 
-    private func addSubscribers() {
+    func addSubscribers() {
         viewModel.$allProducts
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 self?.updateUI()
             }
-            .store(in: &viewModel.cancellables)
+            .store(in: &cancellables)
 
     }
 }
@@ -106,6 +112,6 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout, UICollectionVi
 
 extension HomeViewController {
     enum Route {
-        case toProductDetail(UIViewController, Product)
+        case toProductDetail(BaseViewController, Product)
     }
 }

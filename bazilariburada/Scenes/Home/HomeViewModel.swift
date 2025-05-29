@@ -13,7 +13,7 @@ final class HomeViewModel: ObservableObject {
     private let productService: ProductServiceProtocol
     private let cartService: CartServiceProtocol
     private let authenticationManager: AuthenticationManager
-    var cancellables = Set<AnyCancellable>()
+    private var cancellables = Set<AnyCancellable>()
 
     private var accessToken = ""
 
@@ -26,7 +26,11 @@ final class HomeViewModel: ObservableObject {
 
     var onCartUpdate: Completion?
 
-    init(productService: ProductServiceProtocol = ProductService(), cartService: CartServiceProtocol = CartService(), authenticationManager: AuthenticationManager = .shared) {
+    init(
+        productService: ProductServiceProtocol = ProductService(),
+        cartService: CartServiceProtocol = CartService.shared,
+        authenticationManager: AuthenticationManager = .shared
+    ) {
         self.productService = productService
         self.cartService = cartService
         self.authenticationManager = authenticationManager

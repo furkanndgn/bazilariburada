@@ -10,8 +10,10 @@ import Combine
 
 protocol CartServiceProtocol {
 
-    var currentCartPublisher: AnyPublisher<APIResponse<Cart>?, Never> { get }
+    static var shared: CartServiceProtocol { get }
 
+    var currentCartPublisher: AnyPublisher<Cart?, Never> { get }
+    
     func getUserCart(accessToken: String) async
     func addToCart(productID: String, quantity: Int, accessToken: String) async
     func updateQuantity(of productID: String, with quantity: Int, accessToken: String) async

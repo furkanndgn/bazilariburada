@@ -22,7 +22,11 @@ final class ProductDetailViewModel: ObservableObject {
 
     var onCartUpdate: Completion?
 
-    init(_ product: Product, cartService: CartServiceProtocol = CartService(), wishlistService: WishlistServiceProtocol = WishlistService()) {
+    init(
+        _ product: Product,
+        cartService: CartServiceProtocol = CartService.shared,
+        wishlistService: WishlistServiceProtocol = WishlistService()
+    ) {
         self.product = product
         self.cartService = cartService
         self.wishlistService = wishlistService

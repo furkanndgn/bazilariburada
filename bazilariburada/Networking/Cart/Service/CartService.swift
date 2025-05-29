@@ -11,16 +11,18 @@ import Combine
 /// For endpoints in `Cart` collection
 final class CartService: CartServiceProtocol {
 
-    private let networkManager: NetworkManagerProtocol
 
-    init(networkManager: NetworkManagerProtocol = NetworkManager.shared) {
-        self.networkManager = networkManager
+    static var shared: CartServiceProtocol = CartService()
+
+    @Published var currentCart: Cart?
+    var currentCartPublisher: AnyPublisher<Cart?, Never> {
+        $currentCart.eraseToAnyPublisher()
     }
 
-    private var currentCartSubject = PassthroughSubject<APIResponse<Cart>?, Never>()
+    private let networkManager: NetworkManagerProtocol
 
-    var currentCartPublisher: AnyPublisher<APIResponse<Cart>?, Never> {
-        currentCartSubject.eraseToAnyPublisher()
+    private init(networkManager: NetworkManagerProtocol = NetworkManager.shared) {
+        self.networkManager = networkManager
     }
 
     func getUserCart(accessToken: String) async {
@@ -29,7 +31,7 @@ final class CartService: CartServiceProtocol {
                 endpoint: CartEndpoint.getUserCart,
                 token: accessToken
             )
-            currentCartSubject.send(response)
+            currentCart = response.data
         } catch let error {
             print(error)
         }
@@ -43,7 +45,7 @@ final class CartService: CartServiceProtocol {
                 token: accessToken,
                 body: cartRequest
             )
-            currentCartSubject.send(response)
+            currentCart = response.data
         } catch let error {
             print(error)
         }
@@ -57,7 +59,7 @@ final class CartService: CartServiceProtocol {
                 token: accessToken,
                 body: updateQuantityRequest
             )
-            currentCartSubject.send(response)
+            currentCart = response.data
         } catch let error {
             print(error)
         }
@@ -69,7 +71,7 @@ final class CartService: CartServiceProtocol {
                 endpoint: CartEndpoint.removeProductFromCart(productID: productID),
                 token: accessToken
             )
-            currentCartSubject.send(response)
+            currentCart = response.data
         } catch let error {
             print(error)
         }
@@ -81,7 +83,7 @@ final class CartService: CartServiceProtocol {
                 endpoint: CartEndpoint.emptyCart,
                 token: accessToken
             )
-            currentCartSubject.send(response)
+            currentCart = response.data
         } catch let error {
             print(error)
         }

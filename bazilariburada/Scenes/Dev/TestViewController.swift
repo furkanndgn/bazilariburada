@@ -11,7 +11,7 @@ import Combine
 final class TestViewController: BaseViewController {
 
     let authService = AuthenticationService()
-    let cartService = CartService()
+    let cartService = CartService.shared
     let orderService = OrderService()
     let productService = ProductService()
     let reviewService = ReviewService()

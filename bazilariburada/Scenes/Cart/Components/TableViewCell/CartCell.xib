@@ -4,9 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -19,29 +17,21 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="154"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="91E-pS-Clm" userLabel="ProductImageView">
-                        <rect key="frame" x="12" y="17" width="120" height="120"/>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bag" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="91E-pS-Clm" userLabel="ProductImageView">
+                        <rect key="frame" x="12" y="17.666666666666664" width="120" height="118.66666666666669"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="120" id="AOX-yd-xdL"/>
                             <constraint firstAttribute="height" constant="120" id="Odj-7I-64l"/>
                         </constraints>
                     </imageView>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3jQ-mS-rJd" userLabel="HairlineView">
-                        <rect key="frame" x="18" y="149" width="284" height="1"/>
-                        <color key="backgroundColor" name="Colors/black-20"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="1" id="qI4-dG-qgQ"/>
-                        </constraints>
-                    </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UtZ-km-Yg2" userLabel="NameLabel">
-                        <rect key="frame" x="140" y="17" width="168" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UtZ-km-Yg2" userLabel="NameLabel">
+                        <rect key="frame" x="140" y="17" width="168" height="21.666666666666671"/>
                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aWv-Uc-Emp" userLabel="ProductQuantityView" customClass="ProductQuantityView" customModule="bazilariburada" customModuleProvider="target">
-                        <rect key="frame" x="144" y="50" width="120" height="44"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <rect key="frame" x="144" y="50.666666666666657" width="120" height="44"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="44" id="DEN-mN-zLF"/>
                             <constraint firstAttribute="width" constant="120" id="YzW-7B-8Ik"/>
@@ -55,17 +45,14 @@
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="3jQ-mS-rJd" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="18" id="1NJ-qs-iyq"/>
                     <constraint firstAttribute="trailing" secondItem="UtZ-km-Yg2" secondAttribute="trailing" constant="12" id="5Gi-lo-1cN"/>
                     <constraint firstItem="UtZ-km-Yg2" firstAttribute="leading" secondItem="91E-pS-Clm" secondAttribute="trailing" constant="8" id="Ekh-2j-HfX"/>
                     <constraint firstItem="aWv-Uc-Emp" firstAttribute="leading" secondItem="91E-pS-Clm" secondAttribute="trailing" constant="12" id="NVW-ZL-hHL"/>
-                    <constraint firstItem="3jQ-mS-rJd" firstAttribute="top" secondItem="gd1-UK-Y0t" secondAttribute="bottom" constant="12" id="QTc-Rp-PCU"/>
                     <constraint firstItem="UtZ-km-Yg2" firstAttribute="top" secondItem="91E-pS-Clm" secondAttribute="top" id="VOg-ZA-ZPG"/>
                     <constraint firstItem="91E-pS-Clm" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="12" id="cA6-nF-BjW"/>
+                    <constraint firstItem="gd1-UK-Y0t" firstAttribute="bottom" secondItem="91E-pS-Clm" secondAttribute="bottom" id="lgy-d0-oj9"/>
                     <constraint firstItem="91E-pS-Clm" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="qli-R7-c5h"/>
-                    <constraint firstAttribute="trailing" secondItem="3jQ-mS-rJd" secondAttribute="trailing" constant="18" id="rlv-AD-RRj"/>
                     <constraint firstItem="aWv-Uc-Emp" firstAttribute="top" secondItem="UtZ-km-Yg2" secondAttribute="bottom" constant="12" id="s1w-e2-u0h"/>
-                    <constraint firstItem="3jQ-mS-rJd" firstAttribute="top" secondItem="91E-pS-Clm" secondAttribute="bottom" constant="12" id="skt-dI-ka5"/>
                     <constraint firstAttribute="trailing" secondItem="gd1-UK-Y0t" secondAttribute="trailing" constant="12" id="wWb-ZV-xI0"/>
                 </constraints>
             </tableViewCellContentView>
@@ -74,17 +61,12 @@
                 <outlet property="nameLabel" destination="UtZ-km-Yg2" id="icj-5d-QN2"/>
                 <outlet property="priceLabel" destination="gd1-UK-Y0t" id="VJ4-Bh-PX8"/>
                 <outlet property="productImageView" destination="91E-pS-Clm" id="qF5-2a-YZf"/>
-                <outlet property="productQuantityView" destination="aWv-Uc-Emp" id="09p-zW-Bfh"/>
+                <outlet property="productQuantityView" destination="aWv-Uc-Emp" id="7Ie-JF-fs3"/>
             </connections>
             <point key="canvasLocation" x="114.50381679389312" y="14.084507042253522"/>
         </tableViewCell>
     </objects>
     <resources>
-        <namedColor name="Colors/black-20">
-            <color red="0.88627450980392153" green="0.88627450980392153" blue="0.88627450980392153" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-        </namedColor>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
+        <image name="bag" catalog="system" width="128" height="128"/>
     </resources>
 </document>

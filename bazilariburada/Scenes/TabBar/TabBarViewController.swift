@@ -12,13 +12,16 @@ final class TabBarViewController: UITabBarController {
 
     let productDetailRouter: ProductDetailRouter
     let homeRouter: HomeRouter
+    let cartRouter: CartRouter
 
     init(
         productDetailRouter: ProductDetailRouter = ProductDetailRouter(),
-        homeRouter: HomeRouter = HomeRouter()
+        homeRouter: HomeRouter = HomeRouter(),
+        cartRouter: CartRouter = CartRouter()
     ) {
         self.productDetailRouter = productDetailRouter
         self.homeRouter = homeRouter
+        self.cartRouter = cartRouter
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -35,7 +38,8 @@ final class TabBarViewController: UITabBarController {
         self.viewControllers = [
             createHomeScreen(),
             createProfileScreen(),
-            createReviewScreen()
+            createReviewScreen(),
+            createCartScreen()
         ]
     }
 }
@@ -50,6 +54,13 @@ private extension TabBarViewController {
         let profileScreen = LoginViewController(LoginViewModel())
         let navigationController = UINavigationController(rootViewController: profileScreen)
         navigationController.tabBarItem = UITabBarItem(title: "", image: UIImage(systemName: "person"), tag: 1)
+        return navigationController
+    }
+
+    func createCartScreen() -> UINavigationController {
+        let cartScreen = cartRouter.createCartScreen()
+        let navigationController = UINavigationController(rootViewController: cartScreen)
+        navigationController.tabBarItem = UITabBarItem(tabBarSystemItem: .topRated, tag: 4)
         return navigationController
     }
 }
