@@ -76,7 +76,7 @@
                                     <color key="textColor" name="Colors/black-50"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Images/mastercard-img" translatesAutoresizingMaskIntoConstraints="NO" id="COL-do-Dm6" userLabel="providerLogo">
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Images/Logos/mastercard-logo" translatesAutoresizingMaskIntoConstraints="NO" id="COL-do-Dm6" userLabel="providerLogo">
                                     <rect key="frame" x="314.33333333333331" y="17.333333333333329" width="30" height="30"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="30" id="JU9-jc-mK7"/>
@@ -232,7 +232,7 @@
         </view>
     </objects>
     <resources>
-        <image name="Images/mastercard-img" width="256" height="256"/>
+        <image name="Images/Logos/mastercard-logo" width="256" height="256"/>
         <image name="chevron.right" catalog="system" width="97" height="128"/>
         <namedColor name="Colors/black-50">
             <color red="0.48627450980392156" green="0.48627450980392156" blue="0.48627450980392156" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>

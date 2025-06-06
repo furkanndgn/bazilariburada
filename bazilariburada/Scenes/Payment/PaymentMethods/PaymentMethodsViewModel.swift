@@ -10,9 +10,7 @@ import Combine
 
 final class PaymentMethodsViewModel {
 
-    private let keychainManager = KeychainManager.shared
-    private let serviceIdentifier = Constants.Keychain.serviceIdentifier
-    private let account = Constants.Keychain.paymentAccount
+    private let paymentMethodsManager = PaymentMethodsManager.shared
 
     @Published var paymentMethods = [PaymentMethod]()
     @Published var name = ""
@@ -31,47 +29,33 @@ final class PaymentMethodsViewModel {
     }
 
     var methodCount: Int {
-        paymentMethods.count
+        paymentMethodsManager.paymentMethods.count
     }
 
     init() {
         addSubscribers()
-        load()
+        paymentMethodsManager.load()
     }
 
     func addNewPaymentMethod(_ paymentMethod: PaymentMethod) {
-        paymentMethods.append(paymentMethod)
-        save()
-        load()
+        paymentMethodsManager.addNewPaymentMethod(paymentMethod)
     }
 
     func paymentMethod(at index: Int) -> PaymentMethod {
-        paymentMethods[index]
+        paymentMethodsManager.paymentMethods[index]
     }
 
     func setSelected(at index: Int) {
-        for i in paymentMethods.indices {
-            paymentMethods[i].isSelected = false
-        }
-        paymentMethods[index].isSelected = true
-        save()
-        load()
+        paymentMethodsManager.setSelected(at: index)
     }
 
     func delete(_ paymentMethod: PaymentMethod) {
-        let wasSelected = paymentMethod.isSelected
-        paymentMethods.removeAll { $0.id == paymentMethod.id }
-        if wasSelected, !paymentMethods.isEmpty {
-            for i in paymentMethods.indices {
-                paymentMethods[i].isSelected = false
-            }
-            paymentMethods[0].isSelected = true
-        }
-        save()
-        load()
+        paymentMethodsManager.delete(paymentMethod)
     }
 
     private func addSubscribers() {
+        paymentMethodsManager.$paymentMethods
+            .assign(to: &$paymentMethods)
         Publishers.CombineLatest3($isNameValid, $isNumberValid, $isSecurityCodeValid)
             .map { $0 && $1 && $2}
             .assign(to: &$isFieldsValid)
@@ -84,24 +68,5 @@ final class PaymentMethodsViewModel {
         $securityCode
             .map { [weak self] in CardValidator.cvvCheck($0, brand: PaymentProvider.detectCardBrand(self?.number ?? ""))}
             .assign(to: &$isSecurityCodeValid)
-    }
-
-    private func save() {
-        do {
-            try keychainManager.save(paymentMethods, service: serviceIdentifier, account: account)
-        } catch let error {
-            print(error)
-        }
-    }
-
-    private func load() {
-        do {
-            paymentMethods = try keychainManager.load(service: serviceIdentifier, account: account) ?? []
-            if paymentMethods.count == 1 && paymentMethods.first?.isSelected == false {
-                setSelected(at: 0)
-            }
-        } catch let error {
-            print(error)
-        }
     }
 }

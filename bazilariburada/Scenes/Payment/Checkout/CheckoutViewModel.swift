@@ -9,11 +9,16 @@ import Foundation
 
 final class CheckoutViewModel {
 
-    private(set) var selectedCard: PaymentMethod?
+    let totalPrice: Double
+    private let paymentMethodsManager = PaymentMethodsManager.shared
     private(set) var selectedAddress: Address?
 
-    func changeSelectedCard(with newCard: PaymentMethod) {
-        selectedCard = newCard
+    var selectedPaymentMethod: PaymentMethod? {
+        paymentMethodsManager.getSelectedMethod()
+    }
+
+    init(totalPrice: Double) {
+        self.totalPrice = totalPrice
     }
 
     func changeAddress(_ address: Address) {

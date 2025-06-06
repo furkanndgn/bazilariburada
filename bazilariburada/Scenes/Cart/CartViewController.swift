@@ -40,7 +40,7 @@ final class CartViewController: BaseViewController, RouteEmitting {
     }
 
     @IBAction func checkoutTapped(_ sender: Any) {
-        let vc = CheckoutViewController()
+        let vc = CheckoutViewController(CheckoutViewModel(totalPrice: viewModel.totalPrice))
         if let sheet = vc.sheetPresentationController {
             sheet.detents = [
                 .medium(), // About 50% of the screen
