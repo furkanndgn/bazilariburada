@@ -7,8 +7,7 @@
 
 import UIKit
 
-@MainActor
-final class TabBarViewController: UITabBarController {
+final class MainTabBarController: UITabBarController {
 
     let productDetailRouter: ProductDetailRouter
     let homeRouter: HomeRouter
@@ -44,7 +43,8 @@ final class TabBarViewController: UITabBarController {
     }
 }
 
-private extension TabBarViewController {
+
+private extension MainTabBarController {
 
     func createHomeScreen() -> UINavigationController {
             homeRouter.initialScreen()
@@ -66,7 +66,7 @@ private extension TabBarViewController {
 }
 
 //    MARK: - Testing
-private extension TabBarViewController {
+private extension MainTabBarController {
 
     func createReviewScreen() -> UINavigationController {
         let reviewScreen = ProductReviewsViewController(viewModel: ReviewsViewModel(product: Product.sample))

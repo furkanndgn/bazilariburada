@@ -52,7 +52,7 @@ private extension ActivationViewController {
                 if statusCode == 200 {
                     self.onFinish?(.success)
                 } else {
-                    // TODO: Error popup
+#warning ("TODO: Implement this")
                 }
             })
         }

@@ -35,7 +35,7 @@ final class ProductReviewsViewController: BaseViewController {
 // MARK: - Setup UI
 private extension ProductReviewsViewController {
     func setupView() {
-        // TODO: Fix
+#warning("FIXME: title")
         title = "Reviews"
         tableView.delegate = self
         tableView.dataSource = self
@@ -43,7 +43,7 @@ private extension ProductReviewsViewController {
         let nib = ProductReviewCell.getNib()
         tableView.register(nib, forCellReuseIdentifier: ProductReviewCell.identifier)
         let averageRatingString = String(format: "%.1f", viewModel.product.averageRating ?? 0)
-        // TODO: fix
+#warning("FIXME: string")
         ratingLabel.text = "Rating: \(averageRatingString)/5"
         starRatingView.configureView(with: viewModel.product.averageRating ?? 0)
         updateUI()

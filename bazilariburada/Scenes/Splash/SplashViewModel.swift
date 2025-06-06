@@ -23,8 +23,3 @@ final class SplashViewModel: ObservableObject {
         return true
     }
 }
-
-
-enum TokenValidation {
-    case valid, invalid
-}

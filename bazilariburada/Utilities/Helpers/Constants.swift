@@ -11,6 +11,8 @@ enum Constants {
         static let serviceIdentifier = "com.bazilariburada.auth"
         static let accessAccount = "accessToken"
         static let refreshAccount = "refreshToken"
+        static let paymentAccount = "paymentMethod"
+        static let addressAccount = "address"
     }
 
     enum Text {

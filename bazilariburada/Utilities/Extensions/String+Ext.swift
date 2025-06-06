@@ -18,7 +18,12 @@ extension String {
         let mask = String(repeating: "*", count: max(0, username.count - 1))
         return "\(firstChar)\(mask)@\(domain)"
     }
-    
+
+    var maskedCardNumber: String {
+        let mask = String(repeating: "*", count: count - 4)
+        return "\(mask)\(suffix(4))"
+    }
+
     func isoDate() -> Date? {
         let formatter = ISO8601DateFormatter()
         formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]

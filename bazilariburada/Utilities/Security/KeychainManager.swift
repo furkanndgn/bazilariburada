@@ -12,6 +12,8 @@ final class KeychainManager {
 
     static let shared = KeychainManager()
 
+    private init() { }
+
     func save<T: Codable>(_ object: T, service: String, account: String) throws {
         let data = try JSONEncoder().encode(object)
         let query: [String: Any] = [

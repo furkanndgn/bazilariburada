@@ -13,7 +13,7 @@ final class AppRouter {
     private let window: UIWindow
 
     private var onboardingRouter: OnBoardingRouter?
-    private var tabBarViewController: TabBarViewController?
+    private var tabBarViewController: UITabBarController?
 
     init(window: UIWindow) {
         self.window = window
@@ -51,7 +51,7 @@ final class AppRouter {
 
     private func startAppFlow() {
         Task { @MainActor in
-            tabBarViewController = TabBarViewController()
+            tabBarViewController = MainTabBarController()
             UIView.transition(
                 with: window,
                 duration: 0.5,

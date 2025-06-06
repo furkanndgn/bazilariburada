@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PaymentMethodsEditingViewController" customModule="bazilariburada" customModuleProvider="target">
+            <connections>
+                <outlet property="contentStack" destination="AMN-jp-ahw" id="mfh-pE-s4W"/>
+                <outlet property="expiryDatePicker" destination="JVv-Og-pnU" id="cPr-FX-Tja"/>
+                <outlet property="nameTextField" destination="nMX-DR-GuH" id="yUI-aA-UJb"/>
+                <outlet property="numberTextField" destination="SuG-lg-fpr" id="cbj-Pe-pK1"/>
+                <outlet property="securityCodeTextField" destination="sJU-fb-T3R" id="vkg-lE-CBN"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="783"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="AMN-jp-ahw">
+                    <rect key="frame" x="12" y="59" width="369" height="235"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="6J5-GL-d0V" userLabel="NameSection">
+                            <rect key="frame" x="0.0" y="0.0" width="369" height="45"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ABu-2R-j3H" userLabel="Name">
+                                    <rect key="frame" x="0.0" y="0.0" width="100" height="45"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="100" id="BZ3-eq-Bly"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Cardholder Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nMX-DR-GuH" userLabel="NameTextField">
+                                    <rect key="frame" x="100" y="0.0" width="269" height="45"/>
+                                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" spellCheckingType="no" returnKeyType="next" textContentType="name"/>
+                                    <connections>
+                                        <action selector="nameDidChange:" destination="-1" eventType="editingDidEnd" id="Z4n-Il-fRa"/>
+                                    </connections>
+                                </textField>
+                            </subviews>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="45" id="uyZ-Gz-m0H"/>
+                            </constraints>
+                        </stackView>
+                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="gq6-2t-n53" userLabel="NumberSection">
+                            <rect key="frame" x="0.0" y="45" width="369" height="45"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Number" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Pa-rC-jHG" userLabel="Number">
+                                    <rect key="frame" x="0.0" y="0.0" width="100" height="45"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="100" id="syG-LT-2qZ"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Card Number" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SuG-lg-fpr" userLabel="NumberTextField">
+                                    <rect key="frame" x="100" y="0.0" width="269" height="45"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad" returnKeyType="next"/>
+                                    <connections>
+                                        <action selector="numberDidChange:" destination="-1" eventType="editingDidEnd" id="Hvj-4k-l5B"/>
+                                    </connections>
+                                </textField>
+                            </subviews>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="45" id="QhB-EW-cK2"/>
+                            </constraints>
+                        </stackView>
+                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="KmO-nh-qEV" userLabel="ExpiresAtDate">
+                            <rect key="frame" x="0.0" y="90" width="369" height="100"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Expires at" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6gg-UB-rqe" userLabel="Number">
+                                    <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="100" id="CrM-K6-aEw"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JVv-Og-pnU" userLabel="DatePicker">
+                                    <rect key="frame" x="100" y="0.0" width="269" height="100"/>
+                                </pickerView>
+                            </subviews>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="100" id="Hji-Z8-Oez"/>
+                            </constraints>
+                        </stackView>
+                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="si8-84-kVS" userLabel="CVVSection">
+                            <rect key="frame" x="0.0" y="190" width="369" height="45"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CVV" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7PM-HO-YwQ" userLabel="CVV">
+                                    <rect key="frame" x="0.0" y="0.0" width="100" height="45"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="100" id="Uc2-1X-xPQ"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Card Number" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sJU-fb-T3R" userLabel="CVVTextField">
+                                    <rect key="frame" x="100" y="0.0" width="269" height="45"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad" returnKeyType="done"/>
+                                    <connections>
+                                        <action selector="securityCodeDidChange:" destination="-1" eventType="editingDidEnd" id="NUu-Lr-P3p"/>
+                                    </connections>
+                                </textField>
+                            </subviews>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="45" id="cen-VD-cWw"/>
+                            </constraints>
+                        </stackView>
+                    </subviews>
+                    <color key="backgroundColor" name="Colors/black-20"/>
+                </stackView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="AMN-jp-ahw" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="12" id="7ta-SS-Jxc"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="AMN-jp-ahw" secondAttribute="trailing" constant="12" id="fFg-ZM-9vl"/>
+                <constraint firstItem="AMN-jp-ahw" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="rla-Ae-j3O"/>
+            </constraints>
+            <modalPageSheetSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="140" y="20"/>
+        </view>
+    </objects>
+    <resources>
+        <namedColor name="Colors/black-20">
+            <color red="0.88627450980392153" green="0.88627450980392153" blue="0.88627450980392153" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

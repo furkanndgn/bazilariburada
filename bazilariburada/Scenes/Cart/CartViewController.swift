@@ -16,6 +16,8 @@ final class CartViewController: BaseViewController, RouteEmitting {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var checkoutButton: UIButton!
     @IBOutlet weak var totalPriceLabel: UILabel!
+    @IBOutlet weak var totalPriceContainer: UIView!
+    @IBOutlet weak var dummyCheckoutButton: UIButton!
 
     var onRoute: ((Route) -> Void)?
 
@@ -36,28 +38,44 @@ final class CartViewController: BaseViewController, RouteEmitting {
             await viewModel.getCurrentCart()
         }
     }
+
+    @IBAction func checkoutTapped(_ sender: Any) {
+        let vc = CheckoutViewController()
+        if let sheet = vc.sheetPresentationController {
+            sheet.detents = [
+                .medium(), // About 50% of the screen
+                .large()   // Full screen
+            ]
+            sheet.prefersGrabberVisible = true // Shows the draggable bar
+            sheet.selectedDetentIdentifier = .medium // Start at medium
+        }
+
+        vc.modalPresentationStyle = .pageSheet // Important!
+        present(vc, animated: true)
+    }
 }
 
 
 // MARK: - Setup UI
 private extension CartViewController {
     func setupView() {
-        // TODO: Fix this
+#warning("FIXME: title logic")
         title = "My Cart"
         tableView.delegate = self
         tableView.dataSource = self
-        let nib = CartCell.getNib()
-        tableView.register(nib, forCellReuseIdentifier: CartCell.identifier)
+        tableView.register(CartCell.getNib(), forCellReuseIdentifier: CartCell.identifier)
         configureCheckoutStack()
     }
 
     func configureCheckoutStack() {
         checkoutButton.layer.cornerRadius = 12
         checkoutButton.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
-        totalPriceLabel.layer.cornerRadius = 12
-        totalPriceLabel.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMaxXMaxYCorner]
-        totalPriceLabel.layer.borderColor = UIColor.Colors.green100.cgColor
-        totalPriceLabel.layer.borderWidth = 1
+        dummyCheckoutButton.layer.cornerRadius = 12
+        dummyCheckoutButton.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
+        totalPriceContainer.layer.cornerRadius = 12
+        totalPriceContainer.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMaxXMaxYCorner]
+        totalPriceContainer.layer.borderColor = UIColor.Colors.green100.cgColor
+        totalPriceContainer.layer.borderWidth = 1
     }
 
     func updateUI() {
@@ -65,7 +83,13 @@ private extension CartViewController {
         if !viewModel.cartDisplayItems.isEmpty {
             tableView.reloadData()
             tableView.isHidden = false
+            checkoutButton.alpha = 1
+            dummyCheckoutButton.isHidden = true
+            totalPriceContainer.layer.borderColor = UIColor.Colors.green100.cgColor
         } else {
+            totalPriceContainer.layer.borderColor = UIColor.tertiarySystemFill.cgColor
+            checkoutButton.alpha = 0
+            dummyCheckoutButton.isHidden = false
             tableView.isHidden = true
         }
     }
@@ -107,7 +131,10 @@ extension CartViewController: UITableViewDataSource, UITableViewDelegate {
         self.onRoute?(.toProductDetail(self, product.product))
     }
 
-    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+    func tableView(
+        _ tableView: UITableView,
+        trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath
+    ) -> UISwipeActionsConfiguration? {
         let product = viewModel.product(by: indexPath.row)
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [weak self] _, _, completion in
             Task {

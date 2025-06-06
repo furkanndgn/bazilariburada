@@ -31,6 +31,7 @@ final class HomeViewController: BaseViewController, RouteEmitting {
         setupView()
         Task {
             await viewModel.getProducts()
+            await viewModel.getCurrentCart()
         }
     }
 }

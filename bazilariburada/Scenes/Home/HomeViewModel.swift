@@ -53,6 +53,11 @@ final class HomeViewModel: ObservableObject {
         accessToken = await authenticationManager.accessToken ?? ""
         await cartService.addToCart(productID: id, quantity: 1, accessToken: accessToken)
     }
+
+    func getCurrentCart() async {
+        accessToken = await authenticationManager.accessToken ?? ""
+        await cartService.getUserCart(accessToken: accessToken)
+    }
 }
 
 

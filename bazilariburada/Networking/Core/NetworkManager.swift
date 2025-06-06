@@ -31,7 +31,7 @@ final class NetworkManager: NetworkManagerProtocol {
     ) async throws -> APIResponse<T> {
         let request = try buildRequest(for: endpoint, body: body, token: token, timeoutInterval: timeoutInterval)
 #if DEBUG
-        logRequest(request)
+//        logRequest(request)
 #endif
         return try await withThrowingTaskGroup(of: APIResponse<T>.self) { group in
             group.addTask { [weak self] in
@@ -152,7 +152,7 @@ private extension NetworkManager {
     func executeRequest<T: Decodable>(_ request: URLRequest) async throws -> T {
         let (data, response) = try await session.data(for: request)
 #if DEBUG
-        logResponse(response, data: data)
+//        logResponse(response, data: data)
 #endif
         do {
             try validate(response: response, data: data)

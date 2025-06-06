@@ -30,7 +30,7 @@ final class CartCell: BaseTableViewCell, NibLoadable {
     }
 
     func configureWith(_ cartItem: CartDisplayModel) {
-        // TODO: Implement image
+#warning("FIXME: image")
         productImageView.image = UIImage(systemName: "bag")
         nameLabel.text = "\(cartItem.product.brand) \(cartItem.product.name)"
         priceLabel.text = cartItem.cartItem.price.asCurrency(locale: Locale(identifier: "en_US"))

@@ -36,4 +36,10 @@ enum CredentialValidator {
         guard username.count >= 3, username.count <= 20 else { return false }
         return true
     }
+
+    static func validateFullname(_ name: String) -> Bool {
+        let trimmed = name.trimmingCharacters(in: .whitespacesAndNewlines)
+        let parts = trimmed.split(separator: " ").filter { !$0.isEmpty }
+        return parts.count >= 2 && parts.allSatisfy { $0.rangeOfCharacter(from: .letters) != nil }
+    }
 }

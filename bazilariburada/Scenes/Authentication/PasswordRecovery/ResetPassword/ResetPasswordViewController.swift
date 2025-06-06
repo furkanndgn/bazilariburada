@@ -71,21 +71,20 @@ final class ResetPasswordViewController: BaseViewController, RouteEmitting {
             if statusCode == 200 {
                 self.onRoute?(.toLogin(self))
             } else {
-                // TODO: Implement this
+#warning ("TODO: Implement this")
             }
         }
     }
     
     @IBAction func dummyUpdateTapped(_ sender: Any) {
-        onRoute?(.toLogin(self))
-//        if !viewModel.isCodeValid {
-//            securityCodeWarningLabel.isHidden = false
-//            securityCodeTextField.makeBorderVisible(true)
-//        }
-//        if !viewModel.isPasswordValid {
-//            passwordWarningLabel.isHidden = false
-//            passwordTextField.makeBorderVisible(true)
-//        }
+        if !viewModel.isCodeValid {
+            securityCodeWarningLabel.isHidden = false
+            securityCodeTextField.makeBorderVisible(true)
+        }
+        if !viewModel.isPasswordValid {
+            passwordWarningLabel.isHidden = false
+            passwordTextField.makeBorderVisible(true)
+        }
     }
 
     @objc func codeChanged(_ sender: UITextField) {

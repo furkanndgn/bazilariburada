@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="HCE-tr-2jl" customClass="CardCell" customModule="bazilariburada" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="70"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="HCE-tr-2jl" id="gYX-6O-yGh">
+                <rect key="frame" x="0.0" y="0.0" width="393" height="70"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Images/Logos/visa-logo" translatesAutoresizingMaskIntoConstraints="NO" id="4sW-nj-gvf" userLabel="BrandImageView">
+                        <rect key="frame" x="12" y="0.0" width="70" height="70"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="70" id="Pns-ti-jYK"/>
+                            <constraint firstAttribute="width" constant="70" id="vaG-Et-4nc"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="•••• •••• •••• 4242" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nCT-Yv-yRO" userLabel="CardNumberLabel">
+                        <rect key="frame" x="105.99999999999999" y="24.666666666666671" width="144.66666666666663" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ixk-7N-SiT">
+                        <rect key="frame" x="362" y="27" width="19" height="17"/>
+                        <color key="tintColor" name="Colors/black-50"/>
+                        <imageReference key="image" image="checkmark" catalog="system" symbolScale="default"/>
+                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="17"/>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="nCT-Yv-yRO" firstAttribute="leading" secondItem="4sW-nj-gvf" secondAttribute="trailing" constant="24" id="3An-KV-kZh"/>
+                    <constraint firstItem="4sW-nj-gvf" firstAttribute="leading" secondItem="gYX-6O-yGh" secondAttribute="leading" constant="12" id="AHG-ik-Cnp"/>
+                    <constraint firstItem="Ixk-7N-SiT" firstAttribute="centerY" secondItem="gYX-6O-yGh" secondAttribute="centerY" id="FfR-Pd-tRN"/>
+                    <constraint firstAttribute="trailing" secondItem="Ixk-7N-SiT" secondAttribute="trailing" constant="12" id="NMt-B9-KRi"/>
+                    <constraint firstItem="nCT-Yv-yRO" firstAttribute="centerY" secondItem="gYX-6O-yGh" secondAttribute="centerY" id="ta3-Xd-7Bk"/>
+                    <constraint firstItem="4sW-nj-gvf" firstAttribute="centerY" secondItem="gYX-6O-yGh" secondAttribute="centerY" id="z1a-Ey-P1V"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="brandImageView" destination="4sW-nj-gvf" id="7Kv-dZ-hXz"/>
+                <outlet property="cardNumberLabel" destination="nCT-Yv-yRO" id="0Pp-vG-KrI"/>
+                <outlet property="selectedCardIndicator" destination="Ixk-7N-SiT" id="zRC-9i-9wa"/>
+            </connections>
+            <point key="canvasLocation" x="-54" y="-37"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="Images/Logos/visa-logo" width="399" height="250"/>
+        <image name="checkmark" catalog="system" width="128" height="114"/>
+        <namedColor name="Colors/black-50">
+            <color red="0.48627450980392156" green="0.48627450980392156" blue="0.48627450980392156" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+    </resources>
+</document>

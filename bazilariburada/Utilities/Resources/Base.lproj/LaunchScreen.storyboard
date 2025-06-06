@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -21,7 +21,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ocN-PT-eIx">
                                 <rect key="frame" x="0.0" y="366" width="393" height="120"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Images/Logo-Green" translatesAutoresizingMaskIntoConstraints="NO" id="kbv-bh-5Wp">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Images/Logos/Logo-Green" translatesAutoresizingMaskIntoConstraints="NO" id="kbv-bh-5Wp">
                                         <rect key="frame" x="12" y="0.0" width="120" height="120"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="120" id="O22-ST-g9K"/>
@@ -71,7 +71,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Images/Logo-Green" width="1024" height="1024"/>
+        <image name="Images/Logos/Logo-Green" width="1024" height="1024"/>
         <namedColor name="Colors/green-100">
             <color red="0.32549019607843138" green="0.69411764705882351" blue="0.45882352941176469" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>

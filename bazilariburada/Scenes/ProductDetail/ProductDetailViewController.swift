@@ -70,8 +70,8 @@ private extension ProductDetailViewController {
     }
 
 
-//    TODO: productNameLabel -> brandNameLabel + productNameLabel
-    // TODO: Implement image
+#warning ("TODO: productNameLabel -> brandNameLabel + productNameLabel")
+#warning("FIXME: image")
     func configureSubviews() {
         productNameLabel.text = "\(viewModel.product.brand) \(viewModel.product.name)"
         productQuantityView.productStock = viewModel.product.quantity
