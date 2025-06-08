@@ -17,12 +17,11 @@ final class PaymentMethodsManager {
 
     @Published var paymentMethods = [PaymentMethod]()
 
-    private init() { }
+    private init() {}
 
     func addNewPaymentMethod(_ paymentMethod: PaymentMethod) {
         paymentMethods.append(paymentMethod)
         save()
-        load()
     }
 
     func getSelectedMethod() -> PaymentMethod? {
@@ -36,20 +35,15 @@ final class PaymentMethodsManager {
         }
         paymentMethods[index].isSelected = true
         save()
-        load()
     }
 
     func delete(_ paymentMethod: PaymentMethod) {
         let wasSelected = paymentMethod.isSelected
         paymentMethods.removeAll { $0.id == paymentMethod.id }
         if wasSelected, !paymentMethods.isEmpty {
-            for i in paymentMethods.indices {
-                paymentMethods[i].isSelected = false
-            }
-            paymentMethods[0].isSelected = true
+            setSelected(at: 0)
         }
         save()
-        load()
     }
 
     func load() {
