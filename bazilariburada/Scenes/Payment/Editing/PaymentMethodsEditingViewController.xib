@@ -46,7 +46,7 @@
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" spellCheckingType="no" returnKeyType="next" textContentType="name"/>
                                     <connections>
-                                        <action selector="nameDidChange:" destination="-1" eventType="editingDidEnd" id="Z4n-Il-fRa"/>
+                                        <action selector="nameChanged:" destination="-1" eventType="editingChanged" id="fUw-ec-t6D"/>
                                     </connections>
                                 </textField>
                             </subviews>
@@ -71,7 +71,7 @@
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad" returnKeyType="next"/>
                                     <connections>
-                                        <action selector="numberDidChange:" destination="-1" eventType="editingDidEnd" id="Hvj-4k-l5B"/>
+                                        <action selector="numberChanged:" destination="-1" eventType="editingChanged" id="xOl-ux-Jy3"/>
                                     </connections>
                                 </textField>
                             </subviews>
@@ -116,7 +116,7 @@
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad" returnKeyType="done"/>
                                     <connections>
-                                        <action selector="securityCodeDidChange:" destination="-1" eventType="editingDidEnd" id="NUu-Lr-P3p"/>
+                                        <action selector="securityCodeChanged:" destination="-1" eventType="editingChanged" id="oQk-K7-SEg"/>
                                     </connections>
                                 </textField>
                             </subviews>

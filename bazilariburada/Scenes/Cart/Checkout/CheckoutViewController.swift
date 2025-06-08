@@ -43,6 +43,9 @@ final class CheckoutViewController: BaseViewController {
 
     @objc func paymentSectionTapped() {
         let newVC = PaymentMethodsListingViewController(PaymentMethodsViewModel())
+        newVC.selectedMethodChanged = { [weak self] in
+            self?.updateSelectedPaymentMethod()
+        }
         newVC.title = "Payment Methods"
         let nav = UINavigationController(rootViewController: newVC)
         nav.modalPresentationStyle = .pageSheet
@@ -74,4 +77,8 @@ private extension CheckoutViewController {
         promoCodeSection.addGestureRecognizer(promoCodeGesture)
     }
 
+    func updateSelectedPaymentMethod() {
+        paymentProviderLogo.image = viewModel.selectedPaymentMethod?.brand.brandIcon()
+        cardLastFourDigits.text = viewModel.selectedPaymentMethod?.number.maskedCardNumber
+    }
 }

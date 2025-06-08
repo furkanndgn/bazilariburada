@@ -22,6 +22,7 @@ final class PaymentMethodsViewModel {
     @Published private(set) var isFieldsValid = false
 
     let months = Array(1...12)
+    let monthNames = Calendar.current.monthSymbols
 
     var years: [Int] {
         let currentYear = Calendar.current.component(.year, from: .now)

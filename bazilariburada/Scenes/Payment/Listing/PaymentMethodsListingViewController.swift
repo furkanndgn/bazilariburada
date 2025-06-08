@@ -15,6 +15,8 @@ final class PaymentMethodsListingViewController: BaseViewController {
     private let viewModel: PaymentMethodsViewModel
     private var cancellables = Set<AnyCancellable>()
 
+    var selectedMethodChanged: Completion?
+
     init(_ viewModel: PaymentMethodsViewModel) {
         self.viewModel = viewModel
         super.init()
@@ -98,6 +100,7 @@ extension PaymentMethodsListingViewController: UITableViewDelegate, UITableViewD
         tableView.deselectRow(at: indexPath, animated: true)
         let oldSelectedIndex = viewModel.paymentMethods.firstIndex(where: { $0.isSelected })
         viewModel.setSelected(at: indexPath.row)
+        selectedMethodChanged?()
         var indexPathsToReload = [indexPath]
         if let old = oldSelectedIndex, old != indexPath.row {
             indexPathsToReload.append(IndexPath(row: old, section: 0))

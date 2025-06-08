@@ -9,8 +9,9 @@ import Foundation
 
 final class CheckoutViewModel {
 
-    let totalPrice: Double
     private let paymentMethodsManager = PaymentMethodsManager.shared
+
+    let totalPrice: Double
     private(set) var selectedAddress: Address?
 
     var selectedPaymentMethod: PaymentMethod? {

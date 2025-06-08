@@ -54,15 +54,15 @@ final class PaymentMethodsEditingViewController: BaseViewController {
         viewModel.addNewPaymentMethod(newMethod)
     }
 
-    @IBAction func nameDidChange(_ sender: Any) {
+    @IBAction func nameChanged(_ sender: Any) {
         viewModel.name = nameTextField.text ?? ""
     }
 
-    @IBAction func numberDidChange(_ sender: Any) {
+    @IBAction func numberChanged(_ sender: Any) {
         viewModel.number = numberTextField.text ?? ""
     }
 
-    @IBAction func securityCodeDidChange(_ sender: Any) {
+    @IBAction func securityCodeChanged(_ sender: Any) {
         viewModel.securityCode = securityCodeTextField.text ?? ""
     }
 }
@@ -105,6 +105,20 @@ extension PaymentMethodsEditingViewController: UIPickerViewDataSource, UIPickerV
     }
 
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        component == 0 ? "\(viewModel.months[row])" : "\(viewModel.years[row])"
+        if component == 1 {
+            let year = viewModel.years[row]
+                let lastTwo = String(format: "%02d", year % 100)
+                return lastTwo
+            } else {
+                return viewModel.monthNames[row]
+            }
+    }
+
+    func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
+        if component == 0 {
+            return 150
+        } else {
+            return 60
+        }
     }
 }
