@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-class AddressListingViewController: BaseViewController {
+final class AddressListingViewController: BaseViewController {
 
     private let viewModel: AddressViewModel
 

@@ -12,7 +12,7 @@ final class CartViewModel: ObservableObject {
 
     private let cartService: CartServiceProtocol
     private let productService: ProductServiceProtocol
-    private let authenticationManager: AuthenticationManager
+    private let authenticationManager = AuthenticationManager.shared
     var cancellables = Set<AnyCancellable>()
 
 
@@ -31,16 +31,14 @@ final class CartViewModel: ObservableObject {
 
     init(
         cartService: CartServiceProtocol = CartService.shared,
-        productService: ProductServiceProtocol = ProductService(),
-        authenticationManager: AuthenticationManager = .shared
+        productService: ProductServiceProtocol = ProductService()
     ) {
         self.cartService = cartService
         self.productService = productService
-        self.authenticationManager = authenticationManager
         addSubscribers()
     }
 
-    func product(by index: Int) -> CartDisplayModel {
+    func product(at index: Int) -> CartDisplayModel {
         return cartDisplayItems[index]
     }
 
@@ -61,7 +59,9 @@ final class CartViewModel: ObservableObject {
 }
 
 
+// MARK: - Setup bindings
 private extension CartViewModel {
+    
     func addSubscribers() {
         cartService.currentCartPublisher
             .receive(on: DispatchQueue.main)

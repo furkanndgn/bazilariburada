@@ -11,7 +11,7 @@ final class ProductCell: BaseCollectionViewCell, NibLoadable {
 
     var product: Product?
 
-    var onTap: ((String) -> Void)?
+    var onTap: MessageHandler?
 
     @IBOutlet weak var productImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
@@ -21,11 +21,6 @@ final class ProductCell: BaseCollectionViewCell, NibLoadable {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
     func configure(with product: Product) {
-        layer.cornerRadius = 12
-        layer.borderColor = UIColor.secondarySystemBackground.cgColor
-        layer.borderWidth = 1
-        activityIndicator.hidesWhenStopped = true
-        activityIndicator.layer.cornerRadius = 12
         self.product = product
         nameLabel.text = "\(product.brand) \(product.name)"
         priceLabel.text = product.price.asCurrency(locale: Locale(identifier: "en_US"))
@@ -44,8 +39,17 @@ final class ProductCell: BaseCollectionViewCell, NibLoadable {
         }
     }
 
+
     @IBAction func buttonTapped(_ sender: Any) {
         guard let product = product else { return }
         onTap?(product.id)
+    }
+
+    private func setupView() {
+        layer.cornerRadius = 12
+        layer.borderColor = UIColor.secondarySystemBackground.cgColor
+        layer.borderWidth = 1
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.layer.cornerRadius = 12
     }
 }

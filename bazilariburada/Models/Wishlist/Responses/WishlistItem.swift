@@ -9,10 +9,11 @@ import Foundation
 
 struct WishlistItem: Decodable {
     let id, name, description, imageURL: String
+    let price: Double
 
     enum CodingKeys: String, CodingKey {
         case imageURL = "imageUrl"
-        case name, description, id
+        case name, description, id, price
     }
 
 }

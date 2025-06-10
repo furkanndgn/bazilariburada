@@ -115,8 +115,8 @@ extension CartViewController: UITableViewDataSource, UITableViewDelegate {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CartCell.identifier, for: indexPath) as? CartCell else {
             return UITableViewCell()
         }
-        let product = viewModel.product(by: indexPath.row)
-        cell.configureWith(product)
+        let product = viewModel.product(at: indexPath.row)
+        cell.configure(with: product)
         cell.onQuantityChange = { [weak self] quantity in
             Task {
                 await self?.viewModel.updateItemQuantity(product.id, quantity: quantity)
@@ -127,7 +127,7 @@ extension CartViewController: UITableViewDataSource, UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let product = viewModel.product(by: indexPath.row)
+        let product = viewModel.product(at: indexPath.row)
         self.onRoute?(.toProductDetail(self, product.product))
     }
 
@@ -135,7 +135,7 @@ extension CartViewController: UITableViewDataSource, UITableViewDelegate {
         _ tableView: UITableView,
         trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath
     ) -> UISwipeActionsConfiguration? {
-        let product = viewModel.product(by: indexPath.row)
+        let product = viewModel.product(at: indexPath.row)
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [weak self] _, _, completion in
             Task {
                 await self?.viewModel.removeItemFromCart(product.id)

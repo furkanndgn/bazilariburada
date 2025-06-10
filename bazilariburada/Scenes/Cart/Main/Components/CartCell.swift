@@ -18,7 +18,7 @@ final class CartCell: BaseTableViewCell, NibLoadable {
 
     var onQuantityChange: ((Int) -> Void)?
 
-    func configureWith(_ cartItem: CartDisplayModel) {
+    func configure(with cartItem: CartDisplayModel) {
 #warning("FIXME: image")
         productImageView.image = UIImage(systemName: "bag")
         nameLabel.text = "\(cartItem.product.brand) \(cartItem.product.name)"
