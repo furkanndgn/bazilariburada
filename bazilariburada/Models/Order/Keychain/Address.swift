@@ -9,11 +9,10 @@ import Foundation
 
 struct Address: Codable {
     var id = UUID()
-    var name: String
-    var line1: String
-    var line2: String?
+    var addressName: String
+    var fullName: String
+    var fullStreetAddress: String
     var city: String
-    var postalCode: String
     var country: String
     var isSelected: Bool = false
 }

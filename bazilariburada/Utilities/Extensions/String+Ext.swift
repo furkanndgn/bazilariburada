@@ -29,4 +29,8 @@ extension String {
         formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
         return formatter.date(from: self)
     }
+
+    var isTrimmedEmpty: Bool {
+           self.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+       }
 }

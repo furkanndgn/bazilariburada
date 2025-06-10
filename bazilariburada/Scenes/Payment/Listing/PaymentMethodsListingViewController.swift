@@ -10,9 +10,10 @@ import Combine
 
 final class PaymentMethodsListingViewController: BaseViewController {
 
+    private let viewModel: PaymentMethodsViewModel
+
     @IBOutlet weak var tableView: UITableView!
 
-    private let viewModel: PaymentMethodsViewModel
     private var cancellables = Set<AnyCancellable>()
 
     var selectedMethodChanged: Completion?
@@ -32,7 +33,7 @@ final class PaymentMethodsListingViewController: BaseViewController {
         addSubscribers()
     }
 
-    @objc func addPaymentMethod() {
+    @objc func pushAddScreen() {
         navigationController?
             .pushViewController(
                 PaymentMethodsEditingViewController(viewModel),
@@ -44,7 +45,7 @@ final class PaymentMethodsListingViewController: BaseViewController {
 // MARK: - Setup UI
 private extension PaymentMethodsListingViewController {
     func setupView() {
-        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addPaymentMethod))
+        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(pushAddScreen))
         navigationItem.rightBarButtonItem = addButton
         tableView.delegate = self
         tableView.dataSource = self

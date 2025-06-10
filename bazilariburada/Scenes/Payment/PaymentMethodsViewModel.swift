@@ -16,9 +16,9 @@ final class PaymentMethodsViewModel {
     @Published var name = ""
     @Published var number = ""
     @Published var securityCode = ""
-    @Published private(set) var isNameValid = false
-    @Published private(set) var isNumberValid = false
-    @Published private(set) var isSecurityCodeValid = false
+    @Published private var isNameValid = false
+    @Published private var isNumberValid = false
+    @Published private var isSecurityCodeValid = false
     @Published private(set) var isFieldsValid = false
 
     let months = Array(1...12)
@@ -30,7 +30,7 @@ final class PaymentMethodsViewModel {
     }
 
     var methodCount: Int {
-        paymentMethodsManager.paymentMethods.count
+        paymentMethods.count
     }
 
     init() {
@@ -38,23 +38,33 @@ final class PaymentMethodsViewModel {
         paymentMethodsManager.load()
     }
 
-    func addNewPaymentMethod(_ paymentMethod: PaymentMethod) {
-        paymentMethodsManager.addNewPaymentMethod(paymentMethod)
+    func paymentMethod(at index: Int) -> PaymentMethod {
+        paymentMethods[index]
     }
 
-    func paymentMethod(at index: Int) -> PaymentMethod {
-        paymentMethodsManager.paymentMethods[index]
+    func addNewPaymentMethod(_ paymentMethod: PaymentMethod) {
+        paymentMethodsManager.addNewPaymentMethod(paymentMethod)
     }
 
     func setSelected(at index: Int) {
         paymentMethodsManager.setSelected(at: index)
     }
 
+    func getSelectedMethod() -> PaymentMethod? {
+        paymentMethodsManager.getSelectedMethod()
+    }
+
     func delete(_ paymentMethod: PaymentMethod) {
         paymentMethodsManager.delete(paymentMethod)
     }
 
-    private func addSubscribers() {
+
+}
+
+
+// MARK: - Set bindings
+private extension PaymentMethodsViewModel {
+    func addSubscribers() {
         paymentMethodsManager.$paymentMethods
             .assign(to: &$paymentMethods)
         Publishers.CombineLatest3($isNameValid, $isNumberValid, $isSecurityCodeValid)

@@ -19,7 +19,7 @@ final class AddressManager {
 
     private init() {}
 
-    func addNewPaymentAddress(_ address: Address) {
+    func addNewAddress(_ address: Address) {
         addresses.append(address)
         save()
     }
