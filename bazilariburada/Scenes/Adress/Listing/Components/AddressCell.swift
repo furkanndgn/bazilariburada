@@ -7,12 +7,14 @@
 
 import UIKit
 
-final class AddressCell: BaseTableViewCell {
+final class AddressCell: BaseTableViewCell, NibLoadable {
 
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var selectedIndicatorImage: UIImageView!
     @IBOutlet weak var editButton: UIImageView!
+
+    var editingTapped: Completion?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -20,8 +22,8 @@ final class AddressCell: BaseTableViewCell {
     }
 
     func configure(with address: Address) {
-        nameLabel.text = address.name
-        addressLabel.text = address.line1
+        nameLabel.text = address.addressName
+        addressLabel.text = address.fullStreetAddress
         selectedIndicatorImage.isHidden = !address.isSelected
     }
 
@@ -31,6 +33,6 @@ final class AddressCell: BaseTableViewCell {
     }
 
     @objc func editButtonTapped() {
-
+        editingTapped?()
     }
 }
