@@ -38,7 +38,14 @@ final class CheckoutViewController: BaseViewController {
     }
 
     @objc func addressSectionTapped() {
-        print("address tapped")
+        let newVC = AddressListingViewController(AddressViewModel())
+        newVC.selectedAddressChanged = { [weak self] in
+            self?.updateSelectedAddress()
+        }
+        newVC.title = "Saved Addresses"
+        let nav = UINavigationController(rootViewController: newVC)
+        nav.modalPresentationStyle = .pageSheet
+        present(nav, animated: true)
     }
 
     @objc func paymentSectionTapped() {
@@ -63,7 +70,7 @@ private extension CheckoutViewController {
 
     func setupView() {
         total.text = viewModel.totalPrice.formatted(.currency(code: "USD"))
-//        addressNameLabel. text = viewModel.selectedAddress?.name
+        addressNameLabel.text = viewModel.selectedAddress?.addressName
         paymentProviderLogo.image = viewModel.selectedPaymentMethod?.brand.brandIcon()
         cardLastFourDigits.text = viewModel.selectedPaymentMethod?.number.maskedCardNumber
     }
@@ -80,5 +87,9 @@ private extension CheckoutViewController {
     func updateSelectedPaymentMethod() {
         paymentProviderLogo.image = viewModel.selectedPaymentMethod?.brand.brandIcon()
         cardLastFourDigits.text = viewModel.selectedPaymentMethod?.number.maskedCardNumber
+    }
+
+    func updateSelectedAddress() {
+        addressNameLabel.text = viewModel.selectedAddress?.addressName
     }
 }

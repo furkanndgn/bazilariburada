@@ -18,6 +18,7 @@ final class AddressEditingViewController: BaseViewController {
     @IBOutlet weak var fullNameTextField: UITextField!
     @IBOutlet weak var addressTextField: UITextField!
     @IBOutlet weak var cityTextField: UITextField!
+    @IBOutlet weak var countryTextField: UITextField!
 
     private var cancellables = Set<AnyCancellable>()
 
@@ -74,6 +75,10 @@ final class AddressEditingViewController: BaseViewController {
     @IBAction func cityChanged(_ sender: Any) {
         viewModel.city = cityTextField.text ?? ""
     }
+
+    @IBAction func countryChanged(_ sender: Any) {
+        viewModel.country = countryTextField.text ?? ""
+    }
 }
 
 
@@ -83,18 +88,28 @@ private extension AddressEditingViewController {
         contentStack.isLayoutMarginsRelativeArrangement = true
         contentStack.layoutMargins = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
         contentStack.layer.cornerRadius = 8
-        var button: UIBarButtonItem?
         if config == .add {
-            button = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(saveAddress))
+            configureForAdd()
         } else {
-            button = UIBarButtonItem(
-                barButtonSystemItem: .save,
-                target: self,
-                action: #selector(updateAddress)
-            )
+            configureForUpdate()
         }
-        guard let button else { return }
-        navigationItem.rightBarButtonItem = button
+    }
+
+    func configureForUpdate() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .save,
+            target: self,
+            action: #selector(updateAddress)
+        )
+        addressNameTextField.text = viewModel.addressToEdit?.addressName
+        fullNameTextField.text = viewModel.addressToEdit?.fullName
+        addressTextField.text = viewModel.addressToEdit?.fullStreetAddress
+        cityTextField.text = viewModel.addressToEdit?.city
+        countryTextField.text = viewModel.addressToEdit?.country
+    }
+
+    func configureForAdd() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveAddress))
     }
 
     func addSubscribers() {

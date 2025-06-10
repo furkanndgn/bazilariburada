@@ -29,6 +29,8 @@ class AddressListingViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupView()
+        addSubscribers()
     }
 
     @objc func pushAddScreen() {
@@ -75,11 +77,11 @@ extension AddressListingViewController: UITableViewDelegate, UITableViewDataSour
         }
         let address = viewModel.address(at: indexPath.row)
         cell.configure(with: address)
-        cell.editingTapped = { [weak self] in
+        cell.editTapped = { [weak self] in
             guard let self else { return }
-            self.viewModel.editingAddress = address
+            self.viewModel.addressToEdit = address
             self.navigationController?
-                .pushViewController(AddressEditingViewController(AddressViewModel(), config: .update), animated: true)
+                .pushViewController(AddressEditingViewController(self.viewModel, config: .update), animated: true)
         }
         return cell
     }
@@ -89,6 +91,9 @@ extension AddressListingViewController: UITableViewDelegate, UITableViewDataSour
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [weak self] _, _, completion in
             self?.viewModel.delete(address)
             tableView.deleteRows(at: [indexPath], with: .automatic)
+            if address.isSelected {
+                self?.selectedAddressChanged?()
+            }
             completion(true)
         }
         return UISwipeActionsConfiguration(actions: [deleteAction])

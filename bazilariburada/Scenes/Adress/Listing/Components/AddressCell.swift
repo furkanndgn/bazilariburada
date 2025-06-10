@@ -12,13 +12,11 @@ final class AddressCell: BaseTableViewCell, NibLoadable {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var selectedIndicatorImage: UIImageView!
-    @IBOutlet weak var editButton: UIImageView!
 
-    var editingTapped: Completion?
+    var editTapped: Completion?
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        setTapGesture()
     }
 
     func configure(with address: Address) {
@@ -27,12 +25,7 @@ final class AddressCell: BaseTableViewCell, NibLoadable {
         selectedIndicatorImage.isHidden = !address.isSelected
     }
 
-    private func setTapGesture() {
-        let gesture = UITapGestureRecognizer(target: self, action: #selector(editButtonTapped))
-        editButton.addGestureRecognizer(gesture)
-    }
-
-    @objc func editButtonTapped() {
-        editingTapped?()
+    @IBAction func editButtonTapped(_ sender: Any) {
+        editTapped?()
     }
 }

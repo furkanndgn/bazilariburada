@@ -9,20 +9,20 @@ import Foundation
 
 final class CheckoutViewModel {
 
-    private let paymentMethodsManager = PaymentMethodsManager.shared
+    private let paymentMethodManager = PaymentMethodManager.shared
+    private let addressManager = AddressManager.shared
 
     let totalPrice: Double
-    private(set) var selectedAddress: Address?
+
+    var selectedAddress: Address? {
+        addressManager.getSelectedAddress()
+    }
 
     var selectedPaymentMethod: PaymentMethod? {
-        paymentMethodsManager.getSelectedMethod()
+        paymentMethodManager.getSelectedMethod()
     }
 
     init(totalPrice: Double) {
         self.totalPrice = totalPrice
-    }
-
-    func changeAddress(_ address: Address) {
-        selectedAddress = address
     }
 }

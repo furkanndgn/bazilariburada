@@ -7,9 +7,9 @@
 
 import Foundation
 
-final class PaymentMethodsManager {
+final class PaymentMethodManager {
 
-    static let shared = PaymentMethodsManager()
+    static let shared = PaymentMethodManager()
 
     private let keychainManager = KeychainManager.shared
     private let serviceIdentifier = Constants.Keychain.serviceIdentifier

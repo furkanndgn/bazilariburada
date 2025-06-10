@@ -12,7 +12,7 @@ final class AddressViewModel {
 
     private let addressManager = AddressManager.shared
 
-    var editingAddress: Address?
+    var addressToEdit: Address?
 
     @Published var addresses = [Address]()
     @Published var addressName = ""
@@ -45,8 +45,8 @@ final class AddressViewModel {
     }
 
     func updateAddress(_ updatedAddress: Address) {
-        guard let editingAddress else { return }
-        delete(editingAddress)
+        guard let addressToEdit else { return }
+        delete(addressToEdit)
         addNewAddress(updatedAddress)
     }
 

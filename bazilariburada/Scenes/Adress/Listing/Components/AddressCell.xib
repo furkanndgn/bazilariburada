@@ -19,53 +19,55 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="70"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="VaB-j8-Z2i">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="70"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="naR-QH-w9B" userLabel="NameLabel">
-                                <rect key="frame" x="0.0" y="25" width="97.333333333333329" height="20.333333333333329"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bTs-NL-kRh" userLabel="AddressLabel">
-                                <rect key="frame" x="105.33333333333333" y="25.333333333333336" width="154.66666666666669" height="19.333333333333336"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
-                                <color key="textColor" systemColor="secondaryLabelColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkmark" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="PaS-cJ-8sd" userLabel="SelectedAddressIndicatorImage">
-                                <rect key="frame" x="268" y="26.333333333333336" width="22" height="18.000000000000007"/>
-                                <color key="tintColor" name="Colors/black-50"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="22" id="WlZ-zz-NIu"/>
-                                    <constraint firstAttribute="width" constant="22" id="pXQ-rC-SxO"/>
-                                </constraints>
-                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="17"/>
-                            </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pencil" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="JVw-w9-d3o" userLabel="EditButton">
-                                <rect key="frame" x="298" y="26.666666666666664" width="22" height="17"/>
-                                <color key="tintColor" name="Colors/black-50"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="22" id="Fsu-SG-jqW"/>
-                                    <constraint firstAttribute="width" constant="22" id="Ik5-PJ-H7V"/>
-                                </constraints>
-                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="17"/>
-                            </imageView>
-                        </subviews>
-                    </stackView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="naR-QH-w9B" userLabel="NameLabel">
+                        <rect key="frame" x="8" y="25" width="43.333333333333336" height="20.333333333333329"/>
+                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bTs-NL-kRh" userLabel="AddressLabel">
+                        <rect key="frame" x="59.333333333333343" y="25.333333333333336" width="39.666666666666657" height="19.333333333333336"/>
+                        <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
+                        <color key="textColor" systemColor="secondaryLabelColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkmark" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="PaS-cJ-8sd" userLabel="SelectedAddressIndicatorImage">
+                        <rect key="frame" x="252" y="26.333333333333336" width="22" height="18.000000000000007"/>
+                        <color key="tintColor" name="Colors/black-50"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="22" id="WlZ-zz-NIu"/>
+                            <constraint firstAttribute="width" constant="22" id="pXQ-rC-SxO"/>
+                        </constraints>
+                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="17"/>
+                    </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RbO-bL-Cxv" userLabel="EditButton">
+                        <rect key="frame" x="282" y="20" width="30" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="5FC-NF-RDb"/>
+                            <constraint firstAttribute="width" constant="30" id="Z6U-ms-5c7"/>
+                        </constraints>
+                        <color key="tintColor" name="Colors/black-50"/>
+                        <state key="normal" title="Button"/>
+                        <buttonConfiguration key="configuration" style="plain" image="pencil" catalog="system"/>
+                        <connections>
+                            <action selector="editButtonTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="9vy-Nd-MeI"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="VaB-j8-Z2i" secondAttribute="bottom" id="6Ko-gO-QvS"/>
-                    <constraint firstItem="VaB-j8-Z2i" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="HUf-O3-Dy4"/>
-                    <constraint firstItem="VaB-j8-Z2i" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Qyn-3j-oPf"/>
-                    <constraint firstAttribute="trailing" secondItem="VaB-j8-Z2i" secondAttribute="trailing" id="wNI-6T-xed"/>
+                    <constraint firstItem="naR-QH-w9B" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="4pT-qY-9u5"/>
+                    <constraint firstItem="bTs-NL-kRh" firstAttribute="leading" secondItem="naR-QH-w9B" secondAttribute="trailing" constant="8" id="5rA-Ta-k3w"/>
+                    <constraint firstAttribute="trailing" secondItem="RbO-bL-Cxv" secondAttribute="trailing" constant="8" id="7n2-e9-lRb"/>
+                    <constraint firstItem="PaS-cJ-8sd" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="88E-gt-cFE"/>
+                    <constraint firstItem="RbO-bL-Cxv" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Wcr-4q-6ec"/>
+                    <constraint firstItem="naR-QH-w9B" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="X2i-my-HVh"/>
+                    <constraint firstItem="bTs-NL-kRh" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="YFO-fb-gPY"/>
+                    <constraint firstItem="RbO-bL-Cxv" firstAttribute="leading" secondItem="PaS-cJ-8sd" secondAttribute="trailing" constant="8" id="lkH-xi-RNk"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="addressLabel" destination="bTs-NL-kRh" id="06U-22-TiG"/>
-                <outlet property="editButton" destination="JVw-w9-d3o" id="DyU-S7-hI9"/>
                 <outlet property="nameLabel" destination="naR-QH-w9B" id="RXu-UG-oHc"/>
                 <outlet property="selectedIndicatorImage" destination="PaS-cJ-8sd" id="4vt-av-yAt"/>
             </connections>

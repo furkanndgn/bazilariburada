@@ -92,6 +92,9 @@ extension PaymentMethodsListingViewController: UITableViewDelegate, UITableViewD
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [weak self] _, _, completion in
             self?.viewModel.delete(method)
             tableView.deleteRows(at: [indexPath], with: .automatic)
+            if method.isSelected {
+                self?.selectedMethodChanged?()
+            }
             completion(true)
         }
         return UISwipeActionsConfiguration(actions: [deleteAction])

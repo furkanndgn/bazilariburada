@@ -10,7 +10,7 @@ import Combine
 
 final class PaymentMethodsViewModel {
 
-    private let paymentMethodsManager = PaymentMethodsManager.shared
+    private let paymentMethodManager = PaymentMethodManager.shared
 
     @Published var paymentMethods = [PaymentMethod]()
     @Published var name = ""
@@ -35,7 +35,7 @@ final class PaymentMethodsViewModel {
 
     init() {
         addSubscribers()
-        paymentMethodsManager.load()
+        paymentMethodManager.load()
     }
 
     func paymentMethod(at index: Int) -> PaymentMethod {
@@ -43,19 +43,19 @@ final class PaymentMethodsViewModel {
     }
 
     func addNewPaymentMethod(_ paymentMethod: PaymentMethod) {
-        paymentMethodsManager.addNewPaymentMethod(paymentMethod)
+        paymentMethodManager.addNewPaymentMethod(paymentMethod)
     }
 
     func setSelected(at index: Int) {
-        paymentMethodsManager.setSelected(at: index)
+        paymentMethodManager.setSelected(at: index)
     }
 
     func getSelectedMethod() -> PaymentMethod? {
-        paymentMethodsManager.getSelectedMethod()
+        paymentMethodManager.getSelectedMethod()
     }
 
     func delete(_ paymentMethod: PaymentMethod) {
-        paymentMethodsManager.delete(paymentMethod)
+        paymentMethodManager.delete(paymentMethod)
     }
 
 
@@ -65,7 +65,7 @@ final class PaymentMethodsViewModel {
 // MARK: - Set bindings
 private extension PaymentMethodsViewModel {
     func addSubscribers() {
-        paymentMethodsManager.$paymentMethods
+        paymentMethodManager.$paymentMethods
             .assign(to: &$paymentMethods)
         Publishers.CombineLatest3($isNameValid, $isNumberValid, $isSecurityCodeValid)
             .map { $0 && $1 && $2}

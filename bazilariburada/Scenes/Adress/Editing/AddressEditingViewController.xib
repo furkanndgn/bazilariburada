@@ -16,6 +16,7 @@
                 <outlet property="addressTextField" destination="4By-yR-WmR" id="q2r-MI-r3k"/>
                 <outlet property="cityTextField" destination="YcD-MA-Xqf" id="kXW-Dd-1La"/>
                 <outlet property="contentStack" destination="9Jm-sH-Xib" id="d4f-Jh-x45"/>
+                <outlet property="countryTextField" destination="xuQ-hb-J5o" id="T0I-Vg-5ih"/>
                 <outlet property="fullNameTextField" destination="c1I-Lb-3s4" id="1qm-xm-cug"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -26,7 +27,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="9Jm-sH-Xib" userLabel="ContentStack">
-                    <rect key="frame" x="12" y="118" width="369" height="180"/>
+                    <rect key="frame" x="12" y="118" width="369" height="225"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="Sah-Vk-ZCR" userLabel="AddressNameSection">
                             <rect key="frame" x="0.0" y="0.0" width="369" height="45"/>
@@ -126,6 +127,31 @@
                             </subviews>
                             <constraints>
                                 <constraint firstAttribute="height" constant="45" id="C0V-G5-Z33"/>
+                            </constraints>
+                        </stackView>
+                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="0Qy-LM-OcQ" userLabel="CountrySection">
+                            <rect key="frame" x="0.0" y="180" width="369" height="45"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Country" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jxf-yX-Ddh" userLabel="Title">
+                                    <rect key="frame" x="0.0" y="0.0" width="120" height="45"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="120" id="Nbr-Rn-8Hg"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Required" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xuQ-hb-J5o" userLabel="CountryTextField">
+                                    <rect key="frame" x="120" y="0.0" width="249" height="45"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <textInputTraits key="textInputTraits" autocapitalizationType="words" textContentType="address-level2"/>
+                                    <connections>
+                                        <action selector="countryChanged:" destination="-1" eventType="editingChanged" id="vDv-UP-V5K"/>
+                                    </connections>
+                                </textField>
+                            </subviews>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="45" id="e3S-mz-oPk"/>
                             </constraints>
                         </stackView>
                     </subviews>
