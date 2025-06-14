@@ -10,10 +10,6 @@ import Combine
 
 final class ProductDetailViewController: BaseViewController, RouteEmitting {
 
-    var onRoute: ((Route) -> Void)?
-
-    let viewModel: ProductDetailViewModel
-
     @IBOutlet weak var productNameLabel: UILabel!
     @IBOutlet weak var productStockLabel: UILabel!
     @IBOutlet weak var productQuantityView: ProductQuantityView!
@@ -24,7 +20,10 @@ final class ProductDetailViewController: BaseViewController, RouteEmitting {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var favoriteButton: UIButton!
 
-    var cancellables = Set<AnyCancellable>()
+
+    var onRoute: ((Route) -> Void)?
+    private let viewModel: ProductDetailViewModel
+    private var cancellables = Set<AnyCancellable>()
 
     init(_ viewModel: ProductDetailViewModel) {
         self.viewModel = viewModel
@@ -69,6 +68,14 @@ private extension ProductDetailViewController {
         handleRouting()
     }
 
+    func addSubscribers() {
+        viewModel.$isInWishlist
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] isInWishlist in
+                self?.setFavorited(isInWishlist)
+            }
+            .store(in: &cancellables)
+    }
 
 #warning ("TODO: productNameLabel -> brandNameLabel + productNameLabel")
 #warning("FIXME: image")
@@ -117,19 +124,6 @@ private extension ProductDetailViewController {
                 self?.favoriteButton.setImage(SFSymbol.heart.image(with: .systemGray), for: .normal)
             }
         }
-    }
-}
-
-
-// MARK: - Setup Subscriptions
-private extension ProductDetailViewController {
-    func addSubscribers() {
-        viewModel.$isInWishlist
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] isInWishlist in
-                self?.setFavorited(isInWishlist)
-            }
-            .store(in: &cancellables)
     }
 }
 

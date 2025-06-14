@@ -25,7 +25,7 @@ final class ProductDetailViewModel: ObservableObject {
     init(
         _ product: Product,
         cartService: CartServiceProtocol = CartService.shared,
-        wishlistService: WishlistServiceProtocol = WishlistService()
+        wishlistService: WishlistServiceProtocol = WishlistService.shared
     ) {
         self.product = product
         self.cartService = cartService

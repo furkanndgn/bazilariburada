@@ -13,8 +13,8 @@ final class ProductReviewsViewController: BaseViewController {
     @IBOutlet weak var ratingLabel: UILabel!
     @IBOutlet weak var starRatingView: StarRatingView!
     
-    var viewModel: ReviewsViewModel
-    
+    private let viewModel: ReviewsViewModel
+
     init(viewModel: ReviewsViewModel) {
         self.viewModel = viewModel
         super.init()
@@ -34,6 +34,7 @@ final class ProductReviewsViewController: BaseViewController {
 
 // MARK: - Setup UI
 private extension ProductReviewsViewController {
+
     func setupView() {
 #warning("FIXME: title")
         title = "Reviews"
@@ -63,6 +64,7 @@ private extension ProductReviewsViewController {
 
 // MARK: - TableView Delegation
 extension ProductReviewsViewController: UITableViewDelegate, UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.reviewCount ?? 0
     }

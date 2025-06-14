@@ -8,6 +8,11 @@
 import Foundation
 
 final class ResetPasswordRouter {
+
+    static let shared = ResetPasswordRouter()
+
+    private init() {}
+
     func createResetPasswordScreen(email : String) -> BaseViewController {
         let viewModel = ResetPasswordViewModel(email: email)
         let viewController = ResetPasswordViewController(viewModel)

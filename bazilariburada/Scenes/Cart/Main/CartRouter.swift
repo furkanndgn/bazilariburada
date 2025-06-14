@@ -9,7 +9,9 @@ import Foundation
 
 final class CartRouter {
 
-    var productDetailRouter: ProductDetailRouter?
+    static let shared = CartRouter()
+
+    private init() {}
 
     func createCartScreen() -> BaseViewController {
         let viewModel = CartViewModel()
@@ -28,8 +30,7 @@ final class CartRouter {
 private extension CartRouter {
     func pushProductDetailScreen(_ sender: BaseViewController, for product: Product) {
         Task { @MainActor in
-            productDetailRouter = ProductDetailRouter()
-            let viewController = productDetailRouter!.createProductDetailScreen(for: product)
+            let viewController = ProductDetailRouter.shared.createProductDetailScreen(for: product)
             sender.navigationController?.pushViewController(viewController, animated: true)
         }
     }

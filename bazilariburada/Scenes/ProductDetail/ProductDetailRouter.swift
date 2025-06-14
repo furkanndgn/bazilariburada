@@ -9,6 +9,10 @@ import UIKit
 
 final class ProductDetailRouter {
 
+    static let shared = ProductDetailRouter()
+
+    private init() {}
+
     func createProductDetailScreen(for product: Product) -> UIViewController {
         let viewModel = ProductDetailViewModel(product)
         let viewController = ProductDetailViewController(viewModel)

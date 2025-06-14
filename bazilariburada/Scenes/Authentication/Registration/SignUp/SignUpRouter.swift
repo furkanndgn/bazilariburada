@@ -10,10 +10,14 @@ import UIKit
 @MainActor
 final class SignUpRouter {
 
-    var loginRouter: LoginRouter?
+    static let shared = SignUpRouter()
+
+    private let loginRouter = LoginRouter.shared
     var activationViewController: ActivationViewController?
 
     var onUserLoggedIn: Completion?
+
+    private init() {}
 
     func createRegistrationScreen() -> BaseViewController {
         let viewModel = SignUpViewModel()
@@ -36,22 +40,20 @@ final class SignUpRouter {
 private extension SignUpRouter {
     func pushLoginScreen(_ sender: BaseViewController) {
         Task { @MainActor in
-            loginRouter = LoginRouter()
-            loginRouter?.onUserLoggedIn = { [weak self] in
+            loginRouter.onUserLoggedIn = { [weak self] in
                 self?.onUserLoggedIn?()
             }
-            let viewController = loginRouter!.createLoginScreen()
+            let viewController = loginRouter.createLoginScreen()
             sender.navigationController?.pushWithFade(viewController)
         }
     }
 
     func pushLoginScreen(_ sender: BaseViewController, activationViewController: ActivationViewController) {
         Task { @MainActor in
-            loginRouter = LoginRouter()
-            loginRouter?.onUserLoggedIn = { [weak self] in
+            loginRouter.onUserLoggedIn = { [weak self] in
                 self?.onUserLoggedIn?()
             }
-            let viewController = loginRouter!.createLoginScreen()
+            let viewController = loginRouter.createLoginScreen()
             sender.navigationController?.pushWithFade(viewController)
             activationViewController.navigationController?.popViewController(animated: false)
         }

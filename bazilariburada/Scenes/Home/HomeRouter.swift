@@ -9,11 +9,15 @@ import UIKit
 
 final class HomeRouter {
 
+    static let shared = HomeRouter()
+
+    private init() {}
+
     func initialScreen() -> UINavigationController {
         let viewController = createHomeScreen()
         let navigationController = UINavigationController(rootViewController: viewController)
         navigationController.tabBarItem = UITabBarItem(
-            title: "",
+            title: "shop",
             image: UIImage(systemName: "house"),
             tag: 0
         )
@@ -38,7 +42,7 @@ private extension HomeRouter {
     }
 
     func pushProductDetailScreen(for product: Product, _ sender: UIViewController) {
-        let router = ProductDetailRouter()
+        let router = ProductDetailRouter.shared
         let viewController = router.createProductDetailScreen(for: product)
         sender.navigationController?.pushViewController(viewController, animated: true)
     }

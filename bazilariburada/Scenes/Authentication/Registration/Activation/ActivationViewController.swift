@@ -9,11 +9,11 @@ import UIKit
 
 final class ActivationViewController: BaseViewController {
 
-    private let viewModel: ActivationViewModel
-
     @IBOutlet weak var textFieldView: OTPTextFieldView!
     @IBOutlet weak var emailMessage: UILabel!
     @IBOutlet weak var resendButton: UIButton!
+
+    private let viewModel: ActivationViewModel
 
     var onFinish: ((ActivationResult) -> Void)?
 
@@ -44,6 +44,7 @@ final class ActivationViewController: BaseViewController {
 
 // MARK: - Setup UI
 private extension ActivationViewController {
+
     func setupView() {
         textFieldView.setupDelegates(with: self)
         textFieldView.codeCompleted = { [weak self] activationCode in
@@ -63,6 +64,7 @@ private extension ActivationViewController {
 
 // MARK: - UITextFieldDelegate
 extension ActivationViewController: UITextFieldDelegate {
+    
     func textField(
         _ textField: UITextField,
         shouldChangeCharactersIn range: NSRange,

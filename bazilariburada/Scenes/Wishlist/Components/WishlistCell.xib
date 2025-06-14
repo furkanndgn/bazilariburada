@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -25,60 +26,58 @@
                             <constraint firstAttribute="width" constant="100" id="qKN-LT-af0"/>
                         </constraints>
                     </imageView>
-                    <stackView opaque="NO" contentMode="scaleToFill" alignment="firstBaseline" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="r6q-N2-eUO" userLabel="LabelStack">
-                        <rect key="frame" x="120" y="6.0000000000000018" width="188" height="21.666666666666671"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kuj-Lu-Hhc" userLabel="NameLabel">
-                                <rect key="frame" x="0.0" y="0.0" width="142.66666666666666" height="21.666666666666668"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8b3-Dm-pfx" userLabel="PriceLabel">
-                                <rect key="frame" x="146.66666666666669" y="0.66666666666666607" width="41.333333333333343" height="20.333333333333336"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                    </stackView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kuj-Lu-Hhc" userLabel="NameLabel">
+                        <rect key="frame" x="120.00000000000001" y="6.0000000000000018" width="43.666666666666671" height="21.666666666666671"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8b3-Dm-pfx" userLabel="PriceLabel">
+                        <rect key="frame" x="119.99999999999999" y="35.666666666666664" width="41.333333333333329" height="20.333333333333336"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2dc-o0-ziH" userLabel="AddToCartButton">
-                        <rect key="frame" x="158" y="71" width="112" height="35"/>
+                        <rect key="frame" x="253" y="28.666666666666671" width="55" height="55"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="35" id="kUr-xB-dE1"/>
-                            <constraint firstAttribute="width" constant="112" id="wvw-EP-UDx"/>
+                            <constraint firstAttribute="height" constant="55" id="KPF-jG-aaG"/>
+                            <constraint firstAttribute="width" constant="55" id="gyX-rF-wXC"/>
                         </constraints>
                         <state key="normal" title="Button"/>
-                        <buttonConfiguration key="configuration" style="filled" title="Add to Cart">
+                        <buttonConfiguration key="configuration" style="filled" imagePlacement="top" imagePadding="4">
+                            <imageReference key="image" image="cart.badge.plus" catalog="system" symbolScale="large" variableValue="1"/>
                             <backgroundConfiguration key="background" cornerRadius="8"/>
+                            <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="23"/>
                             <color key="baseBackgroundColor" name="Colors/green-100"/>
                         </buttonConfiguration>
                         <connections>
                             <action selector="buttonTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="x8o-v0-6Rg"/>
                         </connections>
                     </button>
-                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="ol4-a8-jbS">
-                        <rect key="frame" x="158" y="71" width="112" height="35"/>
+                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="ild-Zp-nPL">
+                        <rect key="frame" x="253" y="28.666666666666671" width="55" height="55"/>
                         <color key="backgroundColor" name="Colors/green-100"/>
                     </activityIndicatorView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="ol4-a8-jbS" firstAttribute="bottom" secondItem="2dc-o0-ziH" secondAttribute="bottom" id="43y-YE-MUA"/>
-                    <constraint firstItem="2dc-o0-ziH" firstAttribute="centerX" secondItem="r6q-N2-eUO" secondAttribute="centerX" id="8fv-ih-gHZ"/>
-                    <constraint firstItem="2dc-o0-ziH" firstAttribute="bottom" secondItem="z8w-An-dQU" secondAttribute="bottom" id="8qj-RI-b07"/>
-                    <constraint firstItem="ol4-a8-jbS" firstAttribute="trailing" secondItem="2dc-o0-ziH" secondAttribute="trailing" id="B8Q-Q0-4y9"/>
-                    <constraint firstItem="r6q-N2-eUO" firstAttribute="leading" secondItem="z8w-An-dQU" secondAttribute="trailing" constant="8" id="JeC-2P-oCS"/>
-                    <constraint firstItem="r6q-N2-eUO" firstAttribute="top" secondItem="z8w-An-dQU" secondAttribute="top" id="L5w-Cn-oS6"/>
+                    <constraint firstItem="ild-Zp-nPL" firstAttribute="bottom" secondItem="2dc-o0-ziH" secondAttribute="bottom" id="2Ea-XM-uoA"/>
+                    <constraint firstItem="kuj-Lu-Hhc" firstAttribute="top" secondItem="z8w-An-dQU" secondAttribute="top" id="5kb-6a-a41"/>
+                    <constraint firstItem="8b3-Dm-pfx" firstAttribute="leading" secondItem="z8w-An-dQU" secondAttribute="trailing" constant="8" id="CmV-bU-kcL"/>
+                    <constraint firstItem="ild-Zp-nPL" firstAttribute="leading" secondItem="2dc-o0-ziH" secondAttribute="leading" id="DbY-RG-a7t"/>
+                    <constraint firstItem="ild-Zp-nPL" firstAttribute="top" secondItem="2dc-o0-ziH" secondAttribute="top" id="KDl-ux-oQe"/>
+                    <constraint firstItem="ild-Zp-nPL" firstAttribute="trailing" secondItem="2dc-o0-ziH" secondAttribute="trailing" id="KQP-Hp-eq9"/>
                     <constraint firstItem="z8w-An-dQU" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="12" id="MYK-me-XVx"/>
-                    <constraint firstItem="ol4-a8-jbS" firstAttribute="top" secondItem="2dc-o0-ziH" secondAttribute="top" id="bbg-VZ-NTy"/>
-                    <constraint firstItem="ol4-a8-jbS" firstAttribute="leading" secondItem="2dc-o0-ziH" secondAttribute="leading" id="kqD-pf-qeo"/>
+                    <constraint firstItem="kuj-Lu-Hhc" firstAttribute="leading" secondItem="z8w-An-dQU" secondAttribute="trailing" constant="8" id="TAs-Ky-GVX"/>
+                    <constraint firstItem="8b3-Dm-pfx" firstAttribute="top" secondItem="kuj-Lu-Hhc" secondAttribute="bottom" constant="8" id="TmZ-C0-vsC"/>
+                    <constraint firstAttribute="trailing" secondItem="2dc-o0-ziH" secondAttribute="trailing" constant="12" id="Yit-CK-FBr"/>
+                    <constraint firstItem="2dc-o0-ziH" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="kMH-6w-NAF"/>
                     <constraint firstItem="z8w-An-dQU" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="rst-MV-GX0"/>
-                    <constraint firstAttribute="trailing" secondItem="r6q-N2-eUO" secondAttribute="trailing" constant="12" id="vEC-ts-22x"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="activityIndicator" destination="ol4-a8-jbS" id="MFh-Nc-ooU"/>
+                <outlet property="activityIndicator" destination="ild-Zp-nPL" id="Xgb-yb-nkp"/>
                 <outlet property="addButton" destination="2dc-o0-ziH" id="hq7-dz-YT7"/>
                 <outlet property="priceLabel" destination="8b3-Dm-pfx" id="VUX-rB-FHu"/>
                 <outlet property="productImageView" destination="z8w-An-dQU" id="JFI-Cd-BLO"/>
@@ -89,6 +88,7 @@
     </objects>
     <resources>
         <image name="bag" catalog="system" width="128" height="128"/>
+        <image name="cart.badge.plus" catalog="system" width="128" height="106"/>
         <namedColor name="Colors/green-100">
             <color red="0.32549019607843138" green="0.69411764705882351" blue="0.45882352941176469" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>

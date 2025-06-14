@@ -9,9 +9,11 @@ import UIKit
 
 final class LoginRouter {
 
-    var router: ForgotPasswordRouter?
+    static let shared = LoginRouter()
 
     var onUserLoggedIn: Completion?
+
+    private init() {}
 
     func createLoginScreen() -> BaseViewController {
         let viewModel = LoginViewModel()
@@ -39,8 +41,7 @@ private extension LoginRouter {
     }
 
     func pushForgotPasswordScreen(_ sender: BaseViewController) {
-        router = ForgotPasswordRouter()
-        let viewController = router!.createForgotPasswordScreen()
+        let viewController = ForgotPasswordRouter.shared.createForgotPasswordScreen()
         sender.navigationController?.pushViewController(viewController, animated: true)
     }
 }

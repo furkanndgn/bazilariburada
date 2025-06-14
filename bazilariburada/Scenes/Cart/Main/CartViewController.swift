@@ -10,15 +10,14 @@ import Combine
 
 final class CartViewController: BaseViewController, RouteEmitting {
 
-    private let viewModel: CartViewModel
-    private var cancellables = Set<AnyCancellable>()
-
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var checkoutButton: UIButton!
     @IBOutlet weak var totalPriceLabel: UILabel!
     @IBOutlet weak var totalPriceContainer: UIView!
     @IBOutlet weak var dummyCheckoutButton: UIButton!
 
+    private let viewModel: CartViewModel
+    private var cancellables = Set<AnyCancellable>()
     var onRoute: ((Route) -> Void)?
 
     init(_ viewModel: CartViewModel) {
@@ -58,6 +57,7 @@ final class CartViewController: BaseViewController, RouteEmitting {
 
 // MARK: - Setup UI
 private extension CartViewController {
+
     func setupView() {
 #warning("FIXME: title logic")
         title = "My Cart"
@@ -107,6 +107,7 @@ private extension CartViewController {
 
 // MARK: - TableViewDelegation
 extension CartViewController: UITableViewDataSource, UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         viewModel.productCount
     }

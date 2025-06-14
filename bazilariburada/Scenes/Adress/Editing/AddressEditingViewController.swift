@@ -10,9 +10,6 @@ import Combine
 
 final class AddressEditingViewController: BaseViewController {
 
-    private let viewModel: AddressViewModel
-    private let config: EditingScreenConfig
-
     @IBOutlet weak var contentStack: UIStackView!
     @IBOutlet weak var addressNameTextField: UITextField!
     @IBOutlet weak var fullNameTextField: UITextField!
@@ -20,6 +17,8 @@ final class AddressEditingViewController: BaseViewController {
     @IBOutlet weak var cityTextField: UITextField!
     @IBOutlet weak var countryTextField: UITextField!
 
+    private let viewModel: AddressViewModel
+    private let config: EditingScreenConfig
     private var cancellables = Set<AnyCancellable>()
 
     init(_ viewModel: AddressViewModel, config: EditingScreenConfig) {
@@ -47,6 +46,7 @@ final class AddressEditingViewController: BaseViewController {
             country: viewModel.country
         )
         viewModel.updateAddress(updatedAddress)
+        navigationController?.popViewController(animated: true)
     }
 
     @objc func saveAddress() {
@@ -58,6 +58,7 @@ final class AddressEditingViewController: BaseViewController {
             country: viewModel.country
         )
         viewModel.addNewAddress(address)
+        navigationController?.popViewController(animated: true)
     }
 
     @IBAction func addressNameChanged(_ sender: Any) {
@@ -84,6 +85,7 @@ final class AddressEditingViewController: BaseViewController {
 
 // MARK: - Setup UI
 private extension AddressEditingViewController {
+    
     func setupView(_ config: EditingScreenConfig) {
         contentStack.isLayoutMarginsRelativeArrangement = true
         contentStack.layoutMargins = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)

@@ -9,7 +9,7 @@ import UIKit
 import Combine
 
 final class LoginViewController: BaseViewController, RouteEmitting {
-
+    
     @IBOutlet weak var usernameTextField: UnderlinedTextFieldView!
     @IBOutlet weak var passwordTextField: UnderlinedTextFieldView!
     @IBOutlet weak var usernameWarningLabel: UILabel!
@@ -112,6 +112,7 @@ final class LoginViewController: BaseViewController, RouteEmitting {
 
 // MARK: - Setup UI
 private extension LoginViewController {
+    
     func setupView() {
         setupTextFields()
     }

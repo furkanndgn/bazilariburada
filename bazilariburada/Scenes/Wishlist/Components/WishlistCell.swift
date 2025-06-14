@@ -11,7 +11,7 @@ class WishlistCell: BaseTableViewCell, NibLoadable {
 
     var item: WishlistItem?
 
-    var onTap: MessageHandler?
+    var onTap: ((String) -> Void)?
 
     @IBOutlet weak var productImageView: UIImageView!
     @IBOutlet weak var productNameLabel: UILabel!
@@ -20,6 +20,7 @@ class WishlistCell: BaseTableViewCell, NibLoadable {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
     func configure(with wishlistItem: WishlistItem) {
+        setupView()
         self.item = wishlistItem
         productImageView.image = UIImage(systemName: "bag")
         productNameLabel.text = wishlistItem.name
@@ -27,13 +28,15 @@ class WishlistCell: BaseTableViewCell, NibLoadable {
     }
 
     func setLoading(_ loading: Bool) {
-        if loading {
-            addButton.isHidden = true
-            activityIndicator.startAnimating()
-            activityIndicator.isHidden = false
-        } else {
-            addButton.isHidden = false
-            activityIndicator.stopAnimating()
+        DispatchQueue.main.async { [weak self] in
+            if loading {
+                self?.addButton.isHidden = true
+                self?.activityIndicator.startAnimating()
+                self?.activityIndicator.isHidden = false
+            } else {
+                self?.addButton.isHidden = false
+                self?.activityIndicator.stopAnimating()
+            }
         }
     }
 
@@ -43,7 +46,6 @@ class WishlistCell: BaseTableViewCell, NibLoadable {
     }
 
     private func setupView() {
-        activityIndicator.hidesWhenStopped = true
         activityIndicator.layer.cornerRadius = 8
     }
 }

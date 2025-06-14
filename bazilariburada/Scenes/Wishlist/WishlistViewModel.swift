@@ -11,6 +11,8 @@ import Combine
 final class WishlistViewModel {
 
     private let wishlistService: WishlistServiceProtocol
+    private let cartService: CartServiceProtocol
+    private let productService: ProductServiceProtocol
     private let authenticationManager = AuthenticationManager.shared
     var cancellables = Set<AnyCancellable>()
 
@@ -20,8 +22,16 @@ final class WishlistViewModel {
         currentWishlist.count
     }
 
-    init(wishlistService: WishlistServiceProtocol = WishlistService()) {
+    var onAddToCart: Completion?
+
+    init(
+        wishlistService: WishlistServiceProtocol = WishlistService.shared,
+        cartService: CartServiceProtocol = CartService.shared,
+        productService: ProductServiceProtocol = ProductService()
+    ) {
         self.wishlistService = wishlistService
+        self.cartService = cartService
+        self.productService = productService
         addSubscribers()
     }
 
@@ -36,6 +46,16 @@ final class WishlistViewModel {
     func removeFromWishlist(_ id: String) async {
         await wishlistService.removeFromWishlist(productID: id, with: authenticationManager.accessToken ?? "")
     }
+
+    func addItemToCart(_ id: String) async {
+        await cartService.addToCart(productID: id, quantity: 1, accessToken: authenticationManager.accessToken ?? "")
+        await removeFromWishlist(id)
+        onAddToCart?()
+    }
+
+    func getProductDetail(_ id: String) async -> Product? {
+        await productService.getProduct(by: id)
+    }
 }
 
 
@@ -47,6 +67,7 @@ private extension WishlistViewModel {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] wishlist in
                 self?.currentWishlist = wishlist?.wishlist ?? []
+                self?.onAddToCart?()
             }
             .store(in: &cancellables)
     }

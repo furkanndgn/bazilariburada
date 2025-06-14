@@ -10,12 +10,12 @@ import Combine
 
 final class HomeViewController: BaseViewController, RouteEmitting {
 
+    @IBOutlet weak var productCollectionView: UICollectionView!
+
     var onRoute: ((Route) -> Void)?
     let viewModel: HomeViewModel
-
     private var cancellables = Set<AnyCancellable>()
 
-    @IBOutlet weak var productCollectionView: UICollectionView!
 
     init(_ viewModel: HomeViewModel = HomeViewModel()) {
         self.viewModel = viewModel
@@ -39,6 +39,7 @@ final class HomeViewController: BaseViewController, RouteEmitting {
 
 // MARK: - Setup UI
 private extension HomeViewController {
+    
     func updateUI() {
         if let products = viewModel.allProducts, !products.isEmpty {
             productCollectionView.reloadData()
@@ -71,6 +72,7 @@ private extension HomeViewController {
 
 
 extension HomeViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel.productCount ?? 0
     }
@@ -112,7 +114,7 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout, UICollectionVi
 }
 
 extension HomeViewController {
-    enum Route {
+    internal enum Route {
         case toProductDetail(BaseViewController, Product)
     }
 }

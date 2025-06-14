@@ -8,7 +8,10 @@
 import Foundation
 
 final class ForgotPasswordRouter {
-    var router: ResetPasswordRouter?
+
+    static let shared = ForgotPasswordRouter()
+
+    private init() {}
 
     func createForgotPasswordScreen() -> BaseViewController {
         let viewModel = ForgotPasswordViewModel()
@@ -30,8 +33,7 @@ final class ForgotPasswordRouter {
 // MARK: - Setup Routing
 private extension ForgotPasswordRouter {
     func pushResetPasswordScreen(_ sender: BaseViewController, email: String) {
-        router = ResetPasswordRouter()
-        let viewController = router!.createResetPasswordScreen(email: email)
+        let viewController = ResetPasswordRouter.shared.createResetPasswordScreen(email: email)
         sender.navigationController?.pushViewController(viewController, animated: true)
     }
 

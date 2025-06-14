@@ -11,8 +11,7 @@ import UIKit
 final class AppRouter {
 
     private let window: UIWindow
-
-    private var onboardingRouter: OnBoardingRouter?
+    private var onboardingRouter = OnBoardingRouter.shared
     private var tabBarViewController: UITabBarController?
 
     init(window: UIWindow) {
@@ -38,11 +37,10 @@ final class AppRouter {
 
     private func startAuthenticationFlow() {
         Task { @MainActor in
-            onboardingRouter = OnBoardingRouter()
-            onboardingRouter?.onUserLoggedIn = { [weak self] in
+            onboardingRouter.onUserLoggedIn = { [weak self] in
                 self?.startAppFlow()
             }
-            let viewController = onboardingRouter!.createOnboardingScreen()
+            let viewController = onboardingRouter.createOnboardingScreen()
             let navigationController = UINavigationController(rootViewController: viewController)
             window.rootViewController = navigationController
             window.makeKeyAndVisible()

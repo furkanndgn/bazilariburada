@@ -11,15 +11,16 @@ import Combine
 /// For endpoints in `Wishlist` collection
 final class WishlistService: WishlistServiceProtocol {
 
-    private let networkManager: NetworkManagerProtocol
+    static var shared: WishlistServiceProtocol = WishlistService()
 
+    private let networkManager: NetworkManagerProtocol
     private let wishlistSubject = PassthroughSubject<Wishlist?, Never>()
 
     var wishlistPublisher: AnyPublisher<Wishlist?, Never> {
         wishlistSubject.eraseToAnyPublisher()
     }
 
-    init(networkManager: NetworkManagerProtocol = NetworkManager.shared) {
+    private init(networkManager: NetworkManagerProtocol = NetworkManager.shared) {
         self.networkManager = networkManager
     }
 

@@ -10,6 +10,8 @@ import Combine
 
 protocol WishlistServiceProtocol {
 
+    static var shared: WishlistServiceProtocol { get }
+
     var wishlistPublisher: AnyPublisher<Wishlist?, Never> { get }
 
     func getUserWishlist(with accessToken: String) async

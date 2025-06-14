@@ -69,6 +69,7 @@ final class ForgotPasswordViewController: BaseViewController, RouteEmitting {
 
 // MARK: - Setup UI
 private extension ForgotPasswordViewController {
+
     func setupView() {
         emailTextField.textField.addTarget(self, action: #selector(emailChanged), for: .editingChanged)
         emailTextField.configureView(according: .email)

@@ -52,6 +52,7 @@ final class PaymentMethodsEditingViewController: BaseViewController {
             securityCode: securityCodeTextField.text ?? ""
         )
         viewModel.addNewPaymentMethod(newMethod)
+        navigationController?.popViewController(animated: true)
     }
 
     @IBAction func nameChanged(_ sender: Any) {
@@ -70,6 +71,7 @@ final class PaymentMethodsEditingViewController: BaseViewController {
 
 // MARK: - Setup UI
 private extension PaymentMethodsEditingViewController {
+
     func setupView() {
         if #available(iOS 17.0, *) {
             nameTextField.textContentType = .creditCardName
@@ -98,6 +100,7 @@ private extension PaymentMethodsEditingViewController {
 
 // MARK: - PickerView delegation
 extension PaymentMethodsEditingViewController: UIPickerViewDataSource, UIPickerViewDelegate {
+
     func numberOfComponents(in pickerView: UIPickerView) -> Int { 2 }
 
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {

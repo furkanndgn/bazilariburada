@@ -10,8 +10,11 @@ import UIKit
 @MainActor
 final class OnBoardingRouter {
 
-    var router: SignUpRouter?
+    static let shared = OnBoardingRouter()
+
     var onUserLoggedIn: Completion?
+
+    private init() {}
 
     func createOnboardingScreen() -> BaseViewController {
         let viewController = OnboardingViewController()
@@ -30,11 +33,10 @@ final class OnBoardingRouter {
 // MARK: - Setup Routing
 private extension OnBoardingRouter {
     func pushRegistrationScreen(_ sender: BaseViewController) {
-        router = SignUpRouter()
-        router?.onUserLoggedIn = { [weak self] in
+        SignUpRouter.shared.onUserLoggedIn = { [weak self] in
             self?.onUserLoggedIn?()
         }
-        let viewController = router!.createRegistrationScreen()
+        let viewController = SignUpRouter.shared.createRegistrationScreen()
         sender.navigationController?.pushViewController(viewController, animated: true)
     }
 }

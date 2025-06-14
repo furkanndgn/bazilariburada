@@ -9,8 +9,6 @@ import UIKit
 
 final class CheckoutViewController: BaseViewController {
 
-    private let viewModel: CheckoutViewModel
-
     @IBOutlet weak var addressSection: UIView!
     @IBOutlet weak var paymentSection: UIView!
     @IBOutlet weak var promoCodeSection: UIView!
@@ -21,6 +19,8 @@ final class CheckoutViewController: BaseViewController {
     @IBOutlet weak var total: UILabel!
     @IBOutlet weak var checkoutButton: UIButton!
     @IBOutlet weak var dummyCheckoutButton: UIButton!
+
+    private let viewModel: CheckoutViewModel
 
     init(_ viewModel: CheckoutViewModel) {
         self.viewModel = viewModel
@@ -69,6 +69,7 @@ final class CheckoutViewController: BaseViewController {
 private extension CheckoutViewController {
 
     func setupView() {
+        dummyCheckoutButton.isHidden = true
         total.text = viewModel.totalPrice.formatted(.currency(code: "USD"))
         addressNameLabel.text = viewModel.selectedAddress?.addressName
         paymentProviderLogo.image = viewModel.selectedPaymentMethod?.brand.brandIcon()

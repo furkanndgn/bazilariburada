@@ -10,10 +10,9 @@ import Combine
 
 final class AddressListingViewController: BaseViewController {
 
-    private let viewModel: AddressViewModel
-
     @IBOutlet weak var tableView: UITableView!
 
+    private let viewModel: AddressViewModel
     private var cancellables = Set<AnyCancellable>()
 
     var selectedAddressChanged: Completion?
@@ -41,6 +40,7 @@ final class AddressListingViewController: BaseViewController {
 
 // MARK: - Setup UI
 private extension AddressListingViewController {
+    
     func setupView() {
         let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(pushAddScreen))
         navigationItem.rightBarButtonItem = addButton

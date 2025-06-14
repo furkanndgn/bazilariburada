@@ -20,7 +20,6 @@ final class SignUpViewController: BaseViewController, RouteEmitting {
     @IBOutlet weak var passwordWarningLabel: UILabel!
     @IBOutlet weak var dummyRegisterButton: UIButton!
 
-
     private let viewModel: SignUpViewModel
     private var cancellables = Set<AnyCancellable>()
 
@@ -46,7 +45,27 @@ final class SignUpViewController: BaseViewController, RouteEmitting {
         hideNavigationBar(animated: animated)
     }
 
-    private  func addSubscribers() {
+
+}
+
+
+// MARK: - Setup UI
+private extension SignUpViewController {
+
+    func setupView() {
+        setupTextFields()
+    }
+
+    func setupTextFields() {
+        emailTextField.textField.addTarget(self, action: #selector(emailChanged), for: .editingChanged)
+        emailTextField.configureView(according: .email)
+        usernameTextField.textField.addTarget(self, action: #selector(usernameChanged), for: .editingChanged)
+        usernameTextField.configureView(according: .username)
+        passwordTextField.textField.addTarget(self, action: #selector(passwordChanged), for: .editingChanged)
+        passwordTextField.configureView(according: .password)
+    }
+
+    func addSubscribers() {
         viewModel.$isRegisterEnabled
             .receive(on: DispatchQueue.main)
             .sink { [weak self] isEnabled in
@@ -81,24 +100,6 @@ final class SignUpViewController: BaseViewController, RouteEmitting {
                 }
             }
             .store(in: &cancellables)
-    }
-}
-
-
-// MARK: - Setup UI
-private extension SignUpViewController {
-    func setupView() {
-        setupTextFields()
-    }
-
-
-    func setupTextFields() {
-        emailTextField.textField.addTarget(self, action: #selector(emailChanged), for: .editingChanged)
-        emailTextField.configureView(according: .email)
-        usernameTextField.textField.addTarget(self, action: #selector(usernameChanged), for: .editingChanged)
-        usernameTextField.configureView(according: .username)
-        passwordTextField.textField.addTarget(self, action: #selector(passwordChanged), for: .editingChanged)
-        passwordTextField.configureView(according: .password)
     }
 }
 
