@@ -12,7 +12,7 @@ final class TestViewController: BaseViewController {
 
     let authService = AuthenticationService()
     let cartService = CartService.shared
-    let orderService = OrderService()
+    let orderService = OrderService.shared
     let productService = ProductService()
     let reviewService = ReviewService()
     let userService = UserService()

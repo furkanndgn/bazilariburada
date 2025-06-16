@@ -20,6 +20,9 @@ final class MainTabBarController: UITabBarController {
             createCartScreen(),
             createWishlistScreen()
         ]
+        NotificationCenter.default.addObserver(forName: .checkoutDidFinish, object: nil, queue: .main) { [weak self] _ in
+            self?.selectedIndex = 0
+        }
     }
 }
 

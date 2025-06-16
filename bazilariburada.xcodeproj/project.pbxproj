@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5E37A2B92E003CF700061CFC /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 5E37A2B82E003CF700061CFC /* Lottie */; };
 		5E5728412CFDFB3900B5B4D3 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 5E5728402CFDFB3900B5B4D3 /* SnapKit */; };
 		5EF3DF562DD50FD2009AD8A0 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 5EF3DF552DD50FD2009AD8A0 /* IQKeyboardManagerSwift */; };
 /* End PBXBuildFile section */
@@ -43,6 +44,7 @@
 			files = (
 				5E5728412CFDFB3900B5B4D3 /* SnapKit in Frameworks */,
 				5EF3DF562DD50FD2009AD8A0 /* IQKeyboardManagerSwift in Frameworks */,
+				5E37A2B92E003CF700061CFC /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -87,6 +89,7 @@
 			packageProductDependencies = (
 				5E5728402CFDFB3900B5B4D3 /* SnapKit */,
 				5EF3DF552DD50FD2009AD8A0 /* IQKeyboardManagerSwift */,
+				5E37A2B82E003CF700061CFC /* Lottie */,
 			);
 			productName = bazilariburada;
 			productReference = 5EF5D9D32CE767A6009CFF2B /* bazilariburada.app */;
@@ -119,6 +122,7 @@
 			packageReferences = (
 				5E57283F2CFDFB3900B5B4D3 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				5EF3DF542DD50FD2009AD8A0 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
+				5E37A2B72E003CF700061CFC /* XCRemoteSwiftPackageReference "lottie-spm" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 5EF5D9D42CE767A6009CFF2B /* Products */;
@@ -350,6 +354,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		5E37A2B72E003CF700061CFC /* XCRemoteSwiftPackageReference "lottie-spm" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-spm";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.5.2;
+			};
+		};
 		5E57283F2CFDFB3900B5B4D3 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
@@ -369,6 +381,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		5E37A2B82E003CF700061CFC /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5E37A2B72E003CF700061CFC /* XCRemoteSwiftPackageReference "lottie-spm" */;
+			productName = Lottie;
+		};
 		5E5728402CFDFB3900B5B4D3 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 5E57283F2CFDFB3900B5B4D3 /* XCRemoteSwiftPackageReference "SnapKit" */;

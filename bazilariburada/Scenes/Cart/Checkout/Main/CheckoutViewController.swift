@@ -62,12 +62,30 @@ final class CheckoutViewController: BaseViewController {
     @objc func promoCodeSectionTapped() {
         print("promo code tapped")
     }
+
+    @IBAction func checkoutButtonTapped(_ sender: Any) {
+        viewModel.placeOrder { [weak self] status in
+            if status == 200 {
+                DispatchQueue.main.async {
+                    let viewController = CheckoutCompletedViewController()
+                    viewController.sheetPresentationController?.selectedDetentIdentifier = .large
+                    viewController.buttonTapped = { [weak self] in
+                        viewController.dismiss(animated: false)
+                        self?.navigationController?.dismiss(animated: false) {
+                            NotificationCenter.default.post(name: .checkoutDidFinish, object: nil)
+                        }
+                    }
+                    self?.present(viewController, animated: true)
+                }
+            }
+        }
+    }
 }
 
 
 // MARK: - Setup UI
 private extension CheckoutViewController {
-
+    
     func setupView() {
         dummyCheckoutButton.isHidden = true
         total.text = viewModel.totalPrice.formatted(.currency(code: "USD"))

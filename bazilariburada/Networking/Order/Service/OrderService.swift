@@ -11,16 +11,17 @@ import Combine
 /// For endpoints in `Order` collection
 final class OrderService: OrderServiceProtocol {
 
+    static var shared: OrderServiceProtocol = OrderService()
+
     private let networkManager: NetworkManagerProtocol
 
-    init(networkManager: NetworkManagerProtocol = NetworkManager.shared) {
-        self.networkManager = networkManager
+    @Published var orders: [Order]?
+    var allOrdersPublisher: AnyPublisher<[Order]?, Never> {
+        $orders.eraseToAnyPublisher()
     }
 
-    private let allOrdersSubject = PassthroughSubject<APIResponse<[Order]>?, Never>()
-
-    var allOrdersPublisher: AnyPublisher<APIResponse<[Order]>?, Never> {
-        allOrdersSubject.eraseToAnyPublisher()
+    private init(networkManager: NetworkManagerProtocol = NetworkManager.shared) {
+        self.networkManager = networkManager
     }
 
     func placeAnOrder(to address: String, with accessToken: String) async -> APIResponse<Order>? {
@@ -58,7 +59,7 @@ final class OrderService: OrderServiceProtocol {
                     endpoint: OrderEndpoint.placeOrder,
                     token: accessToken
                 )
-            allOrdersSubject.send(response)
+            orders = response.data
         } catch let error {
             print(error)
         }

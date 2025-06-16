@@ -39,18 +39,18 @@ final class CartViewController: BaseViewController, RouteEmitting {
     }
 
     @IBAction func checkoutTapped(_ sender: Any) {
-        let vc = CheckoutViewController(CheckoutViewModel(totalPrice: viewModel.totalPrice))
-        if let sheet = vc.sheetPresentationController {
+        let checkoutViewController = CheckoutViewController(CheckoutViewModel(totalPrice: viewModel.totalPrice))
+        let nav = UINavigationController(rootViewController: checkoutViewController)
+        if let sheet = nav.sheetPresentationController {
             sheet.detents = [
-                .medium(), // About 50% of the screen
-                .large()   // Full screen
+                .medium(),
+                .large()
             ]
-            sheet.prefersGrabberVisible = true // Shows the draggable bar
-            sheet.selectedDetentIdentifier = .medium // Start at medium
+            sheet.prefersGrabberVisible = true
+            sheet.selectedDetentIdentifier = .medium
         }
-
-        vc.modalPresentationStyle = .pageSheet // Important!
-        present(vc, animated: true)
+        nav.modalPresentationStyle = .pageSheet
+        present(nav, animated: true)
     }
 }
 

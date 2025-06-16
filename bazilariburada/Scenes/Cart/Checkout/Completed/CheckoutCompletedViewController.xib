@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CheckoutCompletedViewController" customModule="bazilariburada" customModuleProvider="target">
+            <connections>
+                <outlet property="animationContainer" destination="tSJ-y0-DKa" id="zD1-Pg-HSD"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Images/FruitsBackground" translatesAutoresizingMaskIntoConstraints="NO" id="A7v-zq-bTi">
+                    <rect key="frame" x="0.0" y="0.0" width="393" height="250"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="250" id="glb-4s-Wu8"/>
+                    </constraints>
+                </imageView>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Images/FruitsBackground" translatesAutoresizingMaskIntoConstraints="NO" id="pRD-D2-6fI">
+                    <rect key="frame" x="0.0" y="662" width="393" height="250"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="250" id="1YW-B0-V2N"/>
+                    </constraints>
+                </imageView>
+                <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3d5-mA-QKN">
+                    <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="KUN-eu-gpl">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    </view>
+                    <blurEffect style="systemThinMaterial"/>
+                </visualEffectView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tSJ-y0-DKa" userLabel="AnimationContainer">
+                    <rect key="frame" x="46.666666666666657" y="24" width="300" height="300"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="300" id="bnN-PA-Jh7"/>
+                        <constraint firstAttribute="width" constant="300" id="lSF-6Y-RNd"/>
+                    </constraints>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thank you! Your order is confirmed." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C3u-fG-xZJ">
+                    <rect key="frame" x="24" y="376" width="345" height="76.666666666666686"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kVX-VG-roU" userLabel="HomeButton">
+                    <rect key="frame" x="46.666666666666657" y="710" width="300" height="60"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="60" id="VDD-sv-P6K"/>
+                        <constraint firstAttribute="width" constant="300" id="dxw-6l-5U8"/>
+                    </constraints>
+                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                    <state key="normal" title="Get Started"/>
+                    <buttonConfiguration key="configuration" style="filled" title="Back to Home">
+                        <backgroundConfiguration key="background" cornerRadius="12"/>
+                        <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="baseBackgroundColor" name="Colors/green-100"/>
+                    </buttonConfiguration>
+                    <connections>
+                        <action selector="homeButtonTapped:" destination="-1" eventType="touchUpInside" id="GYQ-AL-BNy"/>
+                    </connections>
+                </button>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="pRD-D2-6fI" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="2uw-Ll-2sS"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="3d5-mA-QKN" secondAttribute="trailing" id="82i-Gc-aWV"/>
+                <constraint firstItem="3d5-mA-QKN" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="98B-Pk-xo9"/>
+                <constraint firstAttribute="bottom" secondItem="3d5-mA-QKN" secondAttribute="bottom" id="DkV-ZY-1eT"/>
+                <constraint firstItem="C3u-fG-xZJ" firstAttribute="top" secondItem="tSJ-y0-DKa" secondAttribute="bottom" constant="52" id="GdD-km-aSd"/>
+                <constraint firstItem="tSJ-y0-DKa" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="HR7-50-Y2P"/>
+                <constraint firstItem="3d5-mA-QKN" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Ik4-wJ-Bot"/>
+                <constraint firstAttribute="bottom" secondItem="pRD-D2-6fI" secondAttribute="bottom" constant="-60" id="KbM-uf-ePk"/>
+                <constraint firstItem="A7v-zq-bTi" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="SGw-XV-vLw"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="C3u-fG-xZJ" secondAttribute="trailing" constant="24" id="WKg-QF-nOZ"/>
+                <constraint firstItem="A7v-zq-bTi" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="XkX-I1-GDr"/>
+                <constraint firstAttribute="bottom" secondItem="kVX-VG-roU" secondAttribute="bottom" constant="82" id="mGC-cd-T5i"/>
+                <constraint firstItem="pRD-D2-6fI" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="tqh-rL-xDp"/>
+                <constraint firstItem="C3u-fG-xZJ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="ubK-PI-xEZ"/>
+                <constraint firstItem="kVX-VG-roU" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="w4t-y2-xxW"/>
+                <constraint firstItem="A7v-zq-bTi" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="wSv-8T-YAg"/>
+                <constraint firstItem="tSJ-y0-DKa" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="24" id="yaj-mo-Gc8"/>
+            </constraints>
+            <point key="canvasLocation" x="130.53435114503816" y="-12.67605633802817"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="Images/FruitsBackground" width="6000" height="4000"/>
+        <namedColor name="Colors/green-100">
+            <color red="0.32549019607843138" green="0.69411764705882351" blue="0.45882352941176469" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
