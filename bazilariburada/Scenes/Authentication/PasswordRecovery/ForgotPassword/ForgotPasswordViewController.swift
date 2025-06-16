@@ -36,6 +36,7 @@ final class ForgotPasswordViewController: BaseViewController, RouteEmitting {
     }
 
     @IBAction func sendTapped(_ sender: Any) {
+        setLoading(true)
         viewModel.sendCode { statusCode in
             if statusCode == 200 {
 
@@ -73,6 +74,17 @@ private extension ForgotPasswordViewController {
     func setupView() {
         emailTextField.textField.addTarget(self, action: #selector(emailChanged), for: .editingChanged)
         emailTextField.configureView(according: .email)
+    }
+
+    func setLoading(_ loading: Bool) {
+        DispatchQueue.main.async { [weak self] in
+            self?.sendButton.showLoading(loading)
+            if loading {
+                self?.emailTextField.isUserInteractionEnabled = false
+            } else {
+                self?.emailTextField.isUserInteractionEnabled = true
+            }
+        }
     }
 }
 

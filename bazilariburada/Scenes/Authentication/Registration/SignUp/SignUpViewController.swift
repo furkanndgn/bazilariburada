@@ -65,6 +65,21 @@ private extension SignUpViewController {
         passwordTextField.configureView(according: .password)
     }
 
+    func setLoading(_ loading: Bool) {
+        DispatchQueue.main.async { [weak self] in
+            self?.registerButton.showLoading(loading)
+            if loading {
+                self?.usernameTextField.isUserInteractionEnabled = false
+                self?.emailTextField.isUserInteractionEnabled = false
+                self?.usernameTextField.isUserInteractionEnabled = false
+            } else {
+                self?.usernameTextField.isUserInteractionEnabled = true
+                self?.emailTextField.isUserInteractionEnabled = false
+                self?.passwordTextField.isUserInteractionEnabled = true
+            }
+        }
+    }
+
     func addSubscribers() {
         viewModel.$isRegisterEnabled
             .receive(on: DispatchQueue.main)
@@ -135,14 +150,17 @@ private extension SignUpViewController {
     }
 
     @IBAction func registerButtonTapped(_ sender: UIButton) {
+        setLoading(true)
         viewModel
             .register() { [weak self] statusCode in
                 guard let self else { return }
                 if statusCode == 409 {
+                    setLoading(false)
                     DispatchQueue.main.async {
                         self.showUserExistsAlert()
                     }
                 } else if statusCode == 200 {
+                    setLoading(false)
                     onRoute?(.toActivationScreen(self, viewModel.email))
                 }
             }

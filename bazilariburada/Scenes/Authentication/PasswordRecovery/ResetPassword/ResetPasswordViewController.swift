@@ -110,6 +110,19 @@ private extension ResetPasswordViewController {
         securityCodeTextField.configureView(according: .securityCode)
         passwordTextField.configureView(according: .password)
     }
+
+    func setLoading(_ loading: Bool) {
+        DispatchQueue.main.async { [weak self] in
+            self?.updateButton.showLoading(loading)
+            if loading {
+                self?.securityCodeTextField.textField.isUserInteractionEnabled = false
+                self?.passwordTextField.textField.isUserInteractionEnabled = false
+            } else {
+                self?.securityCodeTextField.textField.isUserInteractionEnabled = true
+                self?.passwordTextField.textField.isUserInteractionEnabled = true
+            }
+        }
+    }
 }
 
 

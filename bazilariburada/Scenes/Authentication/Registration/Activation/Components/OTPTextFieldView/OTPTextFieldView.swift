@@ -64,6 +64,7 @@ private extension OTPTextFieldView {
             if nextTag < codeLength {
                 textFields[nextTag].becomeFirstResponder()
             } else {
+                setLoading(true)
                 sender.resignFirstResponder()
                 codeCompleted?(activationCode)
             }
@@ -107,5 +108,19 @@ private extension OTPTextFieldView {
             textField.layer.masksToBounds = true
         }
         textFields.first?.becomeFirstResponder()
+    }
+
+    func setLoading(_ loading: Bool) {
+        DispatchQueue.main.async { [weak self] in
+            if loading {
+                self?.textFields.forEach { textField in
+                    textField.isUserInteractionEnabled = false
+                }
+            } else {
+                self?.textFields.forEach { textField in
+                    textField.isUserInteractionEnabled = true
+                }
+            }
+        }
     }
 }

@@ -92,10 +92,12 @@ final class LoginViewController: BaseViewController, RouteEmitting {
     }
 
     @IBAction func loginTapped(_ sender: Any) {
+        setLoading(true)
         viewModel.login() { [weak self] statusCode in
             guard let self else { return }
             if statusCode == 200 {
                 self.onRoute?(.toMainScreen(self))
+                setLoading(false)
             }
         }
     }
@@ -122,6 +124,19 @@ private extension LoginViewController {
         passwordTextField.textField.addTarget(self, action: #selector(passwordChanged), for: .editingChanged)
         usernameTextField.configureView(according: .username)
         passwordTextField.configureView(according: .password)
+    }
+
+    func setLoading(_ loading: Bool) {
+        DispatchQueue.main.async { [weak self] in
+            self?.loginButton.showLoading(loading)
+            if loading {
+                self?.usernameTextField.isUserInteractionEnabled = false
+                self?.passwordTextField.isUserInteractionEnabled = false
+            } else {
+                self?.usernameTextField.isUserInteractionEnabled = true
+                self?.passwordTextField.isUserInteractionEnabled = true
+            }
+        }
     }
 }
 
