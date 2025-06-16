@@ -96,8 +96,13 @@ final class LoginViewController: BaseViewController, RouteEmitting {
         viewModel.login() { [weak self] statusCode in
             guard let self else { return }
             if statusCode == 200 {
-                self.onRoute?(.toMainScreen(self))
                 setLoading(false)
+                self.onRoute?(.toMainScreen(self))
+            } else {
+                setLoading(false)
+                DispatchQueue.main.async {
+                    self.showAlert()
+                }
             }
         }
     }
@@ -136,6 +141,19 @@ private extension LoginViewController {
                 self?.usernameTextField.isUserInteractionEnabled = true
                 self?.passwordTextField.isUserInteractionEnabled = true
             }
+        }
+    }
+
+    func showAlert() {
+        let alert = ErrorPopupViewController()
+        alert.configurePopup(title: "Something Went Wrong", message: "Please try again.")
+        alert.onDismiss = {
+            alert.animateOut {
+                alert.dismiss(animated: true)
+            }
+        }
+        self.present(alert, animated: false) {
+            alert.animateIn()
         }
     }
 }

@@ -71,7 +71,7 @@ final class ResetPasswordViewController: BaseViewController, RouteEmitting {
             if statusCode == 200 {
                 self.onRoute?(.toLogin(self))
             } else {
-#warning ("TODO: Implement this")
+                self.showAlert()
             }
         }
     }
@@ -99,6 +99,7 @@ final class ResetPasswordViewController: BaseViewController, RouteEmitting {
 
 // MARK: - Setup UI
 private extension ResetPasswordViewController {
+
     func setupView() {
         setupTextFields()
     }
@@ -121,6 +122,19 @@ private extension ResetPasswordViewController {
                 self?.securityCodeTextField.textField.isUserInteractionEnabled = true
                 self?.passwordTextField.textField.isUserInteractionEnabled = true
             }
+        }
+    }
+
+    func showAlert() {
+        let alert = ErrorPopupViewController()
+        alert.configurePopup(title: "Something Went Wrong", message: "Please try again.")
+        alert.onDismiss = {
+            alert.animateOut {
+                alert.dismiss(animated: true)
+            }
+        }
+        self.present(alert, animated: false) {
+            alert.animateIn()
         }
     }
 }

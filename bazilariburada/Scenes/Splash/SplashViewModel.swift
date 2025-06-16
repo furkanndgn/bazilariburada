@@ -17,7 +17,6 @@ final class SplashViewModel: ObservableObject {
     }
 
     func validateTokens() async -> Bool {
-        authenticationManager.logout()
         guard let _ = await authenticationManager.accessToken else {
             return false
         }

@@ -37,9 +37,14 @@ final class ForgotPasswordViewController: BaseViewController, RouteEmitting {
 
     @IBAction func sendTapped(_ sender: Any) {
         setLoading(true)
-        viewModel.sendCode { statusCode in
+        viewModel.sendCode { [weak self] statusCode in
+            guard let self else { return }
             if statusCode == 200 {
-
+                onRoute?(.toResetPassword(self, viewModel.email))
+            } else {
+                DispatchQueue.main.async {
+                    self.showAlert()
+                }
             }
         }
     }
@@ -84,6 +89,19 @@ private extension ForgotPasswordViewController {
             } else {
                 self?.emailTextField.isUserInteractionEnabled = true
             }
+        }
+    }
+
+    func showAlert() {
+        let alert = ErrorPopupViewController()
+        alert.configurePopup(title: "Something Went Wrong", message: "Please try again.")
+        alert.onDismiss = {
+            alert.animateOut {
+                alert.dismiss(animated: true)
+            }
+        }
+        self.present(alert, animated: false) {
+            alert.animateIn()
         }
     }
 }
