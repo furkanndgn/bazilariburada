@@ -13,7 +13,7 @@ final class CartViewModel: ObservableObject {
     private let cartService: CartServiceProtocol
     private let productService: ProductServiceProtocol
     private let authenticationManager = AuthenticationManager.shared
-    var cancellables = Set<AnyCancellable>()
+    private var cancellables = Set<AnyCancellable>()
 
 
     private var cartQuantityUpdateInProgress: Bool = false
@@ -59,7 +59,7 @@ final class CartViewModel: ObservableObject {
 }
 
 
-// MARK: - Setup bindings
+// MARK: - Setup Bindings
 private extension CartViewModel {
     
     func addSubscribers() {

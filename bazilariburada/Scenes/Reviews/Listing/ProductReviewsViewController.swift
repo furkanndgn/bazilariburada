@@ -6,14 +6,18 @@
 //
 
 import UIKit
+import Combine
 
 final class ProductReviewsViewController: BaseViewController {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var ratingLabel: UILabel!
     @IBOutlet weak var starRatingView: StarRatingView!
-    
+    @IBOutlet weak var addReviewButton: UIButton!
+
     private let viewModel: ReviewsViewModel
+
+    private var cancellables = Set<AnyCancellable>()
 
     init(viewModel: ReviewsViewModel) {
         self.viewModel = viewModel
@@ -23,11 +27,27 @@ final class ProductReviewsViewController: BaseViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel.getProductReviews()
+        Task {
+            await viewModel.getProductReviews()
+        }
         setupView()
+        addSubscribers()
+    }
+
+    @IBAction func addButtonTapped(_ sender: Any) {
+        let vc = ReviewAddingViewController(viewModel)
+        if let sheet = vc.sheetPresentationController {
+            sheet.detents = [
+                .medium(),
+                .large()
+            ]
+            sheet.selectedDetentIdentifier = .medium
+        }
+        vc.modalPresentationStyle = .formSheet
+        present(vc, animated: true)
     }
 }
 
@@ -51,7 +71,7 @@ private extension ProductReviewsViewController {
     }
 
     func updateUI() {
-        if let reviews = viewModel.allReviews, !reviews.isEmpty {
+        if !viewModel.allReviews.isEmpty {
             tableView.reloadData()
             tableView.isHidden = false
         }
@@ -59,14 +79,23 @@ private extension ProductReviewsViewController {
             tableView.isHidden = true
         }
     }
+
+    func addSubscribers() {
+        viewModel.$allReviews
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                self?.updateUI()
+            }
+            .store(in: &cancellables)
+    }
 }
 
 
 // MARK: - TableView Delegation
 extension ProductReviewsViewController: UITableViewDelegate, UITableViewDataSource {
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.reviewCount ?? 0
+        return viewModel.reviewCount
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

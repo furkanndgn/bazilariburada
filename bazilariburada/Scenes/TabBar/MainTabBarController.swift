@@ -36,14 +36,22 @@ private extension MainTabBarController {
     func createCartScreen() -> UINavigationController {
         let cartScreen =  CartRouter.shared.createCartScreen()
         let navigationController = UINavigationController(rootViewController: cartScreen)
-        navigationController.tabBarItem = UITabBarItem(tabBarSystemItem: .topRated, tag: 1)
+        navigationController.tabBarItem = UITabBarItem(
+            title: "Cart",
+            image: UIImage(systemName: "cart"),
+            tag: 1
+        )
         return navigationController
     }
 
     func createWishlistScreen() -> UINavigationController {
         let wishlistScreen = WishlistRouter.shared.createWishlistScreen()
         let navigationController = UINavigationController(rootViewController: wishlistScreen)
-        navigationController.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 2)
+        navigationController.tabBarItem = UITabBarItem(
+            title: "Favorites",
+            image: UIImage(systemName: "heart"),
+            tag: 2
+        )
         return navigationController
     }
 }

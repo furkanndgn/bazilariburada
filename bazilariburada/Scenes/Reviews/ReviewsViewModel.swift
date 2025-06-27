@@ -6,35 +6,63 @@
 //
 
 import Foundation
+import Combine
 
 final class ReviewsViewModel {
 
     private let reviewService: ReviewService
+    private let authenticationManager: AuthenticationManager
+
     let product: Product
-    var allReviews: [Review]?
-    var reviewCount: Int?
-    
-    init(product: Product, reviewService: ReviewService = ReviewService()) {
+    @Published private(set) var allReviews = [Review]()
+    var reviewCount: Int {
+        allReviews.count
+    }
+
+    init(
+        product: Product,
+        reviewService: ReviewService = ReviewService(),
+        authenticationManager: AuthenticationManager = AuthenticationManager.shared
+    ) {
         self.product = product
         allReviews = product.reviews
-        reviewCount = allReviews?.count
         self.reviewService = reviewService
-        addSubscribers()
+        self.authenticationManager = authenticationManager
     }
 
     func review(by index: Int) -> Review {
-        return allReviews![index]
+        return allReviews[index]
     }
     
-    func getProductReviews() {
+    func getProductReviews() async {
+        let response = await reviewService.getReviews(of: product.id)
+        guard let reviews = response?.data else { return }
+        allReviews = reviews
+        print(allReviews)
     }
     
-    func addReview(comment: String, rating: Int, userData: LoginResponse) {
+    func addReview(
+        comment: String,
+        rating: Int,
+        completion: @escaping (
+            APIResponse<Review>?
+        ) -> Void
+    ) async {
+        let response = await reviewService.addReview(
+            comment,
+            rating: rating,
+            to: product.id,
+            with: authenticationManager.accessToken ?? ""
+        )
+        await getProductReviews()
+        completion(response)
     }
     
-    func deleteUserReview(_ userData: LoginResponse) {
-    }
-    
-    private func addSubscribers() {
+    func deleteUserReview() async {
+        let response = await reviewService.deleteUserReview(
+            from: product.id,
+            with: authenticationManager.accessToken ?? ""
+        )
+        await getProductReviews()
     }
 }
