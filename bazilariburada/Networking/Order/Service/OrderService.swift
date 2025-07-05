@@ -16,7 +16,7 @@ final class OrderService: OrderServiceProtocol {
     private let networkManager: NetworkManagerProtocol
 
     @Published var orders: [Order]?
-    var allOrdersPublisher: AnyPublisher<[Order]?, Never> {
+    var userOrdersPublisher: AnyPublisher<[Order]?, Never> {
         $orders.eraseToAnyPublisher()
     }
 
@@ -54,12 +54,12 @@ final class OrderService: OrderServiceProtocol {
 
     func getAllOrders(with accessToken: String) async {
         do {
-            let response: APIResponse<[Order]> = try await networkManager
+            let response: APIResponse<OrderResponse> = try await networkManager
                 .performRequest(
-                    endpoint: OrderEndpoint.placeOrder,
+                    endpoint: OrderEndpoint.getAllOrders,
                     token: accessToken
                 )
-            orders = response.data
+            orders = response.data?.orders
         } catch let error {
             print(error)
         }

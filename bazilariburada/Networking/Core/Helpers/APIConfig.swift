@@ -12,7 +12,7 @@ enum APIConfig {
 
     var baseURL: String {
         switch self {
-        case .local: return ""
+        case .local: return "http://localhost:8080/api/v1"
         case .production: return ""
         case .staging: return "https://grocery-app-backend-45m3.onrender.com/api/v1"
         }

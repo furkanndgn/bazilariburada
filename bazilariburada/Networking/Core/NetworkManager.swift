@@ -152,7 +152,7 @@ private extension NetworkManager {
     func executeRequest<T: Decodable>(_ request: URLRequest) async throws -> T {
         let (data, response) = try await session.data(for: request)
 #if DEBUG
-//        logResponse(response, data: data)
+        logResponse(response, data: data)
 #endif
         do {
             try validate(response: response, data: data)

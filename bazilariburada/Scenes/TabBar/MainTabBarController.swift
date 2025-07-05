@@ -18,7 +18,8 @@ final class MainTabBarController: UITabBarController {
         self.viewControllers = [
             createHomeScreen(),
             createCartScreen(),
-            createWishlistScreen()
+            createWishlistScreen(),
+            createProfileScreen()
         ]
         NotificationCenter.default.addObserver(forName: .checkoutDidFinish, object: nil, queue: .main) { [weak self] _ in
             self?.selectedIndex = 0
@@ -51,6 +52,17 @@ private extension MainTabBarController {
             title: "Favorites",
             image: UIImage(systemName: "heart"),
             tag: 2
+        )
+        return navigationController
+    }
+
+    func createProfileScreen() -> UINavigationController {
+        let profileScreen = ProfileViewController(ProfileViewModel())
+        let navigationController = UINavigationController(rootViewController: profileScreen)
+        navigationController.tabBarItem = UITabBarItem(
+            title: "Profile",
+            image: UIImage(systemName: "person.circle"),
+            tag: 3
         )
         return navigationController
     }

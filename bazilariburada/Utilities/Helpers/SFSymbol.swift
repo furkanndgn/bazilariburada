@@ -18,6 +18,7 @@ enum SFSymbol: String {
     case cart = "cart"
     case person = "person"
     case heartText = "heart.text.square"
+    case questionMark = "questionmark"
 
     func image(with tintColor: UIColor) -> UIImage? {
         UIImage(systemName: self.rawValue)?.withTintColor(tintColor, renderingMode: .alwaysOriginal)

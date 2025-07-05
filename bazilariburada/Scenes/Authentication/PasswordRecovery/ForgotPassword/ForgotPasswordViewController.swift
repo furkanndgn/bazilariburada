@@ -35,6 +35,11 @@ final class ForgotPasswordViewController: BaseViewController, RouteEmitting {
         addSubscribers()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        showNavigationBar()
+    }
+
     @IBAction func sendTapped(_ sender: Any) {
         setLoading(true)
         viewModel.sendCode { [weak self] statusCode in

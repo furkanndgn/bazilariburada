@@ -23,9 +23,9 @@ final class ProductCell: BaseCollectionViewCell, NibLoadable {
     func configure(with product: Product) {
         setupView()
         self.product = product
+        loadProductImage(using: product.imageURL)
         nameLabel.text = "\(product.brand) \(product.name)"
         priceLabel.text = product.price.asCurrency(locale: Locale(identifier: "en_US"))
-//        productImageView.image = UIImage(systemName: "bag.fill")
         ratingLabel.text = String(format: "%.1f", product.averageRating ?? 0)
     }
 
@@ -39,6 +39,16 @@ final class ProductCell: BaseCollectionViewCell, NibLoadable {
                 self?.addButton.isHidden = false
                 self?.activityIndicator.stopAnimating()
             }
+        }
+    }
+
+    private func loadProductImage(using urlString: String) {
+        if let url = URL(string: urlString) {
+            productImageView.load(url: url)
+        } else {
+            let image = SFSymbol.questionMark.image(with: .gray)
+            let config = UIImage.SymbolConfiguration(font: .systemFont(ofSize: 12), scale: .small)
+            productImageView.image = image!.withConfiguration(config)
         }
     }
 

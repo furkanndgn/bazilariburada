@@ -19,8 +19,7 @@ final class CartCell: BaseTableViewCell, NibLoadable {
     var onQuantityChange: ((Int) -> Void)?
 
     func configure(with cartItem: CartDisplayModel) {
-#warning("FIXME: image")
-        productImageView.image = UIImage(systemName: "bag")
+        loadProductImage(using: cartItem.product.imageURL)
         nameLabel.text = "\(cartItem.product.brand) \(cartItem.product.name)"
         priceLabel.text = cartItem.cartItem.price.asCurrency(locale: Locale(identifier: "en_US"))
         productQuantityView.productStock = cartItem.product.quantity
@@ -40,6 +39,16 @@ final class CartCell: BaseTableViewCell, NibLoadable {
             self?.quantityChangedWorkItem = workItem
             guard let workItem = self?.quantityChangedWorkItem else { return }
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: workItem)
+        }
+    }
+
+    private func loadProductImage(using urlString: String) {
+        if let url = URL(string: urlString) {
+            productImageView.load(url: url)
+        } else {
+            let image = SFSymbol.questionMark.image(with: .gray)
+            let config = UIImage.SymbolConfiguration(font: .systemFont(ofSize: 12), scale: .small)
+            productImageView.image = image!.withConfiguration(config)
         }
     }
 }

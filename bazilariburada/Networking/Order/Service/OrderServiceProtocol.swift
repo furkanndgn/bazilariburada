@@ -12,7 +12,7 @@ protocol OrderServiceProtocol {
 
     static var shared: OrderServiceProtocol { get }
 
-    var allOrdersPublisher: AnyPublisher<[Order]?, Never> { get }
+    var userOrdersPublisher: AnyPublisher<[Order]?, Never> { get }
 
     func placeAnOrder(to address: String, with accessToken: String) async -> APIResponse<Order>?
 

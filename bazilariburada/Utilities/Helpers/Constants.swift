@@ -47,4 +47,8 @@ enum Constants {
             return "Enter 6-digit code, sent to \(maskedEmail))"
         }
     }
+
+    enum UI {
+        static let loadingViewImageTag = 1010
+    }
 }

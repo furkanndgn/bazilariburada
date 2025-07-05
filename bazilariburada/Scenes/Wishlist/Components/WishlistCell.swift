@@ -22,7 +22,7 @@ class WishlistCell: BaseTableViewCell, NibLoadable {
     func configure(with wishlistItem: WishlistItem) {
         setupView()
         self.item = wishlistItem
-        productImageView.image = UIImage(systemName: "bag")
+        loadProductImage(using: item?.imageURL)
         productNameLabel.text = wishlistItem.name
         priceLabel.text = wishlistItem.price.asCurrency(locale: Locale(identifier: "en_US"))
     }
@@ -37,6 +37,16 @@ class WishlistCell: BaseTableViewCell, NibLoadable {
                 self?.addButton.isHidden = false
                 self?.activityIndicator.stopAnimating()
             }
+        }
+    }
+
+    private func loadProductImage(using urlString: String?) {
+        if let urlString = urlString, let url = URL(string: urlString) {
+            productImageView.load(url: url)
+        } else {
+            let image = SFSymbol.questionMark.image(with: .gray)
+            let config = UIImage.SymbolConfiguration(font: .systemFont(ofSize: 12), scale: .small)
+            productImageView.image = image!.withConfiguration(config)
         }
     }
 

@@ -102,6 +102,19 @@ extension WishlistViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
 
+    func tableView(
+        _ tableView: UITableView,
+        trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath
+    ) -> UISwipeActionsConfiguration? {
+        let item = viewModel.wishlistItem(at: indexPath.row)
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [weak self] _, _, completion in
+            Task {
+                await self?.viewModel.removeFromWishlist(item.id)
+                completion(true)
+            }
+        }
+        return UISwipeActionsConfiguration(actions: [deleteAction])
+    }
 }
 
 

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct Product: Decodable {
     let id, name, description, imageURL, category, brand, weight: String

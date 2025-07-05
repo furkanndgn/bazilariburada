@@ -24,13 +24,21 @@ extension String {
         return "\(mask)\(suffix(4))"
     }
 
+    var isTrimmedEmpty: Bool {
+        self.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+    }
+
     func isoDate() -> Date? {
         let formatter = ISO8601DateFormatter()
         formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
         return formatter.date(from: self)
     }
 
-    var isTrimmedEmpty: Bool {
-           self.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
-       }
+
+    /// Convert date from strings formatted `yyyy-MM-dd`
+    func orderDate() -> Date? {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        return formatter.date(from: self)
+    }
 }

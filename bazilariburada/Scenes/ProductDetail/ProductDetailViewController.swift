@@ -10,6 +10,7 @@ import Combine
 
 final class ProductDetailViewController: BaseViewController, RouteEmitting {
 
+    @IBOutlet weak var productImageView: UIImageView!
     @IBOutlet weak var productNameLabel: UILabel!
     @IBOutlet weak var productStockLabel: UILabel!
     @IBOutlet weak var productQuantityView: ProductQuantityView!
@@ -77,9 +78,8 @@ private extension ProductDetailViewController {
             .store(in: &cancellables)
     }
 
-#warning ("TODO: productNameLabel -> brandNameLabel + productNameLabel")
-#warning("FIXME: image")
     func configureSubviews() {
+        loadProductImage(using: viewModel.product.imageURL)
         productNameLabel.text = "\(viewModel.product.brand) \(viewModel.product.name)"
         productQuantityView.productStock = viewModel.product.quantity
         productStockLabel.text = Constants.Formatter.stock(viewModel.product.quantity)
@@ -94,6 +94,16 @@ private extension ProductDetailViewController {
         activityIndicator.layer.cornerRadius = 12
         viewModel.onCartUpdate = { [weak self] in
             self?.setLoading(false)
+        }
+    }
+
+    func loadProductImage(using urlString: String) {
+        if let url = URL(string: urlString) {
+            productImageView.load(url: url)
+        } else {
+            let image = SFSymbol.questionMark.image(with: .gray)
+            let config = UIImage.SymbolConfiguration(font: .systemFont(ofSize: 12), scale: .small)
+            productImageView.image = image!.withConfiguration(config)
         }
     }
 
